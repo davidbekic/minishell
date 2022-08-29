@@ -11,12 +11,7 @@
 /* ************************************************************************** */
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <string.h>
+#include "../includes/minishell.h"
 
 int	getcmd(char **buf, int size)
 {
