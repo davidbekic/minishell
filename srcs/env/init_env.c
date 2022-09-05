@@ -71,22 +71,6 @@ int main(int ac, char **av, char **env)
   i = 0;
   env_list = NULL;
 
-void ft_init_env(char **main_env)
-{
-  t_env *head;
-  int   i;
-
-  head = (t_env *) calloc(sizeof(env_list), 0);
-  if (env_list == NULL)
-    exit (0);
-  i = 0;
-  while (main_env[i++] != NULL)
-    create_element();
-}
-
-
-int main(int ac, char **av, char **env)
-{
   if (ac == 0)
     exit(0);
   if (av == NULL)
