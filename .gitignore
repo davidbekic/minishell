@@ -1,6 +1,10 @@
 # Prerequisites
 *.d
 
+# I hate DS_Store
+*.DS_Store
+*._.DS_Store
+
 # Object files
 *.o
 *.ko
