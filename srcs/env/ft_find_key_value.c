@@ -6,24 +6,24 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 18:39:10 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/08 19:03:07 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/08 20:03:58 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char    *ft_find_key(char *pattern)
+char	*ft_find_key(char *pattern)
 {
-    int i;
-    char *key = NULL;
+	int		i;
+	char	*key = NULL;
 
-    i = 0;
-    while (pattern[i] != 0 && pattern[i] != '=')
-        i++;
-    key = calloc(10000, 1);
-    if (!key)
+	i = 0;
+	while (pattern[i] != 0 && pattern[i] != '=')
+	i++;
+	key = calloc(10000, 1);
+	if (!key)
 		return (NULL);
-    i = 0;
+	i = 0;
 	while (pattern[i] != '=' && pattern[i] != 0)
 	{
 		key[i] = pattern[i];
@@ -32,14 +32,14 @@ char    *ft_find_key(char *pattern)
 	return (key);
 }
 
-char    *ft_find_value(char *pattern)
+char	*ft_find_value(char *pattern)
 {
-    int i;
-    int j;
-    char *value = NULL;
+	int		i;
+	int		j;
+	char	*value = NULL;
 
-    i = 0;
-    j = 0;
+	i = 0;
+	j = 0;
 	while (pattern[i] != '=')
 		i++;
 	i++;
@@ -48,5 +48,5 @@ char    *ft_find_value(char *pattern)
 		return (NULL);
 	while (pattern[i] != 0)
 		value[j++] = pattern[i++];
-    return (value);
+	return (value);
 }	
