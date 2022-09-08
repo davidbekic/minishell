@@ -1,4 +1,4 @@
-#include "../../../includes/minishell.h"
+#include "../../../../includes/minishell.h"
 
 int main(int ac, char **av, char **env)
 {
@@ -7,8 +7,9 @@ int main(int ac, char **av, char **env)
   int   i;
 
   i = 0;
-  char *str;
-  str = malloc(2000);
+
+  char *new_str_to_export = "C00LV4RIABLE=V4RIABLEC00L";
+  char *existing_str_to_export = "USER=OBAMA";
   env_list = NULL;
   if (ac == 0)
     exit(0);
