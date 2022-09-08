@@ -1,2 +1,1 @@
-gcc ../*.c
-leaks -atExit -- ./a.out
+gcc ../*.c && leaks -atExit -- ./a.out
