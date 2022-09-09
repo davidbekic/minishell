@@ -6,11 +6,11 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 11:58:10 by irifarac          #+#    #+#             */
-/*   Updated: 2022/08/22 13:28:46 by irifarac         ###   ########.fr       */
+/*   Updated: 2022/09/09 12:16:30 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	spawn(char *program, char **arg_list)
 {

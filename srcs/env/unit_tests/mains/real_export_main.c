@@ -19,7 +19,7 @@ int main(int ac, char **av, char **env)
     exit(0);
   env_list = ft_init_env(env);
   ft_export(ft_find_key(new_str_to_export), ft_find_value(new_str_to_export), env_list);
-  ft_export(ft_find_key(existing_str_to_export), ft_find_value(existing_str_to_export), env_list);
+  //ft_export(ft_find_key(existing_str_to_export), ft_find_value(existing_str_to_export), env_list);
   ft_env(env_list);
   free_env(env_list);
   

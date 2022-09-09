@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 16:39:37 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/09 13:40:40 by dbekic           ###   ########.fr       */
+/*   Created: 2022/09/09 12:32:59 by dbekic            #+#    #+#             */
+/*   Updated: 2022/09/09 12:48:35 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void    ft_env(t_env *env_list)
+char    *ft_expand(t_env *env_list, char *key)
 {
-    int     i;
-    t_env   *aux;
-
-    i = 0;
-    aux = env_list;
-    while (aux != NULL)
-    {
-        
-        printf("%s=%s\n", aux->key, aux->value);
-        aux = aux->next;
-        i++;
-    }
+    return (ft_find_elem(env_list, key)->value);
 }
