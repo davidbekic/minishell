@@ -16,12 +16,17 @@ int main(int ac, char **av, char **env)
   if (av == NULL)
     exit(0);
   env_list = ft_init_env(env);
+  if (!env_list)
+    write(2, "malloc failure in init_env\n", 24);
+
   //ft_export(ft_find_key(new_str_to_export), ft_find_value(new_str_to_export), env_list);
   //ft_export(ft_find_key(existing_str_to_export), ft_find_value(existing_str_to_export), env_list);
   //ft_unset(env_list, "SHELL");
-  ft_unset(env_list, "USER");
+  //ft_unset(env_list, "USER");
   ft_env(env_list);
-  //free_env(env_list);
+  //printf("%s\n", ft_find_elem(env_list, "USER")->value);
+  //printf("%s\n", ft_expand(env_list, "USER"));
+  free_env(env_list);
   
 
   //ft_init_env(env);

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/09 14:44:22 by dbekic           ###   ########.fr       */
+/*   Created: 2022/09/09 12:32:59 by dbekic            #+#    #+#             */
+/*   Updated: 2022/09/09 12:48:35 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void    ft_export(char *key, char *value, t_env *list)
+char    *ft_expand(t_env *env_list, char *key)
 {
-    ft_update_var(key, value, list);
+    return (ft_find_elem(env_list, key)->value);
 }

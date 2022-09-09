@@ -6,12 +6,12 @@
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by irifarac          #+#    #+#             */
-/*   Updated: 2022/08/26 13:36:21 by irifarac         ###   ########.fr       */
+/*   Updated: 2022/09/09 12:16:45 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	getcmd(char **buf, int size)
 {

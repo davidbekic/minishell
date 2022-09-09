@@ -6,13 +6,13 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:15:38 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/08 20:05:37 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/09 14:42:29 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	free_key_value_and_maybe_rest(char *key, char *value, unsigned char flag)
+static void	free_key_value_and_maybe_rest(char *key, char *value)
 {
 	if (key)
 	{
@@ -24,9 +24,6 @@ static void	free_key_value_and_maybe_rest(char *key, char *value, unsigned char 
 		free(value);
 		value = NULL;
 	}
-	if (flag == 1)
-		printf("ERROR\n");
-	//free_env(env_list)
 }
 
 t_env	*ft_create_elem(t_env *new, char *key, char *value)
@@ -36,19 +33,19 @@ t_env	*ft_create_elem(t_env *new, char *key, char *value)
 	i = 0;
 	new = (t_env *) calloc(1, sizeof(t_env));
 	if (!new)
-		free_key_value_and_maybe_rest(key, value, 1);
+			return (NULL);
 	new->key = (char *) calloc(strlen(key) + 1, 1);
 	if (!new->key)
-		free_key_value_and_maybe_rest(key, value, 1);
+		return (NULL);
 	new->value = (char *) calloc(strlen(value) + 1, 1);
 	if (!new->value)
-		free_key_value_and_maybe_rest(key, value, 1);
+		return (NULL);
 	while (key[i++] != 0)
 	new->key[i - 1] = key[i - 1];
 	i = 0;
 	while (value[i++] != 0)
 		new->value[i - 1] = value[i - 1];
-	free_key_value_and_maybe_rest(key, value, 0);
+	free_key_value_and_maybe_rest(key, value);
 	new->next = NULL;
 	return (new);
 }
