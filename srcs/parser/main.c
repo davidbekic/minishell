@@ -1,53 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/26 09:31:46 by irifarac          #+#    #+#             */
-/*   Updated: 2022/09/09 12:16:45 by dbekic           ###   ########.fr       */
+/*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
+/*   Updated: 2022/09/12 13:43:52 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
-int	getcmd(char **buf, int size)
+static int	getcmd(char **buf, int size)
 {
-	memset(*buf, 0, size);
-	*buf = readline("😇minishell ");
-	printf("cmd %s size %lu\n", *buf, strlen(*buf));
+	ft_memset(*buf, 0, size);
+	*buf = readline("$ ");
 	add_history(*buf);
-	if (strcmp(*buf, "exit") == 0) //EOF
+	if (ft_strncmp(*buf, "exit", ft_strlen(*buf)) == 0)
 		return (-1);
 	return (0);
 }
 
 int	main(void)
 {
-	char	*buf;
+	static char	*buf;
 
 	buf = (char *)malloc(sizeof(char) * 100);
 	if (!buf)
 		exit (-1);
-	while(getcmd(&buf, sizeof(buf)) >= 0)
+	while (getcmd(&buf, sizeof(buf)) >= 0)
 	{
 		if (buf[0] == 'c' && buf[1] == 'd' && buf[2] == ' ')
 		{
 			printf("entro en cd\n");
-			buf[strlen(buf)] = 0;
-			printf("strlen %lu y directorio %s\n", strlen(buf), buf + 3);
-			/*char	*arg_list[] = {
-				"pwd",
-				NULL
-			};*/
+			buf[ft_strlen(buf)] = 0;
+			printf("strlen %lu y directorio %s\n", ft_strlen(buf), buf + 3);
 			if (chdir(buf + 3) < 0)
 				printf("cd: no such file or directory: %s\n", buf + 3);
-			//execvp("pwd", arg_list);
 			continue ;
 		}
-		printf("%s\n", buf);
+		if (fork1() == 0)
+		{
+			printf("dentro hijo\n");
+			ft_runcmd(parsecmd(buf));
+			printf("hola fuera\n");
+		}
+		wait(0);
+		printf("buf %s\n", buf);
 	}
 	return (0);
 }
