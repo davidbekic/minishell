@@ -8,8 +8,8 @@ int main(int ac, char **av, char **env)
 
   i = 0;
 
-  char *new_str_to_export = "C00LV4RIABLE=V4RIABLEC00L";
-  char *existing_str_to_export = "USER=OBAMA";
+  char *new_str_to_export = "C00LV4RIABLE=V4RIABLEC00L YO YO YO";
+  char *existing_str_to_export = "USER=ZUP FOOL ! ! ! @@""";
   printf("new str to export: %s\n", new_str_to_export);
   printf("existing str to export: %s\n", existing_str_to_export);
   env_list = NULL;
