@@ -9,7 +9,7 @@ int main(int ac, char **av, char **env)
   i = 0;
 
 //  char *new_str_to_export = "C00LV4RIABLE=V4RIABLEC00L YO YO YO";
-  char *new_str_to_export = NULL;
+  char *new_str_to_export = "hello=there";
 //  char *key = "varwithoutvalue";
   char *existing_str_to_export = "USER=ZUP FOOL ! ! ! @@""";
   printf("new str to export: %s\n", new_str_to_export);
