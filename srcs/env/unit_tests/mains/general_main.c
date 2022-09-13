@@ -18,7 +18,7 @@ int main(int ac, char **av, char **env)
   env_list = ft_init_env(env);
   if (!env_list)
     write(2, "malloc failure in init_env\n", 24);
-  printf("did I find PATH?: %s\n", ft_expand(env_list, "PATH"));
+  ft_pwd(env_list);
 
   //ft_export(ft_find_key(new_str_to_export), ft_find_value(new_str_to_export), env_list);
   //ft_export(ft_find_key(existing_str_to_export), ft_find_value(existing_str_to_export), env_list);

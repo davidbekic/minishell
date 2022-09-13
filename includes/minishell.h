@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/09 14:41:43 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/13 17:11:50 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,14 @@ char    *ft_find_key(char *pattern);
 char    *ft_find_value(char *pattern);
 char    *ft_expand(t_env *env_list, char *key);
 void    free_env(t_env *env_list);
-void    ft_env(t_env *env_list);
 void    ft_update_var(char *key, char *value, t_env *list);
+
+
+//Built-ins
+void    ft_env(t_env *env_list);
 void    ft_export(char *key, char *value, t_env *list);
+void	ft_pwd(t_env *env);
 t_env   *ft_unset(t_env *env_list, char *key);
-
-
 
 #endif
 
