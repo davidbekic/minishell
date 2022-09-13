@@ -21,6 +21,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <string.h>
+#include "../Libft/libft.h"
 
 # define EXEC 1
 # define REDIR 2
@@ -94,6 +95,8 @@ char    *ft_expand(t_env *env_list, char *key);
 void    free_env(t_env *env_list);
 void    ft_update_var(char *key, char *value, t_env *list);
 
+// exec
+void	ft_execve(t_env *env, char **names);
 
 //Built-ins
 void    ft_env(t_env *env_list);
