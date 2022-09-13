@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/09 14:41:43 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/13 15:36:53 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <string.h>
+#include "../Libft/libft.h"
 
 # define EXEC 1
 # define REDIR 2
@@ -97,6 +98,8 @@ void    ft_update_var(char *key, char *value, t_env *list);
 void    ft_export(char *key, char *value, t_env *list);
 t_env   *ft_unset(t_env *env_list, char *key);
 
+// exec
+void	ft_execve(t_env *env, char **names);
 
 
 #endif
