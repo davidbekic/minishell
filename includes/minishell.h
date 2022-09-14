@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/13 17:11:50 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/14 14:16:29 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <string.h>
+#include <fcntl.h>
 #include "../Libft/libft.h"
 
 # define EXEC 1
 # define REDIR 2
 # define PIPE 3
-# define O_WRONLY 10
-# define O_CREAT 11
-# define O_RDONLY 12
+//# define O_WRONLY 10
+//# define O_CREAT 11
+//# define O_RDONLY 12
 
 typedef struct s_env
 {
@@ -72,7 +73,9 @@ struct cmd	*parseline(char **pstr, char *estr);
 struct cmd	*parsepipe(char **pstr, char *estr);
 struct cmd	*parseredirs(char **pstr, char *estr, struct cmd *cmd);
 struct cmd	*parseexec(char **pstr, char *estr);
+struct cmd	*terminate(struct cmd *cmd);
 void		ft_runcmd(struct cmd *cmd);
+
 //Building tree structs
 struct cmd	*buildexec(void);
 struct cmd	*buildredir(struct cmd *scmd, char *file, char *efile, int right, int fd);

@@ -6,7 +6,7 @@
 #    By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/09/13 17:26:34 by dbekic           ###   ########.fr        #
+#    Updated: 2022/09/14 15:36:38 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,6 @@ CFLAGS = -Wall -Werror -Wextra -MMD
 # Folders
 OBJDIR = obj
 SRCDIR = srcs/parser
-COMMANDS_DIR = srcs/commands
-ENV_DIR = srcs/env
 
 # Files
 LIBFT = Libft
@@ -30,6 +28,7 @@ SRC = $(SRCDIR)/main.c \
 	  $(SRCDIR)/ft_utils.c \
 	  $(SRCDIR)/ft_build.c \
 	  $(SRCDIR)/ft_parser.c \
+	  $(SRCDIR)/ft_termination.c \
 	  $(SRCDIR)/ft_exec.c 
 
 OBJ = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

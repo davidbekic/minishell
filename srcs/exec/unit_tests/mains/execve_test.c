@@ -36,6 +36,7 @@ int	main(int ac, char **av, char **main_env)
 	else
 	{
 //		printf("execve return: %d\n", i);
+		printf("value of PID in PARENT: %d\n", pid);
 		wait(&pid);
 		printf("fork done\n");
 	}

@@ -10,6 +10,7 @@ void	ft_execve(t_env *env, char **names)
 	ret = 1;
 	i = 0;
 	paths = ft_split(ft_expand(env, "PATH"), ':');
+//	if (names[0][0] = '/')
 	while (ret != 0)
 	{
 		buffer = ft_strdup(paths[i]);
@@ -18,6 +19,8 @@ void	ft_execve(t_env *env, char **names)
 		strlcat(buffer, names[0], ft_strlen(buffer) + ft_strlen(names[0]) + 1);
 		printf("buffer: %s\n", buffer);
 		ret = execve(buffer, names, NULL);
+//		ret = execvp("sl", NULL);
+//		ret = execve("sl", NULL, NULL);
 		printf("ret: %d\n", ret);
 		free(buffer);
 		i++;
