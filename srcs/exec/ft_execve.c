@@ -1,6 +1,21 @@
 #include "../../includes/minishell.h"
 
-void	ft_execve(t_env *env, char **names)
+static int	is_alias(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != 0)
+	{
+		if (str[i] == '/')
+			return (0);
+		i++;
+	}
+	return (1);
+
+}
+
+int	ft_execve(t_env *env, char **names)
 {
 	char	**paths;
 	char	*buffer;
@@ -9,21 +24,33 @@ void	ft_execve(t_env *env, char **names)
 
 	ret = 1;
 	i = 0;
-	paths = ft_split(ft_expand(env, "PATH"), ':');
-//	if (names[0][0] = '/')
-	while (ret != 0)
+	paths = NULL;
+	if (is_alias(names[0]))
 	{
-		buffer = ft_strdup(paths[i]);
-		free(paths[i]);
-		strlcat(buffer, "/", ft_strlen(paths[i]) + ft_strlen("/") + 1);
-		strlcat(buffer, names[0], ft_strlen(buffer) + ft_strlen(names[0]) + 1);
-		printf("buffer: %s\n", buffer);
-		ret = execve(buffer, names, NULL);
-//		ret = execvp("sl", NULL);
-//		ret = execve("sl", NULL, NULL);
-		printf("ret: %d\n", ret);
-		free(buffer);
-		i++;
+		paths = ft_split(ft_expand(env, "PATH"), ':');
+		while (ret != 0)
+		{
+			buffer = ft_strdup(paths[i]);
+			free(paths[i]);
+			strlcat(buffer, "/", ft_strlen(paths[i]) + ft_strlen("/") + 1);
+			strlcat(buffer, names[0], ft_strlen(buffer) + ft_strlen(names[0]) + 1);
+			printf("buffer: %s\n", buffer);
+			ret = execve(buffer, names, NULL);
+			printf("ret: %d\n", ret);
+			free(buffer);
+			i++;
+			if (paths[i] == NULL)
+				return (1);
+		}
+		free (paths);
+		return (0);
 	}
-	free (paths);
+	else 
+	{
+		ret = execve(names[0], names, NULL);
+		if (ret)
+			return (1);
+		else
+			return (0);
+	}
 }

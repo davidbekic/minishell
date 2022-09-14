@@ -19,27 +19,25 @@ int	main(int ac, char **av, char **main_env)
 
 	args = malloc(2000);
 	args[0] = malloc(200);
-	args[0] = "norminette";
+	args[0] = "../../../../../../../../../../../../bin/l";
 	args[1] = malloc(200);
-	args[1] = "../mains";
+	args[1] = NULL;
 	args[2] = malloc(200);
 	args[2] = "test.txt";
 	args[3] = NULL;
-	command = malloc(2000);
-	command = "chmod";
 	i = 0;
 	pid = fork();
 	if (pid == 0)
 	{
-		ft_execve(env, args);
+		if (ft_execve(env, args))
+			printf("no such file or directory: %s\n", args[0]);
 	}
 	else
 	{
-//		printf("execve return: %d\n", i);
 		printf("value of PID in PARENT: %d\n", pid);
 		wait(&pid);
 		printf("fork done\n");
 	}
-	free_env(env);
+		free_env(env);
 
 }

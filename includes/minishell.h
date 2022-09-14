@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/14 14:16:29 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/14 16:26:26 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void    free_env(t_env *env_list);
 void    ft_update_var(char *key, char *value, t_env *list);
 
 // exec
-void	ft_execve(t_env *env, char **names);
+int	ft_execve(t_env *env, char **names);
 
 //Built-ins
 void    ft_env(t_env *env_list);
