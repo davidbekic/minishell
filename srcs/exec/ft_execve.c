@@ -34,9 +34,7 @@ int	ft_execve(t_env *env, char **names)
 			free(paths[i]);
 			strlcat(buffer, "/", ft_strlen(paths[i]) + ft_strlen("/") + 1);
 			strlcat(buffer, names[0], ft_strlen(buffer) + ft_strlen(names[0]) + 1);
-			printf("buffer: %s\n", buffer);
 			ret = execve(buffer, names, NULL);
-			printf("ret: %d\n", ret);
 			free(buffer);
 			i++;
 			if (paths[i] == NULL)

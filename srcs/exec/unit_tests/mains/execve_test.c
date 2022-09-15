@@ -19,7 +19,7 @@ int	main(int ac, char **av, char **main_env)
 
 	args = malloc(2000);
 	args[0] = malloc(200);
-	args[0] = "../../../../../../../../../../../../bin/l";
+	args[0] = "ls";
 	args[1] = malloc(200);
 	args[1] = NULL;
 	args[2] = malloc(200);
@@ -30,7 +30,7 @@ int	main(int ac, char **av, char **main_env)
 	if (pid == 0)
 	{
 		if (ft_execve(env, args))
-			printf("no such file or directory: %s\n", args[0]);
+			printf("minishell: no such file or directory: %s\n", args[0]);
 	}
 	else
 	{
