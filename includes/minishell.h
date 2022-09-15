@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/14 16:26:26 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/15 10:46:34 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ char    *ft_find_value(char *pattern);
 char    *ft_expand(t_env *env_list, char *key);
 void    free_env(t_env *env_list);
 void    ft_update_var(char *key, char *value, t_env *list);
+void	ft_alphabetic_env(t_env *env_list);
 
 // exec
 int	ft_execve(t_env *env, char **names);
