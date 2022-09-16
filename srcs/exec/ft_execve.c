@@ -15,6 +15,11 @@ static int	is_alias(char *str)
 
 }
 
+void	ctrl_c_handler2(int signum)
+{
+	printf("hombre\n");
+}
+
 int	ft_execve(t_env *env, char **names)
 {
 	char	**paths;
@@ -25,6 +30,7 @@ int	ft_execve(t_env *env, char **names)
 	ret = 1;
 	i = 0;
 	paths = NULL;
+	printf("names[1]: %s\n", names[1]);
 	if (is_alias(names[0]))
 	{
 		paths = ft_split(ft_expand(env, "PATH"), ':');

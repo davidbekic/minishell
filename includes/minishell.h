@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/15 13:29:03 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/15 14:49:25 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 #include <stdio.h>
+#include <sys/signal.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
