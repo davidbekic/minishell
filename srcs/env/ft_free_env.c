@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 13:00:01 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/14 16:16:47 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/16 13:20:02 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ void	free_env(t_env *env_list)
 		if (env_list)
 			free(env_list);
 	}
-	exit(0);
+//	exit(0);
 }
