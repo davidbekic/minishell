@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 13:00:01 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/16 13:20:02 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/19 18:13:06 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ void	free_env(t_env *env_list)
 	aux = env_list;
 	while (aux != NULL)
 	{
+//		printf("aux->key: %s\n", aux->key);
+//		printf("aux->value: %s\n", aux->value);
+
 		if (aux->key)
 			free(aux->key);
 		if (aux->value)

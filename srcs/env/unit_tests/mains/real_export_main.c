@@ -11,7 +11,7 @@ int main(int ac, char **av, char **env)
 //  char *new_str_to_export = "C00LV4RIABLE=V4RIABLEC00L YO YO YO";
   char *new_str_to_export = "hello=there";
 //  char *key = "varwithoutvalue";
-  char *existing_str_to_export = "USER2=ZUP FOOL ! ! ! @@""";
+  char *existing_str_to_export = "USER=ZUP FOOL ! ! ! @@""";
   printf("new str to export: %s\n", new_str_to_export);
   printf("existing str to export: %s\n", existing_str_to_export);
   env_list = NULL;
@@ -20,8 +20,9 @@ int main(int ac, char **av, char **env)
   if (av == NULL)
     exit(0);
   env_list = ft_init_env(env);
-  ft_export(ft_find_key(new_str_to_export), ft_find_value(new_str_to_export), env_list);
-  ft_export(ft_find_key(existing_str_to_export), ft_find_value(existing_str_to_export), env_list);
+//  ft_export(ft_find_key(new_str_to_export), ft_find_value(new_str_to_export), env_list);
+	ft_export(new_str_to_export, env_list);
+	ft_export(existing_str_to_export, env_list);
   ft_env(env_list);
   free_env(env_list);
   
