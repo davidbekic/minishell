@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/19 18:38:59 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/20 12:45:28 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	ft_update_var(char *key_value, int value_start, t_env *list)
 
 	i = 0;
 	aux = list;
+	printf("key_value in update var: %s\n", key_value);
 	strncpy(key, key_value, value_start - 1);
 	elem = ft_find_elem(list, key_value);
 	// CREATING ELEMENT
@@ -36,14 +37,12 @@ static void	ft_update_var(char *key_value, int value_start, t_env *list)
 	// UPDATE VARIABLE
 	else
 	{
-		printf("whats UP IN DA HOUSE: %s\n", elem->next->key);
-		printf("value_start: %d\n", value_start);
 		while (key_value[value_start + i] != 0)
 		{
 			i++;
 			elem->value[i - 1] = key_value[value_start + i - 1];
 		}
-		elem->value[i - 1] = 0;
+		elem->value[i] = 0;
 	}
 }
 
@@ -53,15 +52,20 @@ void    ft_export(char *arg, t_env *env)
 	unsigned char	value_start;
 
 	//printf("key_end: %d\value_start: %d\n", key_end, value_start);
-	printf("lol\n");
+	printf("ENTERING FT_EXPORT\n");
+	printf("arg: %s\n", arg);
 	key_end = ft_find_key(arg);
+	printf("key_end: %d\n", key_end);
 	value_start = ft_find_value(arg);
 	// IF NOTHING -- SHOW ALPHABETIC ENV
-	if (key_end == 0|| value_start == 0)
+	if (!arg)
+	{
+		printf("entering alphabetic condition\n");
 		ft_alphabetic_env(env);
+	}
 	// IF ONLY KEY
 	else if (key_end != 0 && value_start == 0)
-		printf("nada\n");
+		printf("minishell: PLEASE GIVE VALUE TO VARIABLE\n");
 	// MAKE NEW OR UPDATE ENV VAR
 	else
 		ft_update_var(arg, value_start, env);

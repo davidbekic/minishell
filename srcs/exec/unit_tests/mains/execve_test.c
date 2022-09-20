@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42barcelon>         +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:18:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/16 14:15:49 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/20 13:31:01 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,24 +69,23 @@ int	main(int ac, char **av, char **main_env)
 
 	args = malloc(2000);
 	args[0] = malloc(200);
-	args[0] = "sleep";
+	args[0] = "/bin/ls";
 	args[1] = malloc(200);
-	args[1] = "20";
+	args[1] = NULL;
 	args[2] = malloc(200);
 	args[2] = NULL;
 	args[3] = NULL;
 	i = 0;
 	signal(SIGINT, ctrl_c_handler);
 //	signal(SIGINT, SIG_IGN);
-	while (WIFEXITED(pid) != 0)
-	{
+	// while (1)
+	// {
 		if (i == 0)
 		{
 				pid = fork();
 			if (pid == 0)
 			{
 				signal(SIGINT, SIG_DFL);
-				exit(130);
 				if (ft_execve(env, args))
 					printf("minishell: no such file or directory: %s\n", args[0]);
 			}
@@ -95,9 +94,10 @@ int	main(int ac, char **av, char **main_env)
 				printf("value of PID in PARENT: %d\n", pid);
 				wait(0);
 				printf("fork done\n");
+				exit (0);
 			}
 			i++;
 		}
 //		free_env(env);
-	}
+	// }
 }

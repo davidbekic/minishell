@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/09/19 14:02:53 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/20 12:46:00 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,17 @@ static int	getcmd(char **buf, int size, t_env *env)
 	add_history(*buf);
 	if (ft_strncmp(*buf, "exit", ft_strlen(*buf)) == 0)
 		return (-1);
-/*	if (ft_strncmp(*buf, "env", ft_strlen(*buf)) == 0)
+	if (ft_strncmp(*buf, "env", ft_strlen(*buf)) == 0)
 		ft_env(env);
 	if (ft_strncmp(*buf, "pwd", ft_strlen(*buf)) == 0)
 		ft_pwd(env);
-	if (ft_strncmp(*buf, "export", 6) == 0)
-		ft_export(ft_find_key("USER=HELLO"), ft_find_value("USER=HELLO"), env);
+	if (ft_strncmp(*buf, "export1", 7) == 0)
+		ft_export("USER2=kuksugareballe", env);
+	if (ft_strncmp(*buf, "export2", 7) == 0)
+		ft_export(NULL, env);
 	if (ft_strncmp(*buf, "unset", 5) == 0)
-		ft_export("USER=HELLO", "USER=HELLO", env);
-*/	return (0);
+		ft_unset("USER", env);
+	return (0);
 }
 
 int	main(int ac, char **av, char **main_env)

@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 18:39:10 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/19 17:33:56 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/20 11:38:18 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ int	ft_find_value(char *pattern)
 	j = 0;
 	if (!pattern)
 		return (0);
-	while (pattern[i] != '=')
+	while (pattern[i] != '=' && pattern[i] != 0)
 		i++;
+	// IF THERE IS NO VALUE, JUST RETURN SIZE OF KEY ANYWAY
+	if (pattern[i] == 0)
+		return(0);
 	i++;
 	return (i);
 }	

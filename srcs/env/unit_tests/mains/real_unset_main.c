@@ -21,6 +21,7 @@ int main(int ac, char **av, char **env)
   //ft_export(ft_find_key(existing_str_to_export), ft_find_value(existing_str_to_export), env_list);
   //ft_unset(env_list, "SHELL");
   //ft_unset(env_list, "TERM_PROGRAM");
+  //ft_export("kuksug=haha", env_list);
   env_list = ft_unset(env_list, "USER");
   env_list = ft_unset(env_list, "TERM_PROGRAM");
   env_list = ft_unset(env_list, "TERM");
