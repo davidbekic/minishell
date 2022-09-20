@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:34:48 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/15 13:04:56 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/19 14:26:08 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_update_var(char *key, char *value, t_env *list)
 	i = 0;
 	aux = list;
 	elem = ft_find_elem(list, key);
+	// CREATING ELEMENT
 	if (!elem)
 	{
 		while (strcmp(list->next->key, "_") != 0)
@@ -30,6 +31,7 @@ void	ft_update_var(char *key, char *value, t_env *list)
 		list->next = elem;
 		elem->next = aux;
 	}
+	// UPDATE VARIABLE
 	else
 	{
 		while (value[i++] != 0)

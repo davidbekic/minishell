@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+         #
+#    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/09/14 15:36:38 by dbekic           ###   ########.fr        #
+#    Updated: 2022/09/20 10:48:05 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	gcc $(CFLAGS) -o $@ -c $<
 
 clean:
+
 ifneq ("$(wildcard $(OBJ) $(DEPENDS) $(OBJDIR))", "")
 	rm -f $(OBJ) $(DEPENDS)
 	rm -rf $(OBJDIR)
@@ -60,6 +61,7 @@ ifneq ("$(wildcard $(OBJ) $(DEPENDS) $(OBJDIR))", "")
 	@make clean -C $(LIBFT)
 	@echo "$(GREEN)Objetos borrados$(RESET)"
 else
+	rm Libft/*.d 
 	@echo "$(RED)Los objetos no existen, no se borra$(RESET)"
 endif
 

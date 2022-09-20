@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:39:37 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/15 13:23:22 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/20 11:36:52 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void    ft_env(t_env *env_list)
     aux = env_list;
     while (aux != NULL)
     {
-        
-        printf("%s=%s\n", aux->key, aux->value);
+		if (aux->value != NULL)
+        	printf("%s=%s\n", aux->key, aux->value);
         aux = aux->next;
         i++;
     }
