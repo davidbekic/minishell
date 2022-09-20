@@ -9,7 +9,7 @@ int main(int ac, char **av, char **env)
   i = 0;
 
 //  char *new_str_to_export = "C00LV4RIABLE=V4RIABLEC00L YO YO YO";
-  char *new_str_to_export = "hello";
+  char *new_str_to_export = "hello=myman";
 //  char *key = "varwithoutvalue";
   char *existing_str_to_export = "USER=ZUP FOOL ! ! ! @@""";
   printf("new str to export: %s\n", new_str_to_export);
@@ -21,7 +21,7 @@ int main(int ac, char **av, char **env)
     exit(0);
   env_list = ft_init_env(env);
 //  ft_export(ft_find_key(new_str_to_export), ft_find_value(new_str_to_export), env_list);
-	//ft_export(new_str_to_export, env_list);
+	ft_export(new_str_to_export, env_list);
 	//ft_export(existing_str_to_export, env_list);
   ft_env(env_list);
   free_env(env_list);
