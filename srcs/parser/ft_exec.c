@@ -64,7 +64,7 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 		// else if (ft_strncmp(execcmd->names[0], "unset", 5) == 0)
 		// 	env = ft_unset(env, "USER");
 		// 	//ft_unset(&env, "USER");
-		else 
+		else
 		{
 			printf("how could I possibly enter here with names[0]: %s\n", execcmd->names[0]);
 			execvp(execcmd->names[0], execcmd->names);

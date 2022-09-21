@@ -22,13 +22,6 @@ void	ctrl_c_handler2(int signum)
 
 static char	*ft_strchrnul(const char *s, int c)
 {
-
-	int i ;
-
-	i = 0;
-
-	while (s[i] != 0)
-
 	while (*s)
 	{
 		if (c == *s)
@@ -49,16 +42,14 @@ int	ft_execve(t_env *env, char **names)
 	ret = 1;
 	path = getenv("PATH");
 	cpath = path;
+	printf("path: %s\n", path);
 	if (is_alias(names[0]))
 	{
+
 		while (cpath)
 		{
 			pstr = ft_strchrnul(cpath, ':');
-			// detta funkar eftersom pointers ar bara adresser i memory, 
-			// sa pstr ar egentligen bara ett nummer som t.ex. 1000.
-			// om vi sen ger tillbaka ptr + 14, ger vi tillbaka numret 1014
-			// darfor blir pstr - cpath = 1014-1000 = 14
-			// och darfor kan vi gora numeriska operationer med strings. strings AR nummer.
+			printf("pstr: %s\n", pstr);
 			ft_memcpy(tstr, cpath, pstr - cpath);
 			tstr[pstr - cpath] = '/';
 			ft_memcpy(tstr + (pstr - cpath) + (pstr>cpath), names[0], ft_strlen(names[0]));

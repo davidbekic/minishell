@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:18:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/20 13:31:01 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/21 14:03:01 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 
 typedef struct s_gvars {
 	int child_PID;
+	unsigned char g_exit_code;
 	int main_PID;
 }	t_gvars;
 
@@ -38,16 +39,6 @@ t_gvars gvars;
 
 void	ctrl_c_handler(int signum)
 {
-//	printf("pid_main: %d\npid_child: %d\n", gvars.main_PID, gvars.child_PID);
-//	if (gvars.main_PID != 0)
-//	{
-//		kill(gvars.main_PID, SIGKILL);
-//		gvars.main_PID = 0;
-//	}
-//	else if (gvars.main_PID == 0)
-//	{
-//		kill(gvars.main_PID, SIGKILL);
-//	}
 	printf("inside handler func. SIGNUM: %d\n", signum);
 }
 
@@ -69,35 +60,56 @@ int	main(int ac, char **av, char **main_env)
 
 	args = malloc(2000);
 	args[0] = malloc(200);
-	args[0] = "/bin/ls";
+	args[0] = "ls";
 	args[1] = malloc(200);
 	args[1] = NULL;
 	args[2] = malloc(200);
 	args[2] = NULL;
 	args[3] = NULL;
 	i = 0;
-	signal(SIGINT, ctrl_c_handler);
-//	signal(SIGINT, SIG_IGN);
-	// while (1)
-	// {
+//	signal(SIGINT, ctrl_c_handler);
+	signal(SIGQUIT, ctrl_c_handler);	
+	signal(SIGINT, SIG_IGN);
+	 while (1)
+	 {
 		if (i == 0)
 		{
-				pid = fork();
+			// CHILD PROCESS
+			pid = fork();
 			if (pid == 0)
 			{
+				int ret;
+				printf("hellooo\n");
 				signal(SIGINT, SIG_DFL);
-				if (ft_execve(env, args))
+				ret = ft_execve(env, args);
+				if (ret != 0)
 					printf("minishell: no such file or directory: %s\n", args[0]);
+				exit(4);
+				return (ret);
 			}
 			else
 			{
 				printf("value of PID in PARENT: %d\n", pid);
-				wait(0);
+				printf("pid in parent: %d\n", pid);
+				wait(&pid);
+				if (WIFEXITED(pid))
+				{
+					printf("WIFEXITED is true\n");
+					gvars.g_exit_code = WEXITSTATUS(pid);
+				}
+				if (WIFSIGNALED(pid))
+				{
+					printf("WIFSIGNALED is true\n");
+					gvars.g_exit_code = WTERMSIG(pid) + 128;		
+				}			
+				printf("exit_status of child %d\n", gvars.g_exit_code);
 				printf("fork done\n");
-				exit (0);
+				//exit (0);
 			}
 			i++;
 		}
-//		free_env(env);
-	// }
+	 }
+	// free_env(env);
+//	return (gvars.g_exit_code);
+	exit(gvars.g_exit_code);
 }
