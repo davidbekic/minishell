@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 18:39:10 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/20 11:38:18 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/22 11:54:28 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_find_key(char *pattern)
 {
 	int		i;
 
+	i = 0;
 	if (!pattern)
 		return (0);
 	while (pattern[i] != 0 && pattern[i] != '=')
@@ -36,7 +37,13 @@ int	ft_find_value(char *pattern)
 		i++;
 	// IF THERE IS NO VALUE, JUST RETURN SIZE OF KEY ANYWAY
 	if (pattern[i] == 0)
-		return(0);
+		return (0);
+	// IF THERE IS EQUALS SIGN, BUT NO VALUE
+	else if (pattern[i] == '=' && pattern[i + 1] == 0)
+	{
+		printf("not true\n");
+		return (0);
+	}
 	i++;
 	return (i);
 }	

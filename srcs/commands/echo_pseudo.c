@@ -30,23 +30,6 @@
 
 #include "../../includes/minishell.h"
 
-static int	ft_non_allowed_char_for_var(char *str)
-{
-	int	i;
-
-	i = 0;
-
-	while (str[++i] != 0)
-	{
-		if (str[i] >= '0' && str[i] <= '9' && i == 0)
-			return (1);
-		if (!(str[i] >= 'a' && str[i] <= 'z') && !(str[i] >= 'A' && str[i] <= 'Z')
-			&& str[i] != '_')
-			return (1);
-	}
-	return (0);
-}
-
 char *ft_echo_expand(char *var, t_env *env)
 {
 	char	str[100];
@@ -54,7 +37,7 @@ char *ft_echo_expand(char *var, t_env *env)
 	int	i;
 
 	i = 0;
-	i = ft_non_allowed_char_for_var(var);
+	i = ft_non_allowed_char_for_var(var, ft_strlen(var));
 	if (i)
 		return (NULL);
 	printf("var: %s\n", var);
@@ -82,7 +65,7 @@ unsigned char	ft_echo(char **names, t_env *env)
 	{
 		while (names[j][i] != 0)
 		{
-			if (names[j][i] == '@' && (quote_type == '\"' || quote_type == 0))
+			if (names[j][i] == '$' && (quote_type == '\"' || quote_type == 0))
 			{
 				printf("haha\n");
 				ft_memcpy(buf + ft_strlen(buf), 
@@ -135,7 +118,7 @@ int	main(int ac, char **av, char **main_env)
 	names[2] = malloc(2000);
 	names[0] = "echo";
 	names[1] = "-n";
-	names[2] = "\"@PATH\"";
+	names[2] = "\" ' \" \'";
 	names[3] = "there";
 	names[4] = NULL;
 	i =	ft_echo(names, env);
