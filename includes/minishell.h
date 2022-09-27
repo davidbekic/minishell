@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/22 11:42:16 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/27 16:53:03 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ struct cmd	*parseredirs(char **pstr, char *estr, struct cmd *cmd);
 struct cmd	*parseexec(char **pstr, char *estr);
 struct cmd	*terminate(struct cmd *cmd);
 void		ft_runcmd(struct cmd *cmd, t_env *env);
+int			ft_prompt_parser(char *str, t_env *env);
 
 //Building tree structs
 struct cmd	*buildexec(void);

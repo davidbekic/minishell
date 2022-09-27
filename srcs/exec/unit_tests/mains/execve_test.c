@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:18:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/21 14:03:01 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/27 16:32:08 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ int	main(int ac, char **av, char **main_env)
 	args[0] = malloc(200);
 	args[0] = "ls";
 	args[1] = malloc(200);
-	args[1] = NULL;
+	args[1] = "\"\"";
 	args[2] = malloc(200);
 	args[2] = NULL;
 	args[3] = NULL;
 	i = 0;
 //	signal(SIGINT, ctrl_c_handler);
-	signal(SIGQUIT, ctrl_c_handler);	
-	signal(SIGINT, SIG_IGN);
+	// signal(SIGQUIT, ctrl_c_handler);	
+	// signal(SIGINT, SIG_IGN);
 	 while (1)
 	 {
 		if (i == 0)

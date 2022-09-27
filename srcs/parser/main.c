@@ -6,18 +6,20 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/09/20 12:46:00 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/27 16:53:26 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../Libft/libft.h"
 
+
 static int	getcmd(char **buf, int size, t_env *env)
 {
 	ft_memset(*buf, 0, size);
 	*buf = readline("$ ");
 	add_history(*buf);
+	ft_prompt_parser(*buf, env);
 	if (ft_strncmp(*buf, "exit", ft_strlen(*buf)) == 0)
 		return (-1);
 	if (ft_strncmp(*buf, "env", ft_strlen(*buf)) == 0)

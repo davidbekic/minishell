@@ -104,22 +104,22 @@ unsigned char	ft_echo(char **names, t_env *env)
 	return (inside_quote);
 }
 
-int	main(int ac, char **av, char **main_env)
-{
-	char		**names;
-	t_env		*env;
-	unsigned char		i = 0;
+// int	main(int ac, char **av, char **main_env)
+// {
+// 	char		**names;
+// 	t_env		*env;
+// 	unsigned char		i = 0;
 
-	printf("sug min: %d %s\n", ac, av[1]);
-	env = ft_init_env(main_env);
-	names = malloc(2000);
-	names[0] = malloc(2000);
-	names[1] = malloc(2000);
-	names[2] = malloc(2000);
-	names[0] = "echo";
-	names[1] = "-n";
-	names[2] = "\" ' \" \'";
-	names[3] = "there";
-	names[4] = NULL;
-	i =	ft_echo(names, env);
-}
+// 	printf("sug min: %d %s\n", ac, av[1]);
+// 	env = ft_init_env(main_env);
+// 	names = malloc(2000);
+// 	names[0] = malloc(2000);
+// 	names[1] = malloc(2000);
+// 	names[2] = malloc(2000);
+// 	names[0] = "echo";
+// 	names[1] = "-n";
+// 	names[2] = "\" ' \" \'";
+// 	names[3] = "there";
+// 	names[4] = NULL;
+// 	i =	ft_echo(names, env);
+// }

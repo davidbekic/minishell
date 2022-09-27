@@ -40,16 +40,18 @@ int	ft_execve(t_env *env, char **names)
 	int	ret;
 
 	ret = 1;
+	printf("helooooon\n");
+	// names[1][3] = 'a';
+	// names[1][2] = 0;
 	path = getenv("PATH");
+	//memcpy(names[1], "122", 2);
+	printf("names[1]: %s\n", names[1]);
 	cpath = path;
-	printf("path: %s\n", path);
 	if (is_alias(names[0]))
 	{
-
 		while (cpath)
 		{
 			pstr = ft_strchrnul(cpath, ':');
-			printf("pstr: %s\n", pstr);
 			ft_memcpy(tstr, cpath, pstr - cpath);
 			tstr[pstr - cpath] = '/';
 			ft_memcpy(tstr + (pstr - cpath) + (pstr>cpath), names[0], ft_strlen(names[0]));

@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/09/20 12:31:45 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/09/27 16:43:17 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 		else
 		{
 			printf("how could I possibly enter here with names[0]: %s\n", execcmd->names[0]);
+			// printf("how could I possibly enter here with names[1]: %s\n", execcmd->names[1]);
 			execvp(execcmd->names[0], execcmd->names);
 		}
 	}
