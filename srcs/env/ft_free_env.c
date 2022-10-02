@@ -21,9 +21,6 @@ void	free_env(t_env *env_list)
 	aux = env_list;
 	while (aux != NULL)
 	{
-//		printf("aux->key: %s\n", aux->key);
-//		printf("aux->value: %s\n", aux->value);
-
 		if (aux->key)
 			free(aux->key);
 		if (aux->value)
@@ -33,5 +30,4 @@ void	free_env(t_env *env_list)
 		if (env_list)
 			free(env_list);
 	}
-//	exit(0);
 }

@@ -19,6 +19,7 @@ char    *ft_expand(t_env *env_list, char *key)
 
     i = 0;
     ft_memcpy(temp_buf, key, strlen(key));
+    temp_buf[ft_strlen(key)] = 0;
 	while (key[i] != 0)
 	{
 		if (key[i] >= '0' && key[i] <= '9' && i == 0)
@@ -31,6 +32,7 @@ char    *ft_expand(t_env *env_list, char *key)
         }
 		i++;
 	}
+    printf("temp_buf: %s\n", temp_buf);
     // printf("ft-find_elem: %s\n", ft_find_elem(env_list, temp_buf)->value);
     return (ft_find_elem(env_list, temp_buf)->value);
 }

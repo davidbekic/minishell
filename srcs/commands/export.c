@@ -60,15 +60,11 @@ void    ft_export(char *arg, t_env *env)
 	//printf("key_end: %d\value_start: %d\n", key_end, value_start);
 	if (!arg)
 	{
-		printf("entering alphabetic condition\n");
 		ft_alphabetic_env(env);
 		return ;
 	}
-	printf("ENTERING FT_EXPORT with arg: %s\n", arg);
-	key_end = ft_find_key(arg);
-		
+	key_end = ft_find_key(arg);	
 	value_start = ft_find_value(arg);
-	printf("key_end: %d\n", key_end);
 	if (ft_non_allowed_char_for_var_name(arg, key_end) || key_end == 0)
 	{
 		printf("minishell: export: `%s\': not a valid identifier\n", arg);

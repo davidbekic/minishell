@@ -32,6 +32,7 @@ static int	getcmd(char **buf, int size, t_env *env)
 		ft_export(NULL, env);
 	if (ft_strncmp(*buf, "unset", 5) == 0)
 		ft_unset("PATH", env);
+	
 	return (0);
 }
 

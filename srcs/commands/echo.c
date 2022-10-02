@@ -14,24 +14,36 @@
 
 void	ft_echo(char **names)
 {
-	unsigned char n_flag;
+	unsigned char 	n_flag;
+	char			**start_ptr;
 	n_flag = 0;
 
+	start_ptr = (char **) names;
 	if (!names[1])
 	{
 		printf("\n");
 		return ;
 	}
-	else if (strncmp(names[1], "-n", 2) == 0)
+	while (*names != NULL)
 	{
+		printf("names: %s\n", *names);
+		if (strncmp(*(names), "-n", 2) == 0)
+			n_flag++;
 		names++;
-		n_flag = 1;
+	// else if (strncmp(names[1], "-n", 2) == 0)
+	// {
+	// 	names++;
+	// 	n_flag = 1;
+	// }
 	}
-	while (*++names)
+	printf("n_flag: %d\n", n_flag);
+	names = start_ptr;
+	while (*(names + 1 + n_flag))
 	{
-		printf("%s", *names);
-		if (*(names + 1) != NULL)
+		printf("%s", *(names + 1 + n_flag));
+		if (*(names + 2 + n_flag) != NULL)
 			printf(" ");
+		names++;
 	}
 	if (!n_flag)
 		printf("\n");
@@ -39,19 +51,26 @@ void	ft_echo(char **names)
 
 // int	main(void)
 // {
-// 	char **names;
+// 	char	**names;
 // 	int		i = 1;
 
 // 	names = malloc(200000);
-// 	names[0] = malloc(20000);
+// 	names[0] = malloc(200);
 // 	names[0] = "echo";
-// 	while (i < 10000)
-// 	{
-// 		names[i] = malloc(20);
-// 		names[i] = "he\n";
-// 		i++;
-// 	}
-// 	names[i] = NULL;
+// 	names[1] = malloc(200);
+// 	names[1] = "hello";
+// 	names[2] = malloc(200);
+// 	names[2] = NULL;
+// 	names[3] = malloc(200);
+// 	names[3] = NULL;
+// 	names[4] = NULL;
+// 	// {
+// 	// 	names[i] = malloc(20);
+// 	// 	names[i] = "he\n";
+// 	// 	i++;
+// 	// }
+// 	// names[i] = NULL;
+
 // 	// names[1] = "hello";
 // 	// names[2] = "there";
 // 	// names[3] = NULL;

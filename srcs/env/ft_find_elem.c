@@ -37,7 +37,6 @@ t_env	*ft_find_elem_before(t_env *env_list, char *key)
 			return (aux);
 		aux = aux->next;
 	}
-	printf("key in ft_find_elem_before: %s\n", key);
 	return (NULL);
 }
 
@@ -46,19 +45,11 @@ t_env	*ft_find_elem(t_env *env_list, char *key)
 	t_env	*aux;
 
 	aux = env_list;
-	
-	
-	printf("entering find_elem with key[4]: %c\n", key[4]);
-	printf("strlen(key): %d\n", ft_strlen_printable(key));
 	// ITERATING THROUGH ENV LIST
 	while (aux != NULL)
 	{
-	//	printf("strncmp(%s, %s, %d): %d\n", aux->key, key, ft_strlen_printable(key), strncmp(aux->key, key, ft_strlen_printable(key)));
 		if (strncmp(aux->key, key, ft_strlen_printable(key)) == 0)
-		{
-			printf("found %s\n", aux->key);
 			return (aux);
-		}
 		aux = aux->next;
 	}
 	return (NULL);

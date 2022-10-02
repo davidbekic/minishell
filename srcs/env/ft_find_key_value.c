@@ -40,10 +40,7 @@ int	ft_find_value(char *pattern)
 		return (0);
 	// IF THERE IS EQUALS SIGN, BUT NO VALUE
 	else if (pattern[i] == '=' && pattern[i + 1] == 0)
-	{
-		printf("not true\n");
 		return (0);
-	}
 	i++;
 	return (i);
 }	

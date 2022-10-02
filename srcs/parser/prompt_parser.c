@@ -12,6 +12,26 @@
 
 #include "../../includes/minishell.h"
 
+int	ft_var_name_stop(char *str)
+{
+	int	i;
+	char	buf[100];
+
+	i = 0;
+	ft_memcpy(buf, str, ft_strlen(buf)); // putting only var_NAME in buf
+	buf[ft_strlen(buf)] = 0; // memcpy not NULL-terminating fro some reason.
+	while (str[i] != 0)
+	{
+		if (str[i] >= '0' && str[i] <= '9' && i == 0)
+			return (0);
+		if (!(str[i] >= 'a' && str[i] <= 'z') && !(str[i] >= 'A' && str[i] <= 'Z')
+			&& str[i] != '_' && !(str[i] >= '0' && str[i] <= '9'))
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
 static int ft_quote_checker(char *str)
 {
 	unsigned char	quote_type;
@@ -53,39 +73,46 @@ static int ft_syntax_checker(char **str)
     return (0);
 }
 
-char *prompt_expander(char **str, t_env *env)
+void    prompt_expander(char **buf, t_env *env)
 {
 	unsigned char	quote_type;
     int             i;
     int             j;
-    char            *expanded_buf;
+    char            dump[2000];
     
 	quote_type = 0;
-    expanded_buf = malloc(2000);
+    ft_memcpy(dump, *buf, ft_strlen(*buf));
+    dump[ft_strlen(*buf)] = 0;
+    buf[0][0] = 0;
+    printf("dump: %s\n", dump);
 	i = 0;
     j = 0;
-	while (str[0][i] != 0)
+	while (dump[i] != 0)
 	{
-		if  ((str[0][i] == '\"' || str[0][i]== '\'') 
-          && (str[0][i] != quote_type ) && !quote_type)
-			quote_type = str[0][i];
-		else if (str[0][i] == quote_type)
+		if  ((dump[i] == '\"' || dump[i]== '\'') 
+          && (dump[i] != quote_type ) && !quote_type)
+			quote_type = dump[i];
+		else if (dump[i] == quote_type)
 			quote_type = 0;
-        if (str[0][i] == '$' && quote_type != '\'')
+        if (dump[i] == '$' && quote_type != '\'')
         {
-            ft_memcpy(expanded_buf + i, ft_expand(env, *(str) + i + 1), strlen(ft_expand(env, *(str) + i + 1)) + 1);
-            printf("expanded_buf: %s\n", expanded_buf);
-            j = strlen(ft_expand(env, *(str) + i + 1));
-            i += 1;
+            printf("to here\n");
+            memcpy(*(buf) + i + j, ft_expand(env, dump + i + 1), strlen(ft_expand(env, dump + i + 1)) + 1);
+            printf("ft_varnamestop: %d\n", ft_var_name_stop(dump + 1 + i));
+            i += ft_var_name_stop(dump + i + 1) + 1;
+            //j += ft_strlen(ft_expand(env, dump + i + 1));
+            j = ft_strlen(*(buf) + i);
+            printf("j: %d\n", j);
+            *(buf + i + j) = 0;
             continue ;
         }
-
-        ft_memcpy(expanded_buf + i + j, *str + i, 1);
+        printf("quote_type: %d\n", quote_type);
+        ft_memcpy(*buf + i + j, dump + i, 1);
+        printf("buf: %s\n", *buf);
+        // printf("dump[%d]: %c\n", i, dump[i]);
         i++;
 	}
-    expanded_buf[i + j] = 0;
-    printf("expanded_buf: %s\n", expanded_buf);
-    return(expanded_buf);
+    printf("expanded_buf: %s\n", *buf);
 }
 
 int ft_prompt_parser(char **buf, t_env *env)
@@ -97,6 +124,7 @@ int ft_prompt_parser(char **buf, t_env *env)
     }
     // if (ft_syntax_checker(buf))
     //     return (1);
-    *buf = prompt_expander(buf, env);   
+    prompt_expander(buf, env);   
+    printf("not passing?\n");
     return (0);
 }
