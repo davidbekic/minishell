@@ -17,7 +17,7 @@
 static int	getcmd(char **buf, int size, t_env *env)
 {
 	ft_memset(*buf, 0, size);
-	*buf = readline("$ ");
+	*buf = readline("minishell: ");
 	add_history(*buf);
 	ft_prompt_parser(buf, env);
 	if (ft_strncmp(*buf, "exit", ft_strlen(*buf)) == 0)

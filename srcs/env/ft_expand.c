@@ -27,11 +27,10 @@ char    *ft_expand(t_env *env_list, char *key)
 			&& key[i] != '_')
         {
 			temp_buf[i] = 0;
-            printf("in here ever?\n");
             break ;
         }
 		i++;
 	}
-    printf("temp_buf: %s\n", temp_buf);
+    // printf("ft-find_elem: %s\n", ft_find_elem(env_list, temp_buf)->value);
     return (ft_find_elem(env_list, temp_buf)->value);
 }

@@ -60,9 +60,9 @@ int	main(int ac, char **av, char **main_env)
 
 	args = malloc(2000);
 	args[0] = malloc(200);
-	args[0] = "ls";
+	args[0] = "LS";
 	args[1] = malloc(200);
-	args[1] = "\"\"";
+	args[1] = NULL;
 	args[2] = malloc(200);
 	args[2] = NULL;
 	args[3] = NULL;

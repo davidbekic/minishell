@@ -18,6 +18,8 @@ t_env    *ft_unset(char *key, t_env *env_list)
     t_env   *to_redirect;
     
     printf("ENTERING FT_UNSET: %s\n", key);
+    if (!key)
+        return (env_list);
     if (strcmp(key, "_") == 0)  // IF TRYING TO CHANGE LAST ENV VARIABLEE
         return (env_list);
     to_delete = ft_find_elem(env_list, key);

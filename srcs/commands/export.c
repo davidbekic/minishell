@@ -69,7 +69,7 @@ void    ft_export(char *arg, t_env *env)
 		
 	value_start = ft_find_value(arg);
 	printf("key_end: %d\n", key_end);
-	if (ft_non_allowed_char_for_var(arg, key_end) || key_end == 0)
+	if (ft_non_allowed_char_for_var_name(arg, key_end) || key_end == 0)
 	{
 		printf("minishell: export: `%s\': not a valid identifier\n", arg);
 		return ;
