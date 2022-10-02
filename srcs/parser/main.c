@@ -19,7 +19,7 @@ static int	getcmd(char **buf, int size, t_env *env)
 	ft_memset(*buf, 0, size);
 	*buf = readline("$ ");
 	add_history(*buf);
-	ft_prompt_parser(*buf, env);
+	ft_prompt_parser(buf, env);
 	if (ft_strncmp(*buf, "exit", ft_strlen(*buf)) == 0)
 		return (-1);
 	if (ft_strncmp(*buf, "env", ft_strlen(*buf)) == 0)
@@ -31,7 +31,7 @@ static int	getcmd(char **buf, int size, t_env *env)
 	if (ft_strncmp(*buf, "export2", 7) == 0)
 		ft_export(NULL, env);
 	if (ft_strncmp(*buf, "unset", 5) == 0)
-		ft_unset("USER", env);
+		ft_unset("PATH", env);
 	return (0);
 }
 

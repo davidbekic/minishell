@@ -14,42 +14,31 @@
 
 static int ft_quote_checker(char *str)
 {
-	int				i;
 	unsigned char	quote_type;
-	unsigned char	in_quote;
 
-	i = 0;
 	quote_type = 0;
-	in_quote = 0;
-	while (str[++i] != 0)
+	while (*str != 0)
 	{
-		if ((str[i] == '\"' || str[i] == '\'') && (str[i] != quote_type) && (in_quote == 0))
-		{
-			in_quote = 1;
-			quote_type = str[i];
-		}
-		else if (str[i] == quote_type )
-		{
-			in_quote = 0;
+		if  ((*str == '\"' || *str== '\'') 
+          && (*str != quote_type ) && !quote_type)
+			quote_type = *str;
+		else if (*str == quote_type)
 			quote_type = 0;
-		}
+        str++;
 	}
-	if (in_quote)
-		return (1);
-	else
-		return (0);
+	return (quote_type);
 }
 
-static int ft_syntax_checker(char *str)
+static int ft_syntax_checker(char **str)
 {
     int i;
     int pipe_redir_count;
     
     i = 0;
     pipe_redir_count = 0;
-    while (str[++i] != 0)
+    while (*str[++i] != 0)
     {
-        if (str[0] == '|')
+        if (*str[0] == '|')
         {
             perror("minishell: parse error near `|'\n");
             return (1);
@@ -64,16 +53,50 @@ static int ft_syntax_checker(char *str)
     return (0);
 }
 
-
-int ft_prompt_parser(char *str, t_env *env)
+char *prompt_expander(char **str, t_env *env)
 {
-    if (ft_quote_checker(str))
+	unsigned char	quote_type;
+    int             i;
+    int             j;
+    char            *expanded_buf;
+    
+	quote_type = 0;
+    expanded_buf = malloc(2000);
+	i = 0;
+    j = 0;
+	while (str[0][i] != 0)
+	{
+		if  ((str[0][i] == '\"' || str[0][i]== '\'') 
+          && (str[0][i] != quote_type ) && !quote_type)
+			quote_type = str[0][i];
+		else if (str[0][i] == quote_type)
+			quote_type = 0;
+        if (str[0][i] == '$' && quote_type != '\'')
+        {
+            ft_memcpy(expanded_buf + i, ft_expand(env, *(str) + i + 1), strlen(ft_expand(env, *(str) + i + 1)) + 1);
+            printf("expanded_buf: %s\n", expanded_buf);
+            j = strlen(ft_expand(env, *(str) + i + 1));
+            i += 1;
+            continue ;
+        }
+
+        ft_memcpy(expanded_buf + i + j, *str + i, 1);
+        i++;
+	}
+    expanded_buf[i + j] = 0;
+    printf("expanded_buf: %s\n", expanded_buf);
+    return(expanded_buf);
+}
+
+int ft_prompt_parser(char **buf, t_env *env)
+{
+    if (ft_quote_checker(*buf))
     {
         perror("minishell: open quotes\n");
         return (1);
     }
-    if (ft_syntax_checker(str))
-        return (1);
+    // if (ft_syntax_checker(buf))
+    //     return (1);
+    *buf = prompt_expander(buf, env);   
     return (0);
-    //prompt_expander(str, env);   
 }

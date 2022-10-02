@@ -76,7 +76,7 @@ struct cmd	*parseredirs(char **pstr, char *estr, struct cmd *cmd);
 struct cmd	*parseexec(char **pstr, char *estr);
 struct cmd	*terminate(struct cmd *cmd);
 void		ft_runcmd(struct cmd *cmd, t_env *env);
-int			ft_prompt_parser(char *str, t_env *env);
+int			ft_prompt_parser(char **buf, t_env *env);
 
 //Building tree structs
 struct cmd	*buildexec(void);

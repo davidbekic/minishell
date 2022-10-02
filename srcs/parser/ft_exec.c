@@ -68,7 +68,8 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 		{
 			printf("how could I possibly enter here with names[0]: %s\n", execcmd->names[0]);
 			// printf("how could I possibly enter here with names[1]: %s\n", execcmd->names[1]);
-			execvp(execcmd->names[0], execcmd->names);
+			//execvp(execcmd->names[0], execcmd->names);
+			printf("execve ret: %d", ft_execve(env, execcmd->names));
 		}
 	}
 	else if (cmd->type == REDIR)
