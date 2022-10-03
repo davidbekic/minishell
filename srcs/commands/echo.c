@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42barcelon>         +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 11:58:05 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/21 13:25:38 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/03 13:49:29 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,12 @@ void	ft_echo(char **names)
 	n_flag = 0;
 
 	start_ptr = (char **) names;
-	if (!names[1])
-	{
-		printf("\n");
-		return ;
-	}
 	while (*names != NULL)
 	{
-		printf("names: %s\n", *names);
-		if (strncmp(*(names), "-n", 2) == 0)
+		if (strcmp(*(names), "-n") == 0)
 			n_flag++;
 		names++;
-	// else if (strncmp(names[1], "-n", 2) == 0)
-	// {
-	// 	names++;
-	// 	n_flag = 1;
-	// }
 	}
-	printf("n_flag: %d\n", n_flag);
 	names = start_ptr;
 	while (*(names + 1 + n_flag))
 	{

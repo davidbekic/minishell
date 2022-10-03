@@ -41,13 +41,11 @@ int	ft_execve(t_env *env, char **names)
 	int	ret;
 
 	ret = 1;
-	printf("helooooon\n");
-	// names[1][3] = 'a';
-	// names[1][2] = 0;
 	path = ft_expand(env, "PATH");
 	//path = getenv("PATH"); // we can't use this because of potential deletion of PATH variable
 	//memcpy(names[1], "122", 2);
 	cpath = path;
+
 	if (is_alias(names[0]))
 	{
 		while (cpath)

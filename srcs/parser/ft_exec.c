@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/09/27 16:43:17 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/03 16:36:41 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,12 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 		execcmd = (struct doexec *)cmd;
 		if (execcmd->names[0] == 0)
 			exit (1);
-		
-		// else if (ft_strncmp(execcmd->names[0], "env", ft_strlen(execcmd->names[0])) == 0)
-		// 	ft_env(env);
-		// else if (ft_strncmp(execcmd->names[0], "pwd", ft_strlen(execcmd->names[0])) == 0)
-		// 	ft_pwd(env);
-		// else if (ft_strncmp(execcmd->names[0], "export", 6) == 0)
-		// 	ft_export(NULL, env);
-		// else if (ft_strncmp(execcmd->names[0], "unset", 5) == 0)
-		// 	env = ft_unset(env, "USER");
-		// 	//ft_unset(&env, "USER");
+		else if (ft_strncmp(execcmd->names[0], "echo", ft_strlen(execcmd->names[0])) == 0)
+			ft_echo(execcmd->names);
 		else
 		{
-			printf("how could I possibly enter here with names[0]: %s\n", execcmd->names[0]);
-			// printf("how could I possibly enter here with names[1]: %s\n", execcmd->names[1]);
-			//execvp(execcmd->names[0], execcmd->names);
-			printf("execve ret: %d", ft_execve(env, execcmd->names));
+			printf("in execve\n");
+			printf("execve ret: %d\n", ft_execve(env, execcmd->names));
 		}
 	}
 	else if (cmd->type == REDIR)

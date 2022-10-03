@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:40:40 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/22 20:41:58 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/03 14:54:20 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,15 @@ t_env	*ft_find_elem(t_env *env_list, char *key)
 
 	aux = env_list;
 	// ITERATING THROUGH ENV LIST
+	printf("key: %s\n", key);
 	while (aux != NULL)
-	{
-		if (strncmp(aux->key, key, ft_strlen_printable(key)) == 0)
+ 	{
+		if (ft_strncmp(aux->key, key, 4096) == 0)
 			return (aux);
+//		printf("aux->key: %s\n", aux->key);
 		aux = aux->next;
+		//printf("aux->next: %s\n", aux->next->key);
 	}
+	printf("leaving find_elem with NULL\n");
 	return (NULL);
 }

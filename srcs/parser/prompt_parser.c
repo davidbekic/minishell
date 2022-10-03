@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:45:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/27 17:10:41 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/03 18:00:00 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@ int	ft_var_name_stop(char *str)
 	i = 0;
 	ft_memcpy(buf, str, ft_strlen(buf)); // putting only var_NAME in buf
 	buf[ft_strlen(buf)] = 0; // memcpy not NULL-terminating fro some reason.
-	while (str[i] != 0)
+	while (str[i] != 0) 
 	{
 		if (str[i] >= '0' && str[i] <= '9' && i == 0)
 			return (0);
 		if (!(str[i] >= 'a' && str[i] <= 'z') && !(str[i] >= 'A' && str[i] <= 'Z')
 			&& str[i] != '_' && !(str[i] >= '0' && str[i] <= '9'))
+        {
+            printf("entering with: %c\n", str[i]);
 			return (i);
+        }
 		i++;
 	}
 	return (i);
@@ -78,40 +81,39 @@ void    prompt_expander(char **buf, t_env *env)
 	unsigned char	quote_type;
     int             i;
     int             j;
-    char            dump[2000];
+    char            dump[4096];
     
-	quote_type = 0;
-    ft_memcpy(dump, *buf, ft_strlen(*buf));
-    dump[ft_strlen(*buf)] = 0;
-    buf[0][0] = 0;
-    printf("dump: %s\n", dump);
 	i = 0;
     j = 0;
+	quote_type = 0;
+    bzero(dump, 4096);
+    ft_memcpy(dump, *buf, ft_strlen(*buf));
 	while (dump[i] != 0)
 	{
-		if  ((dump[i] == '\"' || dump[i]== '\'') 
-          && (dump[i] != quote_type ) && !quote_type)
+		if  ((dump[i] == '\"' || dump[i]== '\'') && (dump[i] != quote_type ) && !quote_type)
 			quote_type = dump[i];
 		else if (dump[i] == quote_type)
 			quote_type = 0;
         if (dump[i] == '$' && quote_type != '\'')
         {
-            printf("to here\n");
-            memcpy(*(buf) + i + j, ft_expand(env, dump + i + 1), strlen(ft_expand(env, dump + i + 1)) + 1);
-            printf("ft_varnamestop: %d\n", ft_var_name_stop(dump + 1 + i));
-            i += ft_var_name_stop(dump + i + 1) + 1;
-            //j += ft_strlen(ft_expand(env, dump + i + 1));
-            j = ft_strlen(*(buf) + i);
-            printf("j: %d\n", j);
-            *(buf + i + j) = 0;
+            if (ft_expand(env, dump + i + 1) == NULL)
+            {
+                ft_memcpy(*buf + i + j, "", 1);      
+                j -= ft_var_name_stop(dump + i + 1) + 2;
+                i -= j;
+            }
+            else 
+            {
+                memcpy(*(buf) + i + j, ft_expand(env, dump + i + 1), ft_strlen(ft_expand(env, dump + i + 1)) + 1);
+                i += ft_var_name_stop(dump + i + 1) + 1;
+                j = ft_strlen(*(buf) + i);
+            }
             continue ;
         }
-        printf("quote_type: %d\n", quote_type);
         ft_memcpy(*buf + i + j, dump + i, 1);
-        printf("buf: %s\n", *buf);
-        // printf("dump[%d]: %c\n", i, dump[i]);
         i++;
 	}
+    buf[0][i + j] = 0;
     printf("expanded_buf: %s\n", *buf);
 }
 
@@ -120,11 +122,11 @@ int ft_prompt_parser(char **buf, t_env *env)
     if (ft_quote_checker(*buf))
     {
         perror("minishell: open quotes\n");
-        return (1);
+        return (124);
     }
     // if (ft_syntax_checker(buf))
     //     return (1);
     prompt_expander(buf, env);   
-    printf("not passing?\n");
+    
     return (0);
 }

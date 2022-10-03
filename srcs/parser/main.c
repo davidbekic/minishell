@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/09/27 16:53:26 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/03 18:05:45 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,29 @@
 
 static int	getcmd(char **buf, int size, t_env *env)
 {
-	ft_memset(*buf, 0, size);
-	*buf = readline("minishell: ");
-	add_history(*buf);
-	ft_prompt_parser(buf, env);
-	if (ft_strncmp(*buf, "exit", ft_strlen(*buf)) == 0)
-		return (-1);
-	if (ft_strncmp(*buf, "env", ft_strlen(*buf)) == 0)
-		ft_env(env);
-	if (ft_strncmp(*buf, "pwd", ft_strlen(*buf)) == 0)
-		ft_pwd(env);
-	if (ft_strncmp(*buf, "export1", 7) == 0)
-		ft_export("USER2=kuksugareballe", env);
-	if (ft_strncmp(*buf, "export2", 7) == 0)
-		ft_export(NULL, env);
-	if (ft_strncmp(*buf, "unset", 5) == 0)
-		ft_unset("PATH", env);
-	
+	while (1)
+	{
+		ft_memset(*buf, 0, size);
+		*buf = readline("minishell: ");
+		if (*buf && **buf)
+			add_history(*buf);
+		ft_prompt_parser(buf, env);
+		if (ft_strncmp(*buf, "exit", ft_strlen(*buf)) == 0)
+			return (-1);
+		else if (ft_strncmp(*buf, "env", ft_strlen(*buf)) == 0)
+			ft_env(env);
+		else if (ft_strncmp(*buf, "pwd", 3) == 0)
+			ft_pwd(env);
+		else if (ft_strncmp(*buf, "export1", 7) == 0)
+			ft_export("USER2=kuksugareballe", env);
+		else if (ft_strncmp(*buf, "export2", 7) == 0)
+			ft_export(NULL, env);
+		else if (ft_strncmp(*buf, "unset", 5) == 0)
+			ft_unset("PATH", env);
+		else 
+			break ;
+		ft_memset(*buf, 0, size);
+	}	
 	return (0);
 }
 
@@ -44,7 +50,7 @@ int	main(int ac, char **av, char **main_env)
 	if (ac > 1 && av[0][0] == '&')
 		exit(1);
 	env = ft_init_env(main_env);
-	buf = (char *)malloc(sizeof(char) * 100);
+	buf = (char *)malloc(sizeof(char) * 4096);
 	if (!buf)
 		exit (-1);
 	while (getcmd(&buf, sizeof(buf), env) >= 0)
@@ -57,9 +63,7 @@ int	main(int ac, char **av, char **main_env)
 			continue ;
 		}
 		if (fork1() == 0)
-		{
 			ft_runcmd(parsecmd(buf), env);
-		}
 		//printf("returned value %d\n", WEXITSTATUS(0));
 		wait(0);
 	}

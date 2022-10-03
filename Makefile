@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/09/20 10:48:05 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/03 14:09:49 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ CFLAGS = -Wall -Werror -Wextra -MMD
 # Folders
 OBJDIR = obj
 SRCDIR = srcs/parser
+EXECDIC = srcs/exec
 
 # Files
 LIBFT = Libft
