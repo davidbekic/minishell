@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:15:38 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/22 12:57:30 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:09:19 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ t_env	*ft_create_elem(t_env *new, char *key_value, int value_start)
 
 	if (value_start == 0)
 		return (NULL);
-	new = (t_env *) calloc(1, sizeof(t_env));
+	new = (t_env *) ft_calloc(1, sizeof(t_env));
 	if (!new)
 			return (NULL);
-	new->key = (char *) calloc(value_start + 1, 1);
+	new->key = (char *) ft_calloc(value_start, 1);
 	if (!new->key)
 		return (NULL);
-	new->value = (char *) calloc(strlen(key_value) + 100 - value_start, 1);
+	new->value = (char *) ft_calloc(strlen(key_value) + 100 - value_start, 1);
 	if (!new->value)
 		return (NULL);
 	while (++i < value_start)
@@ -46,7 +46,7 @@ t_env	*ft_create_elem(t_env *new, char *key_value, int value_start)
 		i++;
 	}
 	new->value[j] = 0;
-	if (i == 0)
+	if (i == 0 || ft_strncmp(key_value, "hehe", 5) == 0)
 		new->value = NULL;
 	new->next = NULL;
 	return (new);

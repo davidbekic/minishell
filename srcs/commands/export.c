@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/22 14:23:25 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:13:00 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,72 +24,62 @@ static void	ft_update_var(char *key_value, int value_start, t_env *list)
 	j = 0;
 	aux = list;
 	strncpy(key, key_value, value_start - 1);
-	elem = ft_find_elem(list, key_value);
-	// CREATING ELEMENT
-	if (!elem)
+	elem = ft_find_elem(list, key);
+	if (!elem) // CREATING ELEMENT
 	{
 		while (strcmp(list->next->key, "_") != 0)
 			list = list->next;
-		elem = ft_create_elem(elem, key_value, ft_find_value(key_value));
+		//elem = ft_create_elem(elem, key_value, ft_find_value(key_value));
+		elem = ft_create_elem(elem, key_value, value_start);
 		aux = list->next;
 		list->next = elem;
 		elem->next = aux;
 	}
-	// UPDATE VARIABLE
-	else
+	else // UPDATE VARIABLE
 	{
 		while (key_value[value_start + i] != 0)
 		{
 			i++;
 			if (key_value[value_start + i - 1] != '\'' && key_value[value_start + i - 1] != '\"' )
-			{
-				printf("key_value[%d]: %c\n", value_start + i - 1, key_value[value_start + i - 1]);
-				j++;
-				elem->value[j - 1] = key_value[value_start + i - 1];
-			}
+				elem->value[++j - 1] = key_value[value_start + i - 1];
 		}
 		elem->value[i] = 0;
 	}
 }
 
-void    ft_export(char *arg, t_env *env)
+int	ft_export(char **names, t_env *env)
 {
-	unsigned char	key_end;
-	unsigned char	value_start;
+	short	ret;
 
-	//printf("key_end: %d\value_start: %d\n", key_end, value_start);
-	if (!arg)
-	{
+	ret = 0;
+	if (!names[1])
 		ft_alphabetic_env(env);
-		return ;
-	}
-	key_end = ft_find_key(arg);	
-	value_start = ft_find_value(arg);
-	if (ft_non_allowed_char_for_var_name(arg, key_end) || key_end == 0)
+	while (*++names)
 	{
-		printf("minishell: export: `%s\': not a valid identifier\n", arg);
-		return ;
-	}
-	// IF NOTHING -- SHOW ALPHABETIC ENV
-	// IF ONLY KEY
-	else if (key_end != 0 && value_start == 0)
-		printf("minishell: PLEASE GIVE VALUE TO VARIABLE\n");
-	// MAKE NEW OR UPDATE ENV VAR
-	else
-		ft_update_var(arg, value_start, env);
+		ret = ft_non_allowed_char_for_var_name(*names, ft_find_value(*(names)) - 1);
+		if (ret)
+			printf("minishell: export: `%s': not a valid identifier\n", *names);
+		else if (!ret)
+			ft_update_var(*names, ft_find_value(*names), env);			
+	}		
+	return (ret);
 }
 
-/*
-void    ft_export(char *key, char *value, t_env *list)
+int	main(int ac, char **av, char **main_env)
 {
-	// IF ONLY KEY
-	if (key && !value)
-		printf("nada\n");
-	// IF NOTHING -- SHOW ALPHABETIC ENV
-	else if (!key || !value)
-		ft_alphabetic_env(list);
-	// MAKE NEW OR UPDATE ENV VAR
-	else
-		ft_update_var(key, value, list);
+	int	i;
+	t_env	*env;
+	char **nullstr;
+
+	nullstr = malloc(200);
+	nullstr[0] = malloc(200);
+	nullstr[1] = malloc(200);
+	nullstr[0] = "./a.out";
+	nullstr[1] = NULL;
+
+	i = 0;
+	env = ft_init_env(main_env);
+	ft_export(av, env);
+	ft_export(nullstr, env);
+	//ft_env(env);
 }
-*/

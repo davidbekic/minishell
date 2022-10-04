@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:39:37 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/20 11:36:52 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:17:33 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,12 @@ void    ft_alphabetic_env(t_env *env_list)
 		if (i == lst_size - j - 2)
 		{
 			if (strncmp(temp->key, "_", 3) != 0)
-				printf("declare -x %s=%s\n", temp->key, temp->value);
+			{
+				printf("declare -x %s=", temp->key);
+				if (temp->value)
+					printf("%s", temp->value);
+				printf("\n");	
+			}
 			aux = env_list;
 			temp = env_list;
 			j++;
