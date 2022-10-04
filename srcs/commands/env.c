@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:39:37 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/04 13:17:33 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/04 16:08:37 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void    ft_alphabetic_env(t_env *env_list)
 		{
 			if (strncmp(temp->key, "_", 3) != 0)
 			{
-				printf("declare -x %s=", temp->key);
+				printf("declare -x %s", temp->key);
 				if (temp->value)
-					printf("%s", temp->value);
+					printf("=\"%s\"", temp->value);
 				printf("\n");	
 			}
 			aux = env_list;
@@ -83,4 +83,5 @@ void    ft_env(t_env *env_list)
         aux = aux->next;
         i++;
     }
+	//ft_free_env(env_list);
 }

@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:18:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/03 11:31:56 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:29:39 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	main(int ac, char **av, char **main_env)
 			i++;
 		}
 	 }
-	// free_env(env);
+	// ft_free_env(env);
 //	return (gvars.g_exit_code);
 	exit(gvars.g_exit_code);
 }

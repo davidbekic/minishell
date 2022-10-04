@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/03 18:05:45 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/04 17:26:58 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,34 @@
 
 static int	getcmd(char **buf, int size, t_env *env)
 {
+	char	rl_copy[200];
+	
 	while (1)
 	{
-		ft_memset(*buf, 0, size);
+		bzero(rl_copy, ft_strlen(rl_copy) + 20);
+		//ft_memset(*buf, 0, ft_strlen(*buf));
 		*buf = readline("minishell: ");
+		ft_memcpy(rl_copy, *buf, ft_strlen(*buf) + 1);
+		if (ft_prompt_parser(buf, env)){
+			perror("syntax error\n");
+			return (258);
+		}
 		if (*buf && **buf)
-			add_history(*buf);
-		ft_prompt_parser(buf, env);
+			add_history(rl_copy);
 		if (ft_strncmp(*buf, "exit", ft_strlen(*buf)) == 0)
 			return (-1);
 		else if (ft_strncmp(*buf, "env", ft_strlen(*buf)) == 0)
 			ft_env(env);
 		else if (ft_strncmp(*buf, "pwd", 3) == 0)
 			ft_pwd(env);
-		else if (ft_strncmp(*buf, "export1", 7) == 0)
-			ft_export("USER2=kuksugareballe", env);
-		else if (ft_strncmp(*buf, "export2", 7) == 0)
-			ft_export(NULL, env);
+		// else if (ft_strncmp(*buf, "export1", 7) == 0)
+		// 	ft_export("USER2=kuksugareballe", env);
+		// else if (ft_strncmp(*buf, "export2", 7) == 0)
+		// 	ft_export(NULL, env);
 		else if (ft_strncmp(*buf, "unset", 5) == 0)
 			ft_unset("PATH", env);
 		else 
 			break ;
-		ft_memset(*buf, 0, size);
 	}	
 	return (0);
 }

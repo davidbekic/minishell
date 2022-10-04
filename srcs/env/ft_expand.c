@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:32:59 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/03 14:48:24 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/04 14:26:28 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ char    *ft_expand(t_env *env_list, char *key)
         }
 		i++;
 	}
-
-    printf("ret1: %s\n", ret);
     ret = (t_env *) ft_find_elem(env_list, temp_buf);
     if (!ret)
         return (NULL);

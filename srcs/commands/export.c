@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/04 13:13:00 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/04 17:13:16 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,23 @@ int	ft_export(char **names, t_env *env)
 	return (ret);
 }
 
-int	main(int ac, char **av, char **main_env)
-{
-	int	i;
-	t_env	*env;
-	char **nullstr;
+// int	main(int ac, char **av, char **main_env)
+// {
+// 	int	i;
+// 	t_env	*env;
+// 	char **nullstr;
 
-	nullstr = malloc(200);
-	nullstr[0] = malloc(200);
-	nullstr[1] = malloc(200);
-	nullstr[0] = "./a.out";
-	nullstr[1] = NULL;
+// 	nullstr = malloc(200);
+// 	nullstr[0] = malloc(200);
+// 	nullstr[1] = malloc(200);
+// 	nullstr[0] = "./a.out";
+// 	nullstr[1] = NULL;
 
-	i = 0;
-	env = ft_init_env(main_env);
-	ft_export(av, env);
-	ft_export(nullstr, env);
-	//ft_env(env);
-}
+	
+// 	i = 0;
+// 	env = ft_init_env(main_env);
+// 	ft_export(av, env);
+// 	ft_export(nullstr, env);
+// 	ft_env(env);
+// 	ft_free_env(env);
+// }

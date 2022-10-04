@@ -17,7 +17,7 @@ int main(int ac, char **av, char **env)
     exit(0);
   env_list = ft_init_env(env);
   ft_export(new_str_to_export, env_list);
-  free_env(env_list);
+  ft_free_env(env_list);
   
 
   //ft_init_env(env);

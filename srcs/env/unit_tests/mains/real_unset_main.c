@@ -32,7 +32,7 @@ int main(int ac, char **av, char **env)
   // env_list = ft_unset(env_list, "kuksug");
   //printf("env_list in MAIN pointing to: %s\n", env_list->key);
   ft_env(env_list);
-  free_env(env_list);
+  ft_free_env(env_list);
   
 
   //ft_init_env(env);

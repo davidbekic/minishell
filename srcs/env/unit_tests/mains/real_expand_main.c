@@ -32,7 +32,7 @@ int main(int ac, char **av, char **env)
   }
   //printf("%s\n", ft_expand(env_list, "USER"));
   //printf("%s\n", ft_expand(env_list, "USER"));
-  free_env(env_list);
+  ft_free_env(env_list);
   
 
   //ft_init_env(env);

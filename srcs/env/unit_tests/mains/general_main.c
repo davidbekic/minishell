@@ -27,7 +27,7 @@ int main(int ac, char **av, char **env)
 //  ft_env(env_list);
   //printf("%s\n", ft_find_elem(env_list, "USER")->value);
   //printf("%s\n", ft_expand(env_list, "USER"));
-  free_env(env_list);
+  ft_free_env(env_list);
   
 
   //ft_init_env(env);

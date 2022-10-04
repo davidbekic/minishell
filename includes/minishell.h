@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/04 11:54:44 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/04 17:25:40 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_env   *ft_find_elem_before(t_env *env_list, char *key);
 int	ft_find_key(char *pattern);
 int	ft_find_value(char *pattern);
 char    *ft_expand(t_env *env_list, char *key);
-void    free_env(t_env *env_list);
+void    ft_free_env(t_env *env_list);
 //void    ft_update_var(char *key, char *value, t_env *list);
 void	ft_alphabetic_env(t_env *env_list);
 int	ft_non_allowed_char_for_var_name(char *str, int len);
@@ -110,7 +110,7 @@ void		ft_env(t_env *env_list);
 int		ft_export(char **names, t_env *env);
 void		ft_pwd(t_env *env);
 void		ft_echo(char **names);
-t_env		*ft_unset(char *key, t_env *env_list);
+int			ft_unset(char *key, t_env *env_list);
 
 
 #endif

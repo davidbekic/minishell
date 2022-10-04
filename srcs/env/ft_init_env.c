@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:19:20 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/21 17:18:30 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:29:39 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_env	*ft_init_env(char **main_env)
 	head = ft_create_elem(head, main_env[0], ft_find_value(main_env[0]));
 	if (!head)
 	{
-		free_env(head);
+		ft_free_env(head);
 		return (NULL);
 	}
 	temp = head;
@@ -33,7 +33,7 @@ t_env	*ft_init_env(char **main_env)
 		current = ft_create_elem(current, main_env[i], ft_find_value(main_env[i]));
 		if (!current)
 		{
-			free_env(head);
+			ft_free_env(head);
 			return (NULL);
 		}
 		temp->next = current;

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_env.c                                      :+:      :+:    :+:   */
+/*   ft_ft_free_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-void	free_env(t_env *env_list)
+void	ft_free_env(t_env *env_list)
 {
 	int		i;
 	t_env	*aux;

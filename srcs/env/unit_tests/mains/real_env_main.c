@@ -16,7 +16,7 @@ int main(int ac, char **av, char **env)
     exit(0);
   env_list = ft_init_env(env);
   ft_env(env_list);
-  free_env(env_list);
+  ft_free_env(env_list);
   
 
   //ft_init_env(env);

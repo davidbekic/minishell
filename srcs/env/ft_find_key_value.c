@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 18:39:10 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/04 13:02:30 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/04 16:19:45 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_find_value(char *pattern)
 		return (i + 1);
 	// IF THERE IS EQUALS SIGN, BUT NO VALUE
 	else if (pattern[i] == '=' && pattern[i + 1] == 0)
-		return (0);
+		return (i + 1);
 	i++;
 	return (i);
 }	
