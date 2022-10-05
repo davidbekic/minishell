@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/05 14:08:25 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/05 15:14:58 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CFLAGS = -Wall -Werror -Wextra -MMD
 
 # Folders
 OBJDIR = obj
-SRCDIR = srcs/parser
+SRCDIR = ./
 EXECDIC = srcs/exec
 
 # Files
@@ -67,8 +67,9 @@ SRC = srcs/parser/main.c \
 	  srcs/exec/ft_execve.c    \
 	  srcs/parser/prompt_parser.c
 
-#OBJ = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
-OBJ = $(patsubst %.c, %.o, $(SRC))
+OBJ = $(SRC:%.c=$(OBJDIR)/%.o)
+# OBJ = $(patsubst %.c, %.o, $(SRC))
+
 DEPENDS = $(patsubst %.c, %.d, $(SRC))
 
 all: makelibs $(NAME)
@@ -92,7 +93,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 clean:
 
 	rm -rf ./obj
-	rm minishell
+	rm -rf minishell
+	@make fclean -C $(LIBFT)
 
 # ifneq ("$(wildcard $(OBJ) $(DEPENDS) $(OBJDIR))", "")
 # 	rm -f $(OBJ) $(DEPENDS)
@@ -106,13 +108,13 @@ clean:
 # endif
 
 fclean: clean
-ifneq ("$(wildcard $(NAME))", "")
-	rm -f $(NAME)
-	@make fclean -C $(LIBFT)
-	@echo "$(GREEN)Ejecutables borrados$(RESET)"
-else
-	@echo "$(RED)Los ejecutables no existen, no se borra$(RESET)"
-endif
+# ifneq ("$(wildcard $(NAME))", "")
+# 	rm -f $(NAME)
+# 	@make fclean -C $(LIBFT)
+# 	@echo "$(GREEN)Ejecutables borrados$(RESET)"
+# else
+# 	@echo "$(RED)Los ejecutables no existen, no se borra$(RESET)"
+# endif
 
 re: fclean all
 
