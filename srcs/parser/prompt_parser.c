@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:45:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/04 17:26:51 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/05 13:45:54 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,20 @@
 int	ft_var_name_stop(char *str)
 {
 	int	i;
-	char	buf[100];
+	char	buf[300];
 
 	i = 0;
-	ft_memcpy(buf, str, ft_strlen(buf)); // putting only var_NAME in buf
-	buf[ft_strlen(buf)] = 0; // memcpy not NULL-terminating fro some reason.
+	ft_memcpy(buf, str, ft_strlen(str) + 1); // putting only var_NAME in buf
+    printf("buf in var_name_stop: %s\n", buf);
 	while (str[i] != 0) 
 	{
 		if (str[i] >= '0' && str[i] <= '9' && i == 0)
-			return (0);
+			return (1);
 		if (!(str[i] >= 'a' && str[i] <= 'z') && !(str[i] >= 'A' && str[i] <= 'Z')
 			&& str[i] != '_' && !(str[i] >= '0' && str[i] <= '9'))
-        {
-            printf("entering with: %c\n", str[i]);
 			return (i);
-        }
 		i++;
+        printf("i in var_name_stop: %d\n", i);
 	}
 	return (i);
 }
@@ -89,33 +87,28 @@ void    prompt_expander(char **buf, t_env *env)
 	quote_type = 0;
     bzero(dump, 4096);
     ft_memcpy(dump, *buf, ft_strlen(*buf));
-	while (dump[i] != 0)
+	while (*(dump + i))
 	{
-		if  ((dump[i] == '\"' || dump[i]== '\'') && (dump[i] != quote_type ) && !quote_type)
+		if ((dump[i] == '\"' || dump[i]== '\'') && (dump[i] != quote_type ) && !quote_type)
 			quote_type = dump[i];
 		else if (dump[i] == quote_type)
 			quote_type = 0;
         if (dump[i] == '$' && quote_type != '\'')
         {
-            if (ft_expand(env, dump + i + 1) == NULL)
-            {
-                ft_memcpy(*buf + i + j, "", 1);      
-                j -= ft_var_name_stop(dump + i + 1) + 2;
-                i -= j;
-            }
-            else 
-            {
-                ft_memcpy(*(buf) + i + j, ft_expand(env, dump + i + 1), ft_strlen(ft_expand(env, dump + i + 1)) + 1);
-                i += ft_var_name_stop(dump + i + 1) + 1;
-                j = ft_strlen(*(buf) + i);
-            }
+            if (ft_expand(env, dump + i + 1) != NULL)  // if var doesn't exist
+                ft_memcpy(*(buf) + j, ft_expand(env, dump + i + 1), ft_strlen(ft_expand(env, dump + i + 1)) + 1);
+            j += ft_strlen(ft_expand(env, dump + i + 1));  // moving forward in BUF after added variable
+            i += ft_var_name_stop(dump + i + 1) + 1;
             continue ;
         }
-        ft_memcpy(*buf + i + j, dump + i, 1);
+        ft_memcpy(*buf + (j), dump + (i), 1);
         i++;
+        j++;
 	}
-    buf[0][i + j] = 0;
+    buf[0][j] = 0;
 }
+
+// if there is a VAR, 
 
 int ft_prompt_parser(char **buf, t_env *env)
 {
