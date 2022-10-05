@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/04 17:26:58 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/05 14:09:00 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ static int	getcmd(char **buf, int size, t_env *env)
 {
 	char	rl_copy[200];
 	
+	printf("size: %d\n", size);
 	while (1)
 	{
+		
 		bzero(rl_copy, ft_strlen(rl_copy) + 20);
 		//ft_memset(*buf, 0, ft_strlen(*buf));
 		*buf = readline("minishell: ");

@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/03 14:09:49 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/05 14:08:25 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,14 +25,50 @@ EXECDIC = srcs/exec
 
 # Files
 LIBFT = Libft
-SRC = $(SRCDIR)/main.c \
-	  $(SRCDIR)/ft_utils.c \
-	  $(SRCDIR)/ft_build.c \
-	  $(SRCDIR)/ft_parser.c \
-	  $(SRCDIR)/ft_termination.c \
-	  $(SRCDIR)/ft_exec.c 
+# SRCDIR =	src/parser/main.c \
+# 	  src/parser/ft_utils.c \
+# 	  src/parser/ft_build.c \
+# 	  src/parser/ft_parser.c \
+# 	  src/parser/ft_termination.c \
+# 	  src/parser/ft_exec.c  \
+# 	  src/commands/echo.c    \
+# 	  src/commands/env.c    \
+# 	  src/commands/export.c    \
+# 	  src/commands/pwd.c     \
+# 	  src/commands/unset.c    \
+# 	  src/env/ft_create_elem.c    \
+# 	  src/env/ft_expand.c    \
+# 	  src/env/ft_find_elem.c    \
+# 	  src/env/ft_find_key_value.c    \
+# 	  src/env/ft_free_env.c    \
+# 	  src/env/ft_init_env.c    \
+# 	  src/env/ft_var_name_check.c    \
+# 	  src/exec/ft_execve.c    \
+# 	  src/parser/prompt_parser.c    
 
-OBJ = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+SRC = srcs/parser/main.c \
+	  srcs/parser/ft_utils.c \
+	  srcs/parser/ft_build.c \
+	  srcs/parser/ft_parser.c \
+	  srcs/parser/ft_termination.c \
+	  srcs/parser/ft_exec.c    \
+	  srcs/commands/echo.c    \
+	  srcs/commands/env.c    \
+	  srcs/commands/export.c    \
+	  srcs/commands/pwd.c     \
+	  srcs/commands/unset.c    \
+	  srcs/env/ft_create_elem.c    \
+	  srcs/env/ft_expand.c    \
+	  srcs/env/ft_find_elem.c    \
+	  srcs/env/ft_find_key_value.c    \
+	  srcs/env/ft_free_env.c    \
+	  srcs/env/ft_init_env.c    \
+	  srcs/env/ft_var_name_check.c    \
+	  srcs/exec/ft_execve.c    \
+	  srcs/parser/prompt_parser.c
+
+#OBJ = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OBJ = $(patsubst %.c, %.o, $(SRC))
 DEPENDS = $(patsubst %.c, %.d, $(SRC))
 
 all: makelibs $(NAME)
@@ -55,16 +91,19 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 
 clean:
 
-ifneq ("$(wildcard $(OBJ) $(DEPENDS) $(OBJDIR))", "")
-	rm -f $(OBJ) $(DEPENDS)
-	rm -rf $(OBJDIR)
-	@echo "$(GREEN)Borrando objetos de $(LIBFT)⚠️ $(RESET)"
-	@make clean -C $(LIBFT)
-	@echo "$(GREEN)Objetos borrados$(RESET)"
-else
-	rm Libft/*.d 
-	@echo "$(RED)Los objetos no existen, no se borra$(RESET)"
-endif
+	rm -rf ./obj
+	rm minishell
+
+# ifneq ("$(wildcard $(OBJ) $(DEPENDS) $(OBJDIR))", "")
+# 	rm -f $(OBJ) $(DEPENDS)
+# 	rm -rf $(OBJDIR)
+# 	@echo "$(GREEN)Borrando objetos de $(LIBFT)⚠️ $(RESET)"
+# 	@make clean -C $(LIBFT)
+# 	@echo "$(GREEN)Objetos borrados$(RESET)"
+# else
+# 	rm Libft/*.d 
+# 	@echo "$(RED)Los objetos no existen, no se borra$(RESET)"
+# endif
 
 fclean: clean
 ifneq ("$(wildcard $(NAME))", "")

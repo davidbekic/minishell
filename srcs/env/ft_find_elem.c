@@ -6,22 +6,22 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:40:40 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/04 13:11:22 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/05 13:56:10 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 
-static int ft_strlen_printable(char *str)
-{
-	int	i;
+// static int ft_strlen_printable(char *str)
+// {
+// 	int	i;
 
-	i = 0;
-	while (str[i] != 0 && str[i] > 31)
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (str[i] != 0 && str[i] > 31)
+// 		i++;
+// 	return (i);
+// }
 
 t_env	*ft_find_elem_before(t_env *env_list, char *key)
 {

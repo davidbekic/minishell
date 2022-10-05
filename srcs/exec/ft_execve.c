@@ -16,11 +16,6 @@ static int	is_alias(char *str)
 
 }
 
-void	ctrl_c_handler2(int signum)
-{
-	printf("hombre\n");
-}
-
 static char	*ft_strchrnul(const char *s, int c)
 {
 	while (*s)
