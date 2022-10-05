@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:15:38 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/04 16:20:05 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/05 16:34:09 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ t_env	*ft_create_elem(t_env *new, char *key_value, int value_start)
 	if (!new->value)
 		return (NULL);
 	while (++i < value_start)
-	{
 		new->key[i - 1] = key_value[i - 1];
-	}
 	i = 0;
 	while (*(key_value + value_start + i) != 0)
 	{
@@ -44,10 +42,7 @@ t_env	*ft_create_elem(t_env *new, char *key_value, int value_start)
 	}
 	new->value[j] = 0;
 	if (key_value[value_start - 1] == 0)
-	{
-		printf("i: %d\n", i);
 		new->value = NULL;
-	}
 	new->next = NULL;
 	return (new);
 }

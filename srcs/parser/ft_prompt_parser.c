@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt_parser.c                                    :+:      :+:    :+:   */
+/*   ft_prompt_parser.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:45:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/05 13:45:54 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/05 16:42:21 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_var_name_stop(char *str)
+static int	ft_var_name_stop(char *str)
 {
-	int	i;
-	char	buf[300];
+	int     i;
+	char	buf[4096];
 
 	i = 0;
 	ft_memcpy(buf, str, ft_strlen(str) + 1); // putting only var_NAME in buf
-    printf("buf in var_name_stop: %s\n", buf);
 	while (str[i] != 0) 
 	{
-		if (str[i] >= '0' && str[i] <= '9' && i == 0)
-			return (1);
 		if (!(str[i] >= 'a' && str[i] <= 'z') && !(str[i] >= 'A' && str[i] <= 'Z')
 			&& str[i] != '_' && !(str[i] >= '0' && str[i] <= '9'))
 			return (i);
 		i++;
-        printf("i in var_name_stop: %d\n", i);
 	}
 	return (i);
 }
@@ -101,9 +97,7 @@ void    prompt_expander(char **buf, t_env *env)
             i += ft_var_name_stop(dump + i + 1) + 1;
             continue ;
         }
-        ft_memcpy(*buf + (j), dump + (i), 1);
-        i++;
-        j++;
+        ft_memcpy(*buf + (++j - 1), dump + (++i - 1), 1);
 	}
     buf[0][j] = 0;
 }

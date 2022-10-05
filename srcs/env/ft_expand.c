@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:32:59 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/04 14:26:28 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/05 16:42:43 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char    *ft_expand(t_env *env_list, char *key)
 {
     int i;
     void *ret;
-    char temp_buf[200];
+    char temp_buf[4096];
 
     i = 0;
     ret = NULL;
@@ -28,12 +28,10 @@ char    *ft_expand(t_env *env_list, char *key)
 			return (NULL);
 		if (!(key[i] >= 'a' && key[i] <= 'z') && !(key[i] >= 'A' && key[i] <= 'Z')
 			&& key[i] != '_')
-        {
-			temp_buf[i] = 0;
             break ;
-        }
 		i++;
 	}
+	temp_buf[i] = 0;
     ret = (t_env *) ft_find_elem(env_list, temp_buf);
     if (!ret)
         return (NULL);

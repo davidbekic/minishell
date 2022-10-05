@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/05 15:14:58 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/05 16:06:43 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRC = srcs/parser/main.c \
 	  srcs/parser/ft_parser.c \
 	  srcs/parser/ft_termination.c \
 	  srcs/parser/ft_exec.c    \
+	  srcs/parser/ft_prompt_parser.c \
 	  srcs/commands/echo.c    \
 	  srcs/commands/env.c    \
 	  srcs/commands/export.c    \
@@ -64,8 +65,7 @@ SRC = srcs/parser/main.c \
 	  srcs/env/ft_free_env.c    \
 	  srcs/env/ft_init_env.c    \
 	  srcs/env/ft_var_name_check.c    \
-	  srcs/exec/ft_execve.c    \
-	  srcs/parser/prompt_parser.c
+	  srcs/exec/ft_execve.c    
 
 OBJ = $(SRC:%.c=$(OBJDIR)/%.o)
 # OBJ = $(patsubst %.c, %.o, $(SRC))
