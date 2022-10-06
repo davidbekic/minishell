@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:45:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/06 14:01:34 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/06 18:57:11 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static int	ft_var_name_stop(char *str)
 			return (i);
 		i++;
 	}
-    printf("returning i: %d\n", i);
 	return (i);
 }
 

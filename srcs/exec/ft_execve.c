@@ -42,6 +42,7 @@ int	ft_execve(t_env *env, char **names)
 	//path = getenv("PATH"); // we can't use this because of potential deletion of PATH variable
 	//memcpy(names[1], "122", 2);
 	cpath = path;
+	//env->envp = ft_create_envp(env);
 	printf("env->envp[0]: %s\n", env->envp[0]);
 	if (is_alias(names[0]))
 	{

@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/06 17:31:40 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/06 19:09:55 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ int	main(int ac, char **av, char **main_env)
 		exit(1);
 	printf("main_env[0]: %s\n", main_env[0]);
 	env = ft_init_env(main_env);
-	env->envp = ft_create_envp(env);
-	printf("env->envp[5]: %s\n", env->envp[5]);
+	
 	buf = (char *)malloc(sizeof(char) * 4096);
 	if (!buf)
 		exit (-1);
@@ -78,6 +77,7 @@ int	main(int ac, char **av, char **main_env)
 		//printf("returned value %d\n", WEXITSTATUS(0));
 		wait(0);
 	}
+	printf("reach here?\n");
 	ft_free_env(env);
 	free(buf);
 	free(env->envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irifarac <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:10:01 by irifarac          #+#    #+#             */
-/*   Updated: 2022/09/07 11:33:59 by irifarac         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:51:21 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	ft_strncmp(const char *str1, const char *str2, size_t number)
 {
 	size_t	position;
 
+	if (!str1 || !str2)
+		return (1);
 	position = 0;
 	if (!number)
 		return (0);

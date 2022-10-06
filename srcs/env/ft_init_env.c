@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:19:20 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/06 17:23:29 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/06 19:10:53 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ char	**ft_create_envp(t_env *env)
 	char	**head;
 
 	ptr = env;
-	if (!env->envp)
-		env->envp = (char **) malloc(sizeof(char*) * ft_envsize(env));
+	
+	env->envp = (char **) malloc(sizeof(char*) * ft_envsize(env));
 	head = env->envp;
 	while (ptr)
 	{
@@ -62,5 +62,6 @@ t_env	*ft_init_env(char **main_env)
 		temp = current;
 		i++;
 	}
+	head->envp = ft_create_envp(head);
 	return (head);
 }
