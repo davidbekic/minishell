@@ -6,40 +6,47 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 11:58:05 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/06 13:37:40 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/06 18:45:25 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+static	int	ft_check_n_flag(char **names)
+{
+	unsigned char	n_flag;
+
+	n_flag = 0;
+	while (ft_strncmp(*(++names), "-n", 2) == 0)
+		n_flag++;
+	return (n_flag);
+}
+
+static int	is_home(char *names)
+{	
+	unsigned char	home_flag;
+
+	home_flag = 0;
+	if (!(ft_strncmp(names, "~", ft_strlen(names)))
+		|| (names[0] == '~' && names[1] == '/'))
+		home_flag++;
+	return (home_flag);
+}
+
 void	ft_echo(t_env *env, char **names)
 {
 	unsigned char 	n_flag;
-	char			**start_ptr;
 	unsigned char	home_flag;
-	n_flag = 0;
 
-	start_ptr = (char **) names;
-	while (*names != NULL)
+	n_flag = ft_check_n_flag(names);
+	while (*(++names + n_flag))
 	{
-		if (strcmp(*(names), "-n") == 0)
-			n_flag++;
-		names++;
-	}
-	names = start_ptr;
-	while (*(names + 1 + n_flag))
-	{
-		home_flag = 0;
-		if (!(ft_strncmp(*(names + 1 + n_flag), "~", ft_strlen(*(names + 1 + n_flag))))
-			|| (names[1 + n_flag][0] == '~' && (names[1 + n_flag][1] == '/')))
-		{
-			home_flag++;
+		home_flag = is_home(*(names + n_flag));
+		if (home_flag)
 			printf("%s", ft_expand(env, "HOME"));
-		}
-		printf("%s", *(names + 1 + n_flag) + home_flag);
-		if (*(names + 2 + n_flag) != NULL)
+		printf("%s", *(names + n_flag) + home_flag);
+		if (*(names + 1 + n_flag) != NULL) // if not last item
 			printf(" ");
-		names++;
 	}
 	if (!n_flag)
 		printf("\n");
