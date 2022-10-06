@@ -27,6 +27,7 @@ static char	*ft_strchrnul(const char *s, int c)
 	return ((char *)s);
 }
 
+
 int	ft_execve(t_env *env, char **names)
 {
 	char	tstr[126];
@@ -36,11 +37,12 @@ int	ft_execve(t_env *env, char **names)
 	int	ret;
 
 	ret = 1;
+	printf("env->name: %s\n", env->value);
 	path = ft_expand(env, "PATH");
 	//path = getenv("PATH"); // we can't use this because of potential deletion of PATH variable
 	//memcpy(names[1], "122", 2);
 	cpath = path;
-
+	printf("env->envp[0]: %s\n", env->envp[0]);
 	if (is_alias(names[0]))
 	{
 		while (cpath)
@@ -49,7 +51,7 @@ int	ft_execve(t_env *env, char **names)
 			ft_memcpy(tstr, cpath, pstr - cpath);
 			tstr[pstr - cpath] = '/';
 			ft_memcpy(tstr + (pstr - cpath) + (pstr>cpath), names[0], ft_strlen(names[0]));
-			execve(tstr, names, NULL);
+			execve(tstr, names, env->envp);
 			memset(tstr, 0, 126);
 			cpath = pstr + 1;
 			if (pstr[0] != ':')
@@ -59,7 +61,7 @@ int	ft_execve(t_env *env, char **names)
 	}
 	else 
 	{
-		ret = execve(names[0], names, NULL);
+		ret = execve(names[0], names, env->envp);
 		if (ret)
 			return (1);
 		else

@@ -12,22 +12,45 @@
 
 #include "../../includes/minishell.h"
 
-void	ft_free_env(t_env *env_list)
+void	ft_free_envp(char **envp)
+{
+	char	**head;
+
+	head = envp;
+	printf("hello?\n");
+	while (*envp)
+	{
+		if (*envp)
+			free(*envp);
+		*envp = NULL;
+		envp++;
+	}
+	printf("address of head in free_envp: %p\n", head);
+	if (head)
+		free(head);
+	// head = NULL;
+}
+
+void	ft_free_env(t_env *env)
 {
 	int		i;
 	t_env	*aux;
+	t_env	*head;
 
 	i = 0;
-	aux = env_list;
+	aux = env;
+	head = env;
+	if (env->envp)
+		ft_free_envp(env->envp);
 	while (aux != NULL)
 	{
 		if (aux->key)
 			free(aux->key);
 		if (aux->value)
 			free(aux->value);
-		env_list = aux;
+		env = aux;
 		aux = aux->next;
-		if (env_list)
-			free(env_list);
+		if (env)
+			free(env);
 	}
 }

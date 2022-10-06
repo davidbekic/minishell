@@ -6,16 +6,17 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 11:58:05 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/03 13:49:29 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/06 13:37:40 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_echo(char **names)
+void	ft_echo(t_env *env, char **names)
 {
 	unsigned char 	n_flag;
 	char			**start_ptr;
+	unsigned char	home_flag;
 	n_flag = 0;
 
 	start_ptr = (char **) names;
@@ -28,7 +29,14 @@ void	ft_echo(char **names)
 	names = start_ptr;
 	while (*(names + 1 + n_flag))
 	{
-		printf("%s", *(names + 1 + n_flag));
+		home_flag = 0;
+		if (!(ft_strncmp(*(names + 1 + n_flag), "~", ft_strlen(*(names + 1 + n_flag))))
+			|| (names[1 + n_flag][0] == '~' && (names[1 + n_flag][1] == '/')))
+		{
+			home_flag++;
+			printf("%s", ft_expand(env, "HOME"));
+		}
+		printf("%s", *(names + 1 + n_flag) + home_flag);
 		if (*(names + 2 + n_flag) != NULL)
 			printf(" ");
 		names++;

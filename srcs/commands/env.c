@@ -6,19 +6,19 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:39:37 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/04 16:08:37 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/06 16:52:32 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	ft_envsize(t_env *lst)
+int	ft_envsize(t_env *env)
 {
 	t_env	*ptr;
 	int		counter;
 
 	counter = 0;
-	ptr = lst;
+	ptr = env;
 	while (ptr != NULL)
 	{
 		counter++;
@@ -27,7 +27,7 @@ static int	ft_envsize(t_env *lst)
 	return (counter);
 }
 
-void    ft_alphabetic_env(t_env *env_list)
+void    ft_alphabetic_env(t_env *env)
 {
 	int     i;
 	int     j;
@@ -37,8 +37,8 @@ void    ft_alphabetic_env(t_env *env_list)
 
 	i = 0;
 	j = 0;
-	lst_size = ft_envsize(env_list);
-	aux = env_list;
+	lst_size = ft_envsize(env);
+	aux = env;
 	temp = aux;
 	while (j < lst_size - 1)
 	{
@@ -57,25 +57,25 @@ void    ft_alphabetic_env(t_env *env_list)
 					printf("=\"%s\"", temp->value);
 				printf("\n");	
 			}
-			aux = env_list;
-			temp = env_list;
+			aux = env;
+			temp = env;
 			j++;
 			i = 0;
 			continue ;
 		}
 		temp = temp->next;
-		aux = env_list;
+		aux = env;
 		i = 0;
 	}
 }
 
-void    ft_env(t_env *env_list)
+void    ft_env(t_env *env)
 {
     int     i;
     t_env   *aux;
 
     i = 0;
-    aux = env_list;
+    aux = env;
     while (aux != NULL)
     {
 		if (aux->value != NULL)

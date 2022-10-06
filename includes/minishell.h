@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/04 17:25:40 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/06 16:56:09 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_env
 {
   char          *key;
   char          *value;
+  char			**envp;
+  int			lst_len;
   struct s_env  *next;
 }     t_env;
 
@@ -91,26 +93,29 @@ int		gettoken(char **pstr, char *estr, char **ftoken, char **eftoken);
 //Env
 t_env   *ft_init_env(char **main_env);
 t_env   *ft_create_elem(t_env *new, char *key_value, int value_start);
+int		ft_envsize(t_env *env);
+char	**ft_create_envp(t_env *env);
 //t_env   *ft_create_elem(t_env *new, char *env_variable);
-t_env   *ft_find_elem(t_env *env_list, char *key);
-t_env   *ft_find_elem_before(t_env *env_list, char *key);
+t_env   *ft_find_elem(t_env *env, char *key);
+t_env   *ft_find_elem_before(t_env *env, char *key);
 int	ft_find_key(char *pattern);
 int	ft_find_value(char *pattern);
-char    *ft_expand(t_env *env_list, char *key);
-void    ft_free_env(t_env *env_list);
+char    *ft_expand(t_env *env, char *key);
+void    ft_free_env(t_env *env);
+void	ft_free_envp(char **envp);
 //void    ft_update_var(char *key, char *value, t_env *list);
-void	ft_alphabetic_env(t_env *env_list);
-int	ft_non_allowed_char_for_var_name(char *str, int len);
+void	ft_alphabetic_env(t_env *env);
+int	ft_var_name_check(char *str, int len);
 
 // exec
 int	ft_execve(t_env *env, char **names);
 
 //Built-ins
-void		ft_env(t_env *env_list);
-int		ft_export(char **names, t_env *env);
+void		ft_env(t_env *env);
+int			ft_export(char **names, t_env *env);
 void		ft_pwd(t_env *env);
-void		ft_echo(char **names);
-int			ft_unset(char *key, t_env *env_list);
+void		ft_echo(t_env *env, char **names);
+int			ft_unset(char *key, t_env *env);
 
 
 #endif

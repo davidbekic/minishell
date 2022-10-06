@@ -6,13 +6,13 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:32:59 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/05 16:42:43 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/06 16:51:58 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char    *ft_expand(t_env *env_list, char *key)
+char    *ft_expand(t_env *env, char *key)
 {
     int i;
     void *ret;
@@ -32,9 +32,9 @@ char    *ft_expand(t_env *env_list, char *key)
 		i++;
 	}
 	temp_buf[i] = 0;
-    ret = (t_env *) ft_find_elem(env_list, temp_buf);
+    ret = (t_env *) ft_find_elem(env, temp_buf);
     if (!ret)
         return (NULL);
     else
-    return (ft_find_elem(env_list, temp_buf)->value);
+    return (ft_find_elem(env, temp_buf)->value);
 }

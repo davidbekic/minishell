@@ -6,13 +6,13 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:57:51 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/04 15:57:27 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/05 17:02:56 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_non_allowed_char_for_var_name(char *str, int len)
+int	ft_var_name_check(char *str, int len)
 {
 	int	i;
 	char	buf[100];

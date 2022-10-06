@@ -6,13 +6,13 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/04 17:13:16 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/06 17:05:42 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	ft_update_var(char *key_value, int value_start, t_env *list)
+static void	ft_update_var(char *key_value, int value_start, t_env *env)
 {
 	t_env	*elem;
 	t_env	*aux;
@@ -22,17 +22,17 @@ static void	ft_update_var(char *key_value, int value_start, t_env *list)
 
 	i = 0;
 	j = 0;
-	aux = list;
+	aux = env;
 	strncpy(key, key_value, value_start - 1);
-	elem = ft_find_elem(list, key);
+	elem = ft_find_elem(env, key);
 	if (!elem) // CREATING ELEMENT
 	{
-		while (strcmp(list->next->key, "_") != 0)
-			list = list->next;
+		while (strcmp(env->next->key, "_") != 0)
+			env = env->next;
 		//elem = ft_create_elem(elem, key_value, ft_find_value(key_value));
 		elem = ft_create_elem(elem, key_value, value_start);
-		aux = list->next;
-		list->next = elem;
+		aux = env->next;
+		env->next = elem;
 		elem->next = aux;
 	}
 	else // UPDATE VARIABLE
@@ -45,6 +45,9 @@ static void	ft_update_var(char *key_value, int value_start, t_env *list)
 		}
 		elem->value[i] = 0;
 	}
+	//free(env->envp);
+	ft_free_envp(env->envp);
+	env->envp = ft_create_envp(env);
 }
 
 int	ft_export(char **names, t_env *env)
@@ -56,7 +59,7 @@ int	ft_export(char **names, t_env *env)
 		ft_alphabetic_env(env);
 	while (*++names)
 	{
-		ret = ft_non_allowed_char_for_var_name(*names, ft_find_value(*(names)) - 1);
+		ret = ft_var_name_check(*names, ft_find_value(*(names)) - 1);
 		if (ret)
 			printf("minishell: export: `%s': not a valid identifier\n", *names);
 		else if (!ret)

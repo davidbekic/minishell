@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/05 16:50:09 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/06 17:31:40 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ static int	getcmd(char **buf, t_env *env)
 	while (1)
 	{
 		ft_memset(*buf, 0, ft_strlen(*buf));
-		rl_copy = readline("minishell: ");
+		rl_copy = readline("🐚 ");
 		ft_memcpy(*buf, rl_copy, ft_strlen(rl_copy) + 1);
 		if (*buf && **buf)
 			add_history(rl_copy);
-		if (ft_prompt_parser(buf, env)){
+		if (ft_prompt_parser(buf, env))
+		{
 			perror("syntax error\n");
 			return (258);
 		}
@@ -41,7 +42,7 @@ static int	getcmd(char **buf, t_env *env)
 		// else if (ft_strncmp(*buf, "export2", 7) == 0)
 		// 	ft_export(NULL, env);
 		else if (ft_strncmp(*buf, "unset", 5) == 0)
-			ft_unset("PATH", env);
+			ft_unset("USER", env);
 
 		else 
 			break ;
@@ -56,7 +57,10 @@ int	main(int ac, char **av, char **main_env)
 
 	if (ac > 1 && av[0][0] == '&')
 		exit(1);
+	printf("main_env[0]: %s\n", main_env[0]);
 	env = ft_init_env(main_env);
+	env->envp = ft_create_envp(env);
+	printf("env->envp[5]: %s\n", env->envp[5]);
 	buf = (char *)malloc(sizeof(char) * 4096);
 	if (!buf)
 		exit (-1);
@@ -75,5 +79,7 @@ int	main(int ac, char **av, char **main_env)
 		wait(0);
 	}
 	ft_free_env(env);
+	free(buf);
+	free(env->envp);
 	return (0);
 }
