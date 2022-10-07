@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/05 16:06:43 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/07 12:34:51 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,8 @@ SRC = srcs/parser/main.c \
 	  srcs/parser/ft_termination.c \
 	  srcs/parser/ft_exec.c    \
 	  srcs/parser/ft_prompt_parser.c \
+	  srcs/parser/ft_builtin_parser.c \
+	  srcs/parser/ft_quotes.c \
 	  srcs/commands/echo.c    \
 	  srcs/commands/env.c    \
 	  srcs/commands/export.c    \

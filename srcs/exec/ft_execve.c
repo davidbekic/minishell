@@ -44,6 +44,7 @@ int	ft_execve(t_env *env, char **names)
 	cpath = path;
 	//env->envp = ft_create_envp(env);
 	printf("env->envp[0]: %s\n", env->envp[0]);
+
 	if (is_alias(names[0]))
 	{
 		while (cpath)

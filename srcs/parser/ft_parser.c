@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:19:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/09/19 12:52:01 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/07 12:34:22 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ struct cmd	*parsecmd(char *str)
 	if (str != estr)
 	{
 		printf("leftovers: %s\n", str);
-		ft_error("syntax");
+		ft_error("syntax", 258);
 	}
 	terminate(cmd);
 //	execmd = (struct doexec *)cmd;
@@ -71,7 +71,7 @@ struct cmd	*parseredirs(char **pstr, char *estr, struct cmd *cmd)
 //		printf("entro en redirs\n");
 		operator = gettoken(pstr, estr, 0, 0);
 		if (gettoken(pstr, estr, &ftoken, &eftoken) != 'z')
-			ft_error("syntax error near unexpected token 'newline'\n");
+			ft_error("syntax error near unexpected token 'newline'\n", 258);
 		if (operator == '<')
 			cmd = buildredir(cmd, ftoken, eftoken, O_RDONLY, 0);
 		else if (operator == '>')
@@ -101,7 +101,7 @@ struct cmd	*parseexec(char **pstr, char *estr)
 		if ((token = gettoken(pstr, estr, &ftoken, &eftoken)) == 0)
 			break ;
 		if (token != 'z')
-			ft_error("syntax");
+			ft_error("syntax", 258);
 		cmd->names[i] = ftoken;
 		cmd->end_names[i] = eftoken;
 		i++;

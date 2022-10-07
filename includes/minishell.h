@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/06 16:56:09 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/07 12:34:24 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define EXEC 1
 # define REDIR 2
 # define PIPE 3
+# define MAXARGS 10
+# define RWRR (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
 //# define O_WRONLY 10
 //# define O_CREAT 11
 //# define O_RDONLY 12
@@ -77,15 +79,19 @@ struct cmd	*parsepipe(char **pstr, char *estr);
 struct cmd	*parseredirs(char **pstr, char *estr, struct cmd *cmd);
 struct cmd	*parseexec(char **pstr, char *estr);
 struct cmd	*terminate(struct cmd *cmd);
+struct cmd	*builtexec(char **pstr, char *estr);
+struct cmd	*builtparse(char *str);
 void		ft_runcmd(struct cmd *cmd, t_env *env);
 int			ft_prompt_parser(char **buf, t_env *env);
+int			ft_setcmd(struct doexec **cmd, char *ftoken, char *eftoken, int sign);
+int			ft_quotes(char **pstr, char *estr, char **ftoken, char **eftoken);
 
 //Building tree structs
 struct cmd	*buildexec(void);
 struct cmd	*buildredir(struct cmd *scmd, char *file, char *efile, int right, int fd);
 struct cmd	*buildpipe(struct cmd *left, struct cmd *right);
 //Utils
-void	ft_error(char *str);
+void	ft_error(char *str, int exit_code);
 int		fork1(void);
 int		ft_find(char **pstr, char *estr, char *tokens);
 int		gettoken(char **pstr, char *estr, char **ftoken, char **eftoken);

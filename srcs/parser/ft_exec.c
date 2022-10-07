@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/06 19:09:36 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/07 12:33:50 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_runpipecmd(struct cmd *cmd, t_env *env)
 
 	pipecmd = (struct dopipe *)cmd;
 	if (pipe(file_d) < 0)
-		ft_error("pipe error");
+		ft_error("pipe error", 1);
 	if (fork1() == 0)
 	{
 		close(1); // first child closes stdout fd

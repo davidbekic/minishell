@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:04:56 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/06 19:01:44 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/07 12:28:47 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ struct cmd	*buildredir(struct cmd *scmd, char *file, char *efile, int right, int
 	cmd->efile = efile;
 	cmd->right = right;
 	cmd->fd = fd;
+	printf("cmd doreadir address %p\n", cmd);
 	return ((struct cmd *)cmd);
 }
 
