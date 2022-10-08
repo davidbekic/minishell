@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/06 17:05:42 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/07 17:17:51 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void	ft_update_var(char *key_value, int value_start, t_env *env)
 		elem->value[i] = 0;
 	}
 	//free(env->envp);
-	ft_free_envp(env->envp);
-	env->envp = ft_create_envp(env);
+	// ft_free_envp(env->envp);
+	// env->envp = ft_create_envp(env);
 }
 
 int	ft_export(char **names, t_env *env)
@@ -55,6 +55,7 @@ int	ft_export(char **names, t_env *env)
 	short	ret;
 
 	ret = 0;
+	printf("names[1] in EXPORT: %s\n", names[1]);
 	if (!names[1])
 		ft_alphabetic_env(env);
 	while (*++names)

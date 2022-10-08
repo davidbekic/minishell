@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/07 12:34:51 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/07 17:13:18 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC = srcs/parser/main.c \
 	  srcs/commands/export.c    \
 	  srcs/commands/pwd.c     \
 	  srcs/commands/unset.c    \
+	  srcs/commands/cd.c    \
 	  srcs/env/ft_create_elem.c    \
 	  srcs/env/ft_expand.c    \
 	  srcs/env/ft_find_elem.c    \

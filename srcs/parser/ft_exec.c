@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/07 12:33:50 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/08 13:46:51 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 		execcmd = (struct doexec *)cmd;
 		if (execcmd->names[0] == 0)
 			exit (1);
-		else if (ft_strncmp(execcmd->names[0], "echo", ft_strlen(execcmd->names[0])) == 0)
-			ft_echo(env, execcmd->names);
+		if (!(ft_strncmp(execcmd->names[0], "env", 3)))
+			ft_env(env);
 		else
 		{
 			printf("in execve\n");

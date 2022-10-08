@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:10:01 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/07 12:31:14 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/07 19:03:06 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_strncmp(const char *str1, const char *str2, size_t number)
 {
 	size_t	position;
 
-	if (!str1 || !str2)
+	if (!str1 || !str2 || !ft_strlen(str2))
 		return (1);
 	position = 0;
 	if (!number)

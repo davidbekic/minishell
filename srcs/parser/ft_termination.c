@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:17:51 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/07 12:28:58 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/07 15:46:20 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,12 @@ int	ft_setcmd(struct doexec **cmd, char *ftoken, char *eftoken, int sign)
 
 	if (sign == 1)
 	{
-		printf("entro en sign\n");
+//		printf("entro en sign\n");
 		(*cmd)->names[i] = 0;
 		(*cmd)->end_names[i] = 0;
 		i = 0;
 		return (i);
 	}
-	printf("names es %s\n", (*cmd)->names[i]);
 	(*cmd)->names[i] = ftoken;
 	(*cmd)->end_names[i] = eftoken;
 	i++;

@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:39:37 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/06 16:52:32 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/08 13:42:15 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void    ft_env(t_env *env)
 
     i = 0;
     aux = env;
+	printf("env pointing to: %s\n", env->key);
     while (aux != NULL)
     {
 		if (aux->value != NULL)
