@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:19:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/07 12:34:22 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/10 15:06:31 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ struct cmd	*parsecmd(char *str)
 	terminate(cmd);
 //	execmd = (struct doexec *)cmd;
 //	printf("ecm type %s\n", execmd->names[0]);
-//	printf("ecm type %s\n", execmd->names[1]);
+//	printf("ecm type %s\n", execmd->names[1]);)
 	return (cmd);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:39:37 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/08 13:42:15 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/10 16:35:19 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,18 @@ void    ft_alphabetic_env(t_env *env)
 	}
 }
 
-void    ft_env(t_env *env)
+void    ft_env(t_env *env, char **names)
 {
     int     i;
     t_env   *aux;
 
+	if (*(names + 1))
+	{
+		printf("env: %s: no such file or directory\n", *(names + 1));
+		return ;
+	}
     i = 0;
     aux = env;
-	printf("env pointing to: %s\n", env->key);
     while (aux != NULL)
     {
 		if (aux->value != NULL)

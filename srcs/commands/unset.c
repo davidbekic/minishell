@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:22:21 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/08 18:31:19 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/10 13:20:56 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int ft_unset(char **names, t_env **env)
     unsigned char   ret;
     
     ret = 0;
-    while (*names++)
+    while (*(names++ + 1) != NULL)
     {
+        printf("*names: %s\n", *names);
         if (ft_var_name_check(*names, ft_strlen(*names)))
         {
             ret = 1;

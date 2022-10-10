@@ -6,13 +6,13 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/07 17:17:51 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/10 14:45:50 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	ft_update_var(char *key_value, int value_start, t_env *env)
+void	ft_update_var(char *key_value, int value_start, t_env *env)
 {
 	t_env	*elem;
 	t_env	*aux;

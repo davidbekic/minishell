@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:19:20 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/08 18:15:38 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/10 14:40:50 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ t_env	*ft_init_env(char **main_env)
 		temp = current;
 		i++;
 	}
-	head->envp = ft_create_envp(head);
+	//head->envp = ft_create_envp(head);
 	return (head);
 }

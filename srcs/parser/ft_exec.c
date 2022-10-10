@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/08 13:46:51 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/10 16:30:41 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,23 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 	if (cmd->type == EXEC)
 	{
 		execcmd = (struct doexec *)cmd;
+		printf("execcmd->names[0]: %s\n", execcmd->names[0]);
 		if (execcmd->names[0] == 0)
 			exit (1);
-		if (!(ft_strncmp(execcmd->names[0], "env", 3)))
-			ft_env(env);
+		else if (!(strcmp(execcmd->names[0], "env")))
+			ft_env(env, execcmd->names);
+		else if (!(strcmp(execcmd->names[0], "echo")))
+			ft_echo(env, execcmd->names);
+		else if (!(strcmp(execcmd->names[0], "export")))
+			ft_export(execcmd->names, env);
+		else if (!(strcmp(execcmd->names[0], "exit")))
+			ft_exit(execcmd->names);
+		else if (!(strcmp(execcmd->names[0], "unset")))
+			ft_unset(execcmd->names, &env);
+		// else if (!(ft_strncmp(execcmd->names[0], "cd", 2)))
+		// 	ft_cd(execcmd->names, &env);
 		else
 		{
-			printf("in execve\n");
-			printf("env->key: %s\n", env->key);
 			printf("execve ret: %d\n", ft_execve(env, execcmd->names));
 		}
 	}

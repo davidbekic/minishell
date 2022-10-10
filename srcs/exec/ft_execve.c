@@ -27,24 +27,15 @@ static char	*ft_strchrnul(const char *s, int c)
 	return ((char *)s);
 }
 
-
-int	ft_execve(t_env *env, char **names)
+static int	ft_find_exec(t_env *env, char **names)
 {
 	char	tstr[126];
 	char	*path;
 	char	*pstr;
 	char	*cpath;
-	int	ret;
 
-	ret = 1;
-	printf("env->name: %s\n", env->value);
 	path = ft_expand(env, "PATH");
-	//path = getenv("PATH"); // we can't use this because of potential deletion of PATH variable
-	//memcpy(names[1], "122", 2);
 	cpath = path;
-	//env->envp = ft_create_envp(env);
-	printf("env->envp[0]: %s\n", env->envp[0]);
-
 	if (is_alias(names[0]))
 	{
 		while (cpath)
@@ -53,61 +44,37 @@ int	ft_execve(t_env *env, char **names)
 			ft_memcpy(tstr, cpath, pstr - cpath);
 			tstr[pstr - cpath] = '/';
 			ft_memcpy(tstr + (pstr - cpath) + (pstr>cpath), names[0], ft_strlen(names[0]));
-			execve(tstr, names, env->envp);
+			execve(tstr, names, NULL);
 			memset(tstr, 0, 126);
 			cpath = pstr + 1;
 			if (pstr[0] != ':')
 				return (1);
 		}
-		return (0);
 	}
-	else 
-	{
-		ret = execve(names[0], names, env->envp);
-		if (ret)
-			return (1);
-		else
-			return (0);
-	}
+	return (0);
 }
 
 
+int	ft_execve(t_env *env, char **names)
+{
+	int		ret;
+	char	shlvl[20];
+	int		shlvl_int;
 
-// int	ft_execve(t_env *env, char **names)
-// {
-// 	char	**paths;
-// 	char	*buffer;
-// 	int	i;
-// 	int	ret;
-
-// 	ret = 1;
-// 	i = 0;
-// 	paths = NULL;
-// 	printf("names[1]: %s\n", names[1]);
-// 	if (is_alias(names[0]))
-// 	{
-// 		paths = ft_split(ft_expand(env, "PATH"), ':');
-// 		while (ret != 0)
-// 		{
-// 			buffer = ft_strdup(paths[i]);
-// 			free(paths[i]);
-// 			strlcat(buffer, "/", ft_strlen(paths[i]) + ft_strlen("/") + 1);
-// 			strlcat(buffer, names[0], ft_strlen(buffer) + ft_strlen(names[0]) + 1);
-// 			ret = execve(buffer, names, NULL);
-// 			free(buffer);
-// 			i++;
-// 			if (paths[i] == NULL)
-// 				return (1);
-// 		}
-// 		free (paths);
-// 		return (0);
-// 	}
-// 	else 
-// 	{
-// 		ret = execve(names[0], names, NULL);
-// 		if (ret)
-// 			return (1);
-// 		else
-// 			return (0);
-// 	}
-// }
+	ret = 0;
+	shlvl_int = ft_atoi(ft_expand(env, "SHLVL")) + 1;
+	ft_memcpy(shlvl, "SHLVL=", 7);
+	ft_memcpy(shlvl + ft_strlen(shlvl), ft_itoa(shlvl_int), ft_strlen(ft_itoa(shlvl_int)) + 1);
+	if (!(strcmp(names[0], "./minishell")))
+	{	
+		if (env->envp)
+			free(env->envp);
+		ft_update_var(shlvl, 6, env);
+		env->envp = ft_create_envp(env);
+		return (execve(names[0], names, env->envp));
+	}
+	else if (is_alias(names[0]))
+		return (ft_find_exec(env, names));
+	else
+		return (execve(names[0], names, NULL));
+}

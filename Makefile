@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/07 17:13:18 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/10 13:24:24 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,26 +25,6 @@ EXECDIC = srcs/exec
 
 # Files
 LIBFT = Libft
-# SRCDIR =	src/parser/main.c \
-# 	  src/parser/ft_utils.c \
-# 	  src/parser/ft_build.c \
-# 	  src/parser/ft_parser.c \
-# 	  src/parser/ft_termination.c \
-# 	  src/parser/ft_exec.c  \
-# 	  src/commands/echo.c    \
-# 	  src/commands/env.c    \
-# 	  src/commands/export.c    \
-# 	  src/commands/pwd.c     \
-# 	  src/commands/unset.c    \
-# 	  src/env/ft_create_elem.c    \
-# 	  src/env/ft_expand.c    \
-# 	  src/env/ft_find_elem.c    \
-# 	  src/env/ft_find_key_value.c    \
-# 	  src/env/ft_free_env.c    \
-# 	  src/env/ft_init_env.c    \
-# 	  src/env/ft_var_name_check.c    \
-# 	  src/exec/ft_execve.c    \
-# 	  src/parser/prompt_parser.c    
 
 SRC = srcs/parser/main.c \
 	  srcs/parser/ft_utils.c \
@@ -61,6 +41,7 @@ SRC = srcs/parser/main.c \
 	  srcs/commands/pwd.c     \
 	  srcs/commands/unset.c    \
 	  srcs/commands/cd.c    \
+	  srcs/commands/exit.c   \
 	  srcs/env/ft_create_elem.c    \
 	  srcs/env/ft_expand.c    \
 	  srcs/env/ft_find_elem.c    \
