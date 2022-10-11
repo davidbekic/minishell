@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:45:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/07 13:56:34 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/11 16:46:58 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,15 @@ static int	ft_var_name_stop(char *str)
 	char	buf[4096];
 
 	i = 0;
-    // if (ft_strlen(str) == 0)
-    // {
-    //     printf("yes?\n");
-    //     return (-1);
-    // }
 	ft_memcpy(buf, str, ft_strlen(str) + 1); // putting only var_NAME in buf
 	while (str[i] != 0) 
 	{
-        if ((str[i] >= '0' && str[i] <= '9') && !i)
+		if (!(str[i] >= 'a' && str[i] <= 'z') && !(str[i] >= 'A' && str[i] <= 'Z')
+			&& str[i] != '_' && !i && str[i] != '$')
             return (1);
 		if (!(str[i] >= 'a' && str[i] <= 'z') && !(str[i] >= 'A' && str[i] <= 'Z')
 			&& str[i] != '_' && !(str[i] >= '0' && str[i] <= '9'))
-			return (i);
+			    return (i);
 		i++;
 	}
 	return (i);
@@ -78,6 +74,15 @@ static int ft_syntax_checker(char *str)
     return (0);
 }
 
+static int  ft_home_check(char *str, int pos)
+{
+    if (str[pos] == '~' && str[pos - 1] != '~' && str[pos + 1] != '~' 
+        && (str[pos + 1] == '/' || str[pos + 1] == 0 || str[pos + 1] == 32) 
+        && (str[pos - 1] == 32 || str[pos - 1] == 0))
+        return (1);
+    return (0);
+}
+
 void    prompt_expander(char **buf, t_env *env)
 {
 	unsigned char	quote_type;
@@ -96,14 +101,19 @@ void    prompt_expander(char **buf, t_env *env)
 			quote_type = dump[i];
 		else if (dump[i] == quote_type)
 			quote_type = 0;
+        if (ft_home_check(dump, i) && !quote_type)
+        {
+                ft_memcpy(*(buf) + j, ft_expand(env, "HOME"), ft_strlen(ft_expand(env, "HOME")) + 1);
+                i++;
+                j += ft_strlen(ft_expand(env, "HOME"));
+        }
         if (dump[i] == '$' && quote_type != '\'')
         {
-            if (ft_expand(env, dump + i + 1) != NULL)  // if var doesn't exist
+            if (ft_expand(env, dump + i + 1) != NULL)  // if var exist
                 ft_memcpy(*(buf) + j, ft_expand(env, dump + i + 1), ft_strlen(ft_expand(env, dump + i + 1)) + 1);
-            if (!ft_var_name_stop(dump + i + 1))
+            if (!ft_var_name_stop(dump + i + 1) && dump[i] != '~')
                 ft_memcpy(*buf + (++j - 1), dump + (i), 1);
-            else
-                j += ft_strlen(ft_expand(env, dump + i + 1));  // moving forward in BUF after added variable              
+            j += ft_strlen(ft_expand(env, dump + i + 1));  // moving forward in BUF after added variable              
             i += ft_var_name_stop(dump + i + 1) + 1;
             continue ;
         }
@@ -111,8 +121,6 @@ void    prompt_expander(char **buf, t_env *env)
 	}
     buf[0][j] = 0;
 }
-
-// if there is a VAR, 
 
 int ft_prompt_parser(char **buf, t_env *env)
 {

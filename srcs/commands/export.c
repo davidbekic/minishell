@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/10 14:45:50 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/11 16:51:29 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ void	ft_update_var(char *key_value, int value_start, t_env *env)
 	i = 0;
 	j = 0;
 	aux = env;
+	bzero(key, 100);
 	strncpy(key, key_value, value_start - 1);
+	key[ft_strlen(key)] = 0;
 	elem = ft_find_elem(env, key);
 	if (!elem) // CREATING ELEMENT
 	{
 		while (strcmp(env->next->key, "_") != 0)
 			env = env->next;
-		//elem = ft_create_elem(elem, key_value, ft_find_value(key_value));
 		elem = ft_create_elem(elem, key_value, value_start);
 		aux = env->next;
 		env->next = elem;
@@ -45,9 +46,6 @@ void	ft_update_var(char *key_value, int value_start, t_env *env)
 		}
 		elem->value[i] = 0;
 	}
-	//free(env->envp);
-	// ft_free_envp(env->envp);
-	// env->envp = ft_create_envp(env);
 }
 
 int	ft_export(char **names, t_env *env)
@@ -55,7 +53,6 @@ int	ft_export(char **names, t_env *env)
 	short	ret;
 
 	ret = 0;
-	printf("names[1] in EXPORT: %s\n", names[1]);
 	if (!names[1])
 		ft_alphabetic_env(env);
 	while (*++names)

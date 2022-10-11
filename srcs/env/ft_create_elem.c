@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:15:38 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/06 16:32:03 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/11 16:50:02 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_env	*ft_create_elem(t_env *new, char *key_value, int value_start)
 	new->key = (char *) ft_calloc(value_start, 1);
 	if (!new->key)
 		return (NULL);
-	new->value = (char *) ft_calloc(strlen(key_value) + 100 - value_start, 1);
+	new->value = (char *) ft_calloc(strlen(key_value) - value_start, 1);
 	if (!new->value)
 		return (NULL);
 	while (++i < value_start)
