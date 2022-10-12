@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:39:37 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/10 16:35:19 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/12 17:55:36 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void    ft_alphabetic_env(t_env *env)
 	}
 }
 
-void    ft_env(t_env *env, char **names)
+int    ft_env(t_env *env, char **names)
 {
     int     i;
     t_env   *aux;
@@ -77,7 +77,7 @@ void    ft_env(t_env *env, char **names)
 	if (*(names + 1))
 	{
 		printf("env: %s: no such file or directory\n", *(names + 1));
-		return ;
+		return (127);
 	}
     i = 0;
     aux = env;
@@ -88,5 +88,5 @@ void    ft_env(t_env *env, char **names)
         aux = aux->next;
         i++;
     }
-	//ft_free_env(env_list);
+	return (0);
 }

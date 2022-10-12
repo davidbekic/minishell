@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/11 16:32:24 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/12 16:41:47 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,7 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 		else if (!(strcmp(execcmd->names[0], "env")))
 			ft_env(env, execcmd->names);
 		else if (!(strcmp(execcmd->names[0], "echo")))
-		{
-			printf("in child as well?\n");
 			ft_echo(execcmd->names);
-		}
 		else if (!(strcmp(execcmd->names[0], "export")))
 			ft_export(execcmd->names, env);
 		else if (!(strcmp(execcmd->names[0], "exit")))
@@ -70,9 +67,7 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 		else if (!(ft_strncmp(execcmd->names[0], "cd", 2)))
 			ft_cd(env, execcmd->names);
 		else
-		{
 			printf("execve ret: %d\n", ft_execve(env, execcmd->names));
-		}
 	}
 	else if (cmd->type == REDIR)
 	{

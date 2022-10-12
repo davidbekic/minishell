@@ -25,7 +25,6 @@ void	ft_free_envp(char **envp)
 		*envp = NULL;
 		envp++;
 	}
-	printf("address of head in free_envp: %p\n", head);
 	if (head)
 		free(head);
 	// head = NULL;
@@ -41,7 +40,9 @@ void	ft_free_env(t_env *env)
 	aux = env;
 	head = env;
 	if (env->envp)
+	{	
 		ft_free_envp(env->envp);
+	}
 	while (aux != NULL)
 	{
 		if (aux->key)

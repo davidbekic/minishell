@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:19:20 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/10 14:40:50 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/12 16:52:28 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ char	**ft_create_envp(t_env *env)
 	char	**head;
 
 	ptr = env;
-	
-	env->envp = (char **) malloc(sizeof(char*) * ft_envsize(env));
+	printf("ft_envsize: %d\n", ft_envsize(env));
+	env->envp = (char **) malloc(sizeof(char*) * (ft_envsize(env) + 1));
 	head = env->envp;
 	while (ptr)
 	{
@@ -32,6 +32,18 @@ char	**ft_create_envp(t_env *env)
 	}
 	*env->envp = NULL;
 	return (env->envp - (env->envp - head));
+}
+
+static void increase_shlvl(t_env *env)
+{
+	char	shlvl[20];
+	int		shlvl_int;
+
+	shlvl_int = ft_atoi(ft_expand(env, "SHLVL")) + 1;
+	ft_bzero(shlvl, 20);
+	ft_memcpy(shlvl, "SHLVL=", 7);
+	ft_memcpy(shlvl + ft_strlen(shlvl), ft_itoa(shlvl_int), ft_strlen(ft_itoa(shlvl_int)));
+	ft_update_var(shlvl, 6, env);
 }
 
 t_env	*ft_init_env(char **main_env)
@@ -62,6 +74,6 @@ t_env	*ft_init_env(char **main_env)
 		temp = current;
 		i++;
 	}
-	//head->envp = ft_create_envp(head);
+	increase_shlvl(head);
 	return (head);
 }

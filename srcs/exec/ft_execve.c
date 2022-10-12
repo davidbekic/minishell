@@ -44,7 +44,7 @@ static int	ft_find_exec(t_env *env, char **names)
 			ft_memcpy(tstr, cpath, pstr - cpath);
 			tstr[pstr - cpath] = '/';
 			ft_memcpy(tstr + (pstr - cpath) + (pstr>cpath), names[0], ft_strlen(names[0]));
-			execve(tstr, names, NULL);
+			execve(tstr, names, env->envp);
 			memset(tstr, 0, 126);
 			cpath = pstr + 1;
 			if (pstr[0] != ':')
@@ -57,24 +57,15 @@ static int	ft_find_exec(t_env *env, char **names)
 
 int	ft_execve(t_env *env, char **names)
 {
-	int		ret;
-	char	shlvl[20];
-	int		shlvl_int;
-
-	ret = 0;
-	shlvl_int = ft_atoi(ft_expand(env, "SHLVL")) + 1;
-	ft_memcpy(shlvl, "SHLVL=", 7);
-	ft_memcpy(shlvl + ft_strlen(shlvl), ft_itoa(shlvl_int), ft_strlen(ft_itoa(shlvl_int)) + 1);
-	if (!(strcmp(names[0], "./minishell")))
-	{	
-		if (env->envp)
-			free(env->envp);
-		ft_update_var(shlvl, 6, env);
-		env->envp = ft_create_envp(env);
-		return (execve(names[0], names, env->envp));
-	}
-	else if (is_alias(names[0]))
+	if (!(strcmp(*names, "bash")) 
+		|| !(strcmp(*names, "./minishell"))
+		|| !(strcmp(*names, "zsh")))
+		{
+			printf("running a shell\n");
+			env->envp = ft_create_envp(env);
+		}
+	if (is_alias(names[0]))
 		return (ft_find_exec(env, names));
 	else
-		return (execve(names[0], names, NULL));
+		return (execve(names[0], names, env->envp));
 }

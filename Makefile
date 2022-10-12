@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/10 13:24:24 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/12 12:35:47 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,13 @@ RED = \033[0;31m
 GREEN = \033[0;32m
 RESET = \033[0m
 
+UNAME_S := $(shell uname -s)
 NAME = minishell
 CFLAGS = -Wall -Werror -Wextra -MMD
+
+LDFLAGS = /Users/${USER}/homebrew/opt/readline/lib
+RFLAGS = /Users/${USER}/homebrew/opt/readline/include
+
 
 # Folders
 OBJDIR = obj
@@ -34,6 +39,7 @@ SRC = srcs/parser/main.c \
 	  srcs/parser/ft_exec.c    \
 	  srcs/parser/ft_prompt_parser.c \
 	  srcs/parser/ft_builtin_parser.c \
+	  srcs/parser/ft_signals.c \
 	  srcs/parser/ft_quotes.c \
 	  srcs/commands/echo.c    \
 	  srcs/commands/env.c    \
@@ -65,14 +71,14 @@ makelibs:
 -include $(DEPENDS)
 $(NAME): $(OBJ)
 	@echo "$(GREEN)Creando ejecutable 🛠 $@ $(RESET)"
-	gcc $(CFLAGS) $(SRC) -LLibft -lft -lreadline -o $@
+	gcc $(CFLAGS) $(OBJ) -LLibft -lft -L$(LDFLAGS) -lreadline -o $@
 	@rm -f minishell.d
 	@echo "$(GREEN)Compilado ✅ $@ $(RESET)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@echo "$(GREEN)Compilando $< de $@ $(RESET)"
 	@mkdir -p $(@D)
-	gcc $(CFLAGS) -o $@ -c $<
+	gcc -I$(RFLAGS) $(CFLAGS) -o $@ -c $<
 
 clean:
 

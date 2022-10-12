@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/11 16:51:29 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/12 19:29:31 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	ft_update_var(char *key_value, int value_start, t_env *env)
 	}
 	else // UPDATE VARIABLE
 	{
+		if (!elem->value) 
+			elem->value = malloc((ft_strlen(key_value) - value_start) + 1);
 		while (key_value[value_start + i] != 0)
 		{
 			i++;
@@ -65,24 +67,3 @@ int	ft_export(char **names, t_env *env)
 	}		
 	return (ret);
 }
-
-// int	main(int ac, char **av, char **main_env)
-// {
-// 	int	i;
-// 	t_env	*env;
-// 	char **nullstr;
-
-// 	nullstr = malloc(200);
-// 	nullstr[0] = malloc(200);
-// 	nullstr[1] = malloc(200);
-// 	nullstr[0] = "./a.out";
-// 	nullstr[1] = NULL;
-
-	
-// 	i = 0;
-// 	env = ft_init_env(main_env);
-// 	ft_export(av, env);
-// 	ft_export(nullstr, env);
-// 	ft_env(env);
-// 	ft_free_env(env);
-// }

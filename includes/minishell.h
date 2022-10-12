@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/11 11:57:50 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/12 17:58:56 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 //# define O_WRONLY 10
 //# define O_CREAT 11
 //# define O_RDONLY 12
+
+extern int g_exit;
 
 typedef struct s_env
 {
@@ -91,10 +93,10 @@ struct cmd	*buildexec(void);
 struct cmd	*buildredir(struct cmd *scmd, char *file, char *efile, int right, int fd);
 struct cmd	*buildpipe(struct cmd *left, struct cmd *right);
 //Utils
-void	ft_error(char *str, int exit_code);
-int		fork1(void);
-int		ft_find(char **pstr, char *estr, char *tokens);
-int		gettoken(char **pstr, char *estr, char **ftoken, char **eftoken);
+void		ft_error(char *str, int exit_code);
+int			fork1(void);
+int			ft_find(char **pstr, char *estr, char *tokens);
+int			gettoken(char **pstr, char *estr, char **ftoken, char **eftoken);
 
 //Env
 t_env   *ft_init_env(char **main_env);
@@ -117,11 +119,16 @@ void	ft_update_var(char *key_value, int value_start, t_env *env);
 // exec
 int	ft_execve(t_env *env, char **names);
 
+
+// signals
+void		ft_info_handler(int signo, siginfo_t *info, void *context);
+void		ft_handler(int signo);
+
 //Built-ins
-void		ft_env(t_env *env, char **names);
+int			ft_env(t_env *env, char **names);
 int			ft_export(char **names, t_env *env);
 void		ft_pwd(t_env *env);
-void		ft_echo(char **names);
+int			ft_echo(char **names);
 int			ft_unset(char **names, t_env **env);
 int			ft_cd(t_env *env, char **names);
 void		ft_exit(char **names);

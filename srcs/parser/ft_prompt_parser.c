@@ -6,11 +6,13 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:45:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/11 16:46:58 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/12 19:14:41 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+// extern int g_exit;
 
 static int	ft_var_name_stop(char *str)
 {
@@ -83,25 +85,42 @@ static int  ft_home_check(char *str, int pos)
     return (0);
 }
 
+static int  ft_is_exit(char *str)
+{
+    if (!(strncmp(str, "$?", 2)))
+        return (1);
+    else
+        return (0);
+}
+
 void    prompt_expander(char **buf, t_env *env)
 {
 	unsigned char	quote_type;
+    char            dump[4096];
     int             i;
     int             j;
-    char            dump[4096];
     
 	i = 0;
     j = 0;
 	quote_type = 0;
     bzero(dump, 4096);
     ft_memcpy(dump, *buf, ft_strlen(*buf));
-	while (*(dump + i))
+    printf("g_exit: %d\n", g_exit);
+    printf("itoa(g_exit): %s\n", ft_itoa(g_exit));
+    if (strlen(*buf) > 4096)
+        return ;
+	while (*(dump + i) && j < 4096)
 	{
 		if ((dump[i] == '\"' || dump[i]== '\'') && (dump[i] != quote_type ) && !quote_type)
 			quote_type = dump[i];
 		else if (dump[i] == quote_type)
 			quote_type = 0;
-        if (ft_home_check(dump, i) && !quote_type)
+        if (ft_is_exit(dump + i) && quote_type != '\'')
+        {
+            ft_memcpy(*(buf) + j, ft_itoa(g_exit), ft_strlen(ft_itoa(g_exit)));
+            j += ft_strlen(ft_itoa(g_exit));   
+        }
+        else if (ft_home_check(dump, (i)) && !quote_type)
         {
                 ft_memcpy(*(buf) + j, ft_expand(env, "HOME"), ft_strlen(ft_expand(env, "HOME")) + 1);
                 i++;
@@ -120,6 +139,7 @@ void    prompt_expander(char **buf, t_env *env)
         ft_memcpy(*buf + (++j - 1), dump + (++i - 1), 1);
 	}
     buf[0][j] = 0;
+
 }
 
 int ft_prompt_parser(char **buf, t_env *env)
@@ -130,7 +150,7 @@ int ft_prompt_parser(char **buf, t_env *env)
         return (124);
     }
     if (ft_syntax_checker(*buf))
-        return (1);
+        return (1);    
     prompt_expander(buf, env);   
     
     return (0);
