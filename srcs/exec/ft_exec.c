@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/12 16:41:47 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/13 18:18:22 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 {
 	struct doexec	*execcmd;
 	struct doredir	*redircmd;
+	int				ret;
 
+	ret = 0;
 	if (cmd == 0)
 		exit (1);
 	if (cmd->type == EXEC)
@@ -55,19 +57,21 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 		if (execcmd->names[0] == 0)
 			exit (1);
 		else if (!(strcmp(execcmd->names[0], "env")))
-			ft_env(env, execcmd->names);
+			ret = ft_env(env, execcmd->names);
 		else if (!(strcmp(execcmd->names[0], "echo")))
-			ft_echo(execcmd->names);
+			ret = ft_echo(execcmd->names);
 		else if (!(strcmp(execcmd->names[0], "export")))
-			ft_export(execcmd->names, env);
+			ret = ft_export(execcmd->names, env);
 		else if (!(strcmp(execcmd->names[0], "exit")))
 			ft_exit(execcmd->names);
 		else if (!(strcmp(execcmd->names[0], "unset")))
-			ft_unset(execcmd->names, &env);
+			ret = ft_unset(execcmd->names, &env);
 		else if (!(ft_strncmp(execcmd->names[0], "cd", 2)))
-			ft_cd(env, execcmd->names);
+			ret = ft_cd(env, execcmd->names);
+		else if (!(ft_strncmp(execcmd->names[0], "pwd", 3)))
+			ret = ft_pwd(env);
 		else
-			printf("execve ret: %d\n", ft_execve(env, execcmd->names));
+			ret = ft_execve(env, execcmd->names);
 	}
 	else if (cmd->type == REDIR)
 	{
@@ -79,5 +83,6 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 	}
 	else if (cmd->type == PIPE)
 		ft_runpipecmd(cmd, env);
-	exit (0);
+	// printf("ret in child: %d\n", ret);
+	exit (ret);
 }

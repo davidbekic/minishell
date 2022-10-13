@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/12 17:58:56 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/13 17:23:01 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void		ft_runcmd(struct cmd *cmd, t_env *env);
 int			ft_prompt_parser(char **buf, t_env *env);
 int			ft_setcmd(struct doexec **cmd, char *ftoken, char *eftoken, int sign);
 int			ft_quotes(char **pstr, char *estr, char **ftoken, char **eftoken);
+int			ft_is_builtin(char *buf);
 
 //Building tree structs
 struct cmd	*buildexec(void);
@@ -109,25 +110,27 @@ t_env   *ft_find_elem_before(t_env *env, char *key);
 int	ft_find_key(char *pattern);
 int	ft_find_value(char *pattern);
 char    *ft_expand(t_env *env, char *key);
-void    ft_free_env(t_env *env);
+void    ft_free_env(t_env *env, int err);
 void	ft_free_envp(char **envp);
 //void    ft_update_var(char *key, char *value, t_env *list);
 void	ft_alphabetic_env(t_env *env);
 int	ft_var_name_check(char *str, int len);
-void	ft_update_var(char *key_value, int value_start, t_env *env);
+int	ft_update_var(char *key_value, int value_start, t_env *env);
 
 // exec
+int	ft_run_builtin(t_env *env, char **buf);
 int	ft_execve(t_env *env, char **names);
-
 
 // signals
 void		ft_info_handler(int signo, siginfo_t *info, void *context);
 void		ft_handler(int signo);
+void		ft_signals(void);
+void	ft_termios(void);
 
 //Built-ins
 int			ft_env(t_env *env, char **names);
 int			ft_export(char **names, t_env *env);
-void		ft_pwd(t_env *env);
+int			ft_pwd(t_env *env);
 int			ft_echo(char **names);
 int			ft_unset(char **names, t_env **env);
 int			ft_cd(t_env *env, char **names);

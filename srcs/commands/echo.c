@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 11:58:05 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/12 17:49:54 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/13 18:34:38 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static	int	ft_check_n_flag(char **names)
 		{
 			while (names[i - 1][j])
 			{
-				if (names[i - 1][++j - 1] != 'n' && (names[i - 1][j + 1] != 0 || names[i - 1][j + 1] != 32))
+				if (names[i - 1][++j - 1] != 'n' && (names[i - 1][j + 1] != 0
+							|| names[i - 1][j + 1] != 32))
 					return (n_flag);
 			}
 			if (no_flag)
@@ -42,7 +43,7 @@ static	int	ft_check_n_flag(char **names)
 
 int	ft_echo(char **names)
 {
-	unsigned char 	n_flag;
+	unsigned char	n_flag;
 
 	n_flag = 0;
 	n_flag = ft_check_n_flag(names);

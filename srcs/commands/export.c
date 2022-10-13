@@ -6,13 +6,13 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/12 19:29:31 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/13 18:38:42 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_update_var(char *key_value, int value_start, t_env *env)
+int	ft_update_var(char *key_value, int value_start, t_env *env)
 {
 	t_env	*elem;
 	t_env	*aux;
@@ -38,16 +38,22 @@ void	ft_update_var(char *key_value, int value_start, t_env *env)
 	}
 	else // UPDATE VARIABLE
 	{
-		if (!elem->value) 
+		if (!elem->value)
+		{
 			elem->value = malloc((ft_strlen(key_value) - value_start) + 1);
+			if (!elem->value)
+				return (1);
+		}
 		while (key_value[value_start + i] != 0)
 		{
 			i++;
-			if (key_value[value_start + i - 1] != '\'' && key_value[value_start + i - 1] != '\"' )
+			if (key_value[value_start + i - 1] != '\''
+				&& key_value[value_start + i - 1] != '\"' )
 				elem->value[++j - 1] = key_value[value_start + i - 1];
 		}
 		elem->value[i] = 0;
 	}
+	return (0);
 }
 
 int	ft_export(char **names, t_env *env)
@@ -63,7 +69,7 @@ int	ft_export(char **names, t_env *env)
 		if (ret)
 			printf("minishell: export: `%s': not a valid identifier\n", *names);
 		else if (!ret)
-			ft_update_var(*names, ft_find_value(*names), env);			
+			ret = ft_update_var(*names, ft_find_value(*names), env);
 	}		
 	return (ret);
 }

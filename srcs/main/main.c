@@ -3,67 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/15 11:58:10 by irifarac          #+#    #+#             */
-/*   Updated: 2022/09/09 12:16:30 by dbekic           ###   ########.fr       */
+/*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
+/*   Updated: 2022/10/13 18:21:53 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
-int	spawn(char *program, char **arg_list)
+int g_exit;
+
+static int	getcmd(char **buf, t_env *env)
 {
-	pid_t	child_pid;
-
-	child_pid = fork();
-	if (child_pid != 0)
+	char	*rl_copy;
+	
+	ft_memset(*buf, 0, ft_strlen(*buf) + 1);
+	*buf[0] = 'c';
+	rl_copy = readline("🐚 ");
+	ft_memcpy(*buf, rl_copy, ft_strlen(rl_copy) + 1);
+	if (*buf && **buf)
+		add_history(rl_copy);
+	if (ft_prompt_parser(buf, env))
 	{
-		return (child_pid);
+		perror("syntax error\n");
+		g_exit = 258;
 	}
-	else
-	{
-		arg_list[1] = "-la";
-		execvp(program, arg_list);
-		write(2, "Error\n", 6);
-		return (-1);
-	}
-	return (0);
+	if (ft_is_builtin(*buf))
+		return (ft_run_builtin(env, buf));
+	return (1);
 }
 
-int	main(void)
+int	main(int ac, char **av, char **main_env)
 {
-	/*char* line;
-    line = readline("$");  // readline allocates space for returned string
-    if(line != NULL) {
-       printf("You entered: %s\n", line);
-	   free(line);   // but you are responsible for freeing the space
-	}*/
-	int		child_status;
-	char	*arg_list[] = {
-		"ls",
-		"-l",
-		NULL
-	};
-	spawn("ls", arg_list);
-	wait(&child_status);
-	printf("%s\n", arg_list[1]);
-	if (WIFEXITED(child_status))
-		printf("the child process exited normally, with exit code %d\n", WEXITSTATUS(child_status));
-	else
-		printf("the child process exited abnormally\n");
-	write(1,"done with main\n", 15);
-	/*char *inpt;
-    int i = 0;
-    while (strcmp(inpt, "exit") != 0)
-    {
-                inpt = readline("$ ");
-                add_history(inpt);
-                printf("%s", inpt);
-                printf("\n");
-				free(inpt);
-                ++i;
-    }*/
+	static char		*buf;
+	t_env			*env;
 
+	if ((ac > 1 && av[0][0] == '&') || !*main_env)
+		exit(1);
+	env = ft_init_env(main_env);
+	if (!env)
+		ft_free_env(env, 1);
+	ft_termios();
+	ft_signals();
+	buf = (char *)ft_calloc(sizeof(char) * 4096, 1);
+	if (!buf)
+		ft_free_env(env, 1);
+	while (getcmd(&buf, env) >= 0)
+	{	
+		if (ft_is_builtin(buf))
+			continue;
+		if (fork() == 0)			
+			ft_runcmd(parsecmd(buf), env);
+		wait(0);
+	}
 	return (0);
 }

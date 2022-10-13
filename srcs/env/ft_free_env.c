@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ft_free_env.c                                      :+:      :+:    :+:   */
+/*   ft_ft_free_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 13:00:01 by dbekic            #+#    #+#             */
-/*   Updated: 2022/09/19 18:13:06 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/13 18:28:41 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_free_envp(char **envp)
 	char	**head;
 
 	head = envp;
-	printf("hello?\n");
 	while (*envp)
 	{
 		if (*envp)
@@ -27,10 +26,9 @@ void	ft_free_envp(char **envp)
 	}
 	if (head)
 		free(head);
-	// head = NULL;
 }
 
-void	ft_free_env(t_env *env)
+void	ft_free_env(t_env *env, int err)
 {
 	int		i;
 	t_env	*aux;
@@ -40,9 +38,7 @@ void	ft_free_env(t_env *env)
 	aux = env;
 	head = env;
 	if (env->envp)
-	{	
 		ft_free_envp(env->envp);
-	}
 	while (aux != NULL)
 	{
 		if (aux->key)
@@ -53,5 +49,10 @@ void	ft_free_env(t_env *env)
 		aux = aux->next;
 		if (env)
 			free(env);
+	}
+	if (err)
+	{
+		ft_putstr_fd("malloc failure, please restart Shell\n", 2);
+		exit(1);
 	}
 }

@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/12 12:35:47 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/13 17:23:21 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,16 +31,16 @@ EXECDIC = srcs/exec
 # Files
 LIBFT = Libft
 
-SRC = srcs/parser/main.c \
+SRC = srcs/main/main.c \
 	  srcs/parser/ft_utils.c \
 	  srcs/parser/ft_build.c \
 	  srcs/parser/ft_parser.c \
 	  srcs/parser/ft_termination.c \
-	  srcs/parser/ft_exec.c    \
+	  srcs/exec/ft_exec.c    \
 	  srcs/parser/ft_prompt_parser.c \
 	  srcs/parser/ft_builtin_parser.c \
-	  srcs/parser/ft_signals.c \
 	  srcs/parser/ft_quotes.c \
+	  srcs/main/ft_signals.c \
 	  srcs/commands/echo.c    \
 	  srcs/commands/env.c    \
 	  srcs/commands/export.c    \
@@ -55,6 +55,7 @@ SRC = srcs/parser/main.c \
 	  srcs/env/ft_free_env.c    \
 	  srcs/env/ft_init_env.c    \
 	  srcs/env/ft_var_name_check.c    \
+	  srcs/exec/ft_run_builtin.c    \
 	  srcs/exec/ft_execve.c    
 
 OBJ = $(SRC:%.c=$(OBJDIR)/%.o)

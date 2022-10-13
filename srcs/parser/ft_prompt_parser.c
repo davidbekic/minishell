@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:45:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/12 19:14:41 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/13 16:55:43 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,6 @@ void    prompt_expander(char **buf, t_env *env)
 	quote_type = 0;
     bzero(dump, 4096);
     ft_memcpy(dump, *buf, ft_strlen(*buf));
-    printf("g_exit: %d\n", g_exit);
-    printf("itoa(g_exit): %s\n", ft_itoa(g_exit));
     if (strlen(*buf) > 4096)
         return ;
 	while (*(dump + i) && j < 4096)

@@ -6,11 +6,47 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:30:38 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/12 17:01:59 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/13 18:18:06 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <signal.h>
+#include <termios.h>
+
+void	ft_termios(void)
+{
+	struct termios	term;
+
+	if (isatty(STDIN_FILENO) == 0)
+		ft_error("this fd is not a tty", 130);
+	if (tcgetattr(STDIN_FILENO, &term) < 0)
+		ft_error("get attributes error", 130);
+	//turn off echo octal
+	term.c_lflag &= ~(ECHOCTL);
+	//TCSADRAIN the change occurs after all ouput has been transmitted
+	if (tcsetattr(STDIN_FILENO, TCSADRAIN, &term) < 0)
+		ft_error("set attributes error", 130);
+	//Check if the changes were set properly
+	if (term.c_lflag & (ECHOCTL))
+		ft_error("attributes wrongly set", 130);
+}
+
+void	ft_signals(void)
+{
+	struct sigaction	act;
+	struct sigaction	oact;
+
+	act.sa_handler = SIG_IGN;
+//	act.sa_mask = 0;
+	sigemptyset(&act.sa_mask);
+	act.sa_flags = SA_RESTART | SA_SIGINFO;
+	act.sa_sigaction = ft_info_handler;
+	if (sigaction(SIGCHLD, &act, &oact) < 0)
+		ft_error("sigaction error", 130);
+	if (sigaction(SIGINT, &act, &oact) < 0)
+		ft_error("sigaction error", 130);
+}
 
 void	ft_handler(int signo)
 {
@@ -25,13 +61,15 @@ void	ft_info_handler(int signo, siginfo_t *info, void *context)
 	(void)context;
 	child = info->si_pid;
 	status = info->si_status;
-//	printf("pid: %d status: %d\n", child, status);
+	// printf("pid: %d status: %d\n", child, status);
+	// printf("signo: %d AND SIGCHLD: %d\n", signo, SIGCHLD);
 	if (signo == SIGCHLD)
 	{
-		printf("child died\n");
+		//printf("child died\n");
 	}
 	if (signo == SIGINT)
 	{
+		
 		//printf("sigint %s\n", rl_line_buffer);
 		//if (ioctl(STDIN_FILENO, TIOCSTI, "\n") < 0)
 		//	ft_error("ioctl erro", 130);

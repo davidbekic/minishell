@@ -6,13 +6,14 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:09:19 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/10 12:49:25 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/13 13:46:42 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_pwd(t_env *env)
+int	ft_pwd(t_env *env)
 {
 	printf("%s\n", ft_expand(env, "PWD"));
+	return (0);
 }

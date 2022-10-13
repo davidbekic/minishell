@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:39:37 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/12 17:55:36 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/13 18:36:19 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	ft_envsize(t_env *env)
 	return (counter);
 }
 
-void    ft_alphabetic_env(t_env *env)
+void	ft_alphabetic_env(t_env *env)
 {
-	int     i;
-	int     j;
+	int		i;
+	int		j;
 	int		lst_size;
 	t_env	*aux;
 	t_env	*temp;
@@ -55,7 +55,7 @@ void    ft_alphabetic_env(t_env *env)
 				printf("declare -x %s", temp->key);
 				if (temp->value)
 					printf("=\"%s\"", temp->value);
-				printf("\n");	
+				printf("\n");
 			}
 			aux = env;
 			temp = env;
@@ -69,24 +69,24 @@ void    ft_alphabetic_env(t_env *env)
 	}
 }
 
-int    ft_env(t_env *env, char **names)
+int	ft_env(t_env *env, char **names)
 {
-    int     i;
-    t_env   *aux;
+	int		i;
+	t_env	*aux;
 
 	if (*(names + 1))
 	{
 		printf("env: %s: no such file or directory\n", *(names + 1));
 		return (127);
 	}
-    i = 0;
-    aux = env;
-    while (aux != NULL)
-    {
+	i = 0;
+	aux = env;
+	while (aux != NULL)
+	{
 		if (aux->value != NULL)
-        	printf("%s=%s\n", aux->key, aux->value);
-        aux = aux->next;
-        i++;
-    }
+			printf("%s=%s\n", aux->key, aux->value);
+	aux = aux->next;
+	i++;
+	}
 	return (0);
 }
