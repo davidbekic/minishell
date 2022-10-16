@@ -67,8 +67,8 @@ t_env	*ft_init_env(char **main_env)
 	i = 1;
 	while (main_env[i] != NULL)
 	{
-		current = ft_create_elem
-			(current, main_env[i], ft_find_value(main_env[i]));
+		current = ft_create_elem(current, main_env[i],
+			ft_find_value(main_env[i]));
 		if (!current)
 			return (NULL);
 		temp->next = current;

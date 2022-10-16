@@ -28,7 +28,7 @@ int	ft_unset(char **names, t_env **env)
 			continue ;
 		}
 		to_delete = ft_find_elem(*env, *names);
-		if (!to_delete || !*names || strcmp(*names, "_") == 0)
+		if (!to_delete || !*names || ft_strcmp(*names, "_") == 0)
 			continue ;
 		to_redirect = ft_find_elem_before(*env, *names);
 		if (!to_redirect)

@@ -19,8 +19,11 @@ UNAME_S := $(shell uname -s)
 NAME = minishell
 CFLAGS = -Wall -Werror -Wextra -MMD
 
-LDFLAGS = /Users/${USER}/homebrew/opt/readline/lib
-RFLAGS = /Users/${USER}/homebrew/opt/readline/include
+LDFLAGS = /opt/homebrew/opt/readline/lib
+RFLAGS = /opt/homebrew/opt/readline/include
+#LDFLAGS = /Users/${USER}/homebrew/opt/readline/lib
+#RFLAGS = /Users/${USER}/homebrew/opt/readline/include
+
 
 
 # Folders
@@ -41,13 +44,13 @@ SRC = srcs/main/main.c \
 	  srcs/parser/ft_builtin_parser.c \
 	  srcs/parser/ft_quotes.c \
 	  srcs/main/ft_signals.c \
-	  srcs/commands/echo.c    \
-	  srcs/commands/env.c    \
-	  srcs/commands/export.c    \
-	  srcs/commands/pwd.c     \
-	  srcs/commands/unset.c    \
-	  srcs/commands/cd.c    \
-	  srcs/commands/exit.c   \
+	  srcs/builtins/echo.c    \
+	  srcs/builtins/env.c    \
+	  srcs/builtins/export.c    \
+	  srcs/builtins/pwd.c     \
+	  srcs/builtins/unset.c    \
+	  srcs/builtins/cd.c    \
+	  srcs/builtins/exit.c   \
 	  srcs/env/ft_create_elem.c    \
 	  srcs/env/ft_expand.c    \
 	  srcs/env/ft_find_elem.c    \

@@ -18,20 +18,20 @@ int	ft_update_var(char *key_value, int value_start, t_env *env)
 	t_env	*aux;
 	int		i;
 	int		j;
-	char	key[100];
+	char	key[4096];
 
 	i = 0;
 	j = 0;
 	aux = env;
-	bzero(key, 100);
-	strncpy(key, key_value, value_start - 1);
+	ft_bzero(key, 4096);
+	ft_memcpy(key, key_value, value_start - 1);
 	key[ft_strlen(key)] = 0;
 	elem = ft_find_elem(env, key);
-	if (!elem) // CREATING ELEMENT
+	if (!elem) // CREATING ELEMENT 
 	{
-		while (strcmp(env->next->key, "_") != 0)
+		while (ft_strcmp(env->next->key, "_") != 0)
 			env = env->next;
-		elem = ft_create_elem(elem, key_value, value_start);
+		elem = ft_create_elem(elem, key_value, value_start);	
 		aux = env->next;
 		env->next = elem;
 		elem->next = aux;
@@ -65,11 +65,19 @@ int	ft_export(char **names, t_env *env)
 		ft_alphabetic_env(env);
 	while (*++names)
 	{
+		if (ft_strlen(*names) > 100)
+		{
+			printf("too long variable name or value\n");
+			return 1;
+		}
 		ret = ft_var_name_check(*names, ft_find_value(*(names)) - 1);
 		if (ret)
+		{
+			ret = 1;
 			printf("minishell: export: `%s': not a valid identifier\n", *names);
+		}
 		else if (!ret)
-			ret = ft_update_var(*names, ft_find_value(*names), env);
-	}		
+			ft_update_var(*names, ft_find_value(*names), env);
+	}
 	return (ret);
 }

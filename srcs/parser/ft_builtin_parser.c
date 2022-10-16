@@ -42,7 +42,7 @@ int	ft_is_builtin(char *buf)
 	buf = head;
 	while (built_ins[++i])
 	{
-		if (!(strcmp(ft_memcpy(comparison_str, buf, marker), built_ins[i])))
+		if (!(ft_strcmp(ft_memcpy(comparison_str, buf, marker), built_ins[i])))
 			return (1);
 	}
 	return (0);
@@ -83,5 +83,5 @@ struct cmd	*builtexec(char **pstr, char *estr)
 			break ;
 	}
 	ft_setcmd(&cmd, ftoken, eftoken, 1);
-	return (ret);
+	return (ret);		
 }

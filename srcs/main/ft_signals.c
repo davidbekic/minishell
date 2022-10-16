@@ -14,6 +14,8 @@
 #include <signal.h>
 #include <termios.h>
 
+extern int g_exit;
+
 void	ft_termios(void)
 {
 	struct termios	term;
@@ -56,12 +58,13 @@ void	ft_handler(int signo)
 void	ft_info_handler(int signo, siginfo_t *info, void *context)
 {
 	int	child;
-	int	status;
+	static int status;
 
 	(void)context;
 	child = info->si_pid;
-	status = info->si_status;
-	// printf("pid: %d status: %d\n", child, status);
+	if (info->si_status)
+		status = info->si_status;
+	g_exit = status;
 	// printf("signo: %d AND SIGCHLD: %d\n", signo, SIGCHLD);
 	if (signo == SIGCHLD)
 	{

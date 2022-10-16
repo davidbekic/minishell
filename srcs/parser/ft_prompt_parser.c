@@ -93,7 +93,7 @@ static int  ft_is_exit(char *str)
         return (0);
 }
 
-void    prompt_expander(char **buf, t_env *env)
+static void    prompt_expander(char **buf, t_env *env)
 {
 	unsigned char	quote_type;
     char            dump[4096];
@@ -105,8 +105,6 @@ void    prompt_expander(char **buf, t_env *env)
 	quote_type = 0;
     bzero(dump, 4096);
     ft_memcpy(dump, *buf, ft_strlen(*buf));
-    if (strlen(*buf) > 4096)
-        return ;
 	while (*(dump + i) && j < 4096)
 	{
 		if ((dump[i] == '\"' || dump[i]== '\'') && (dump[i] != quote_type ) && !quote_type)
@@ -148,8 +146,11 @@ int ft_prompt_parser(char **buf, t_env *env)
         return (124);
     }
     if (ft_syntax_checker(*buf))
-        return (1);    
-    prompt_expander(buf, env);   
-    
+        return (128);    
+    if (ft_strlen(*buf) > 4096)
+        return (1);
+    prompt_expander(buf, env);
+    if (ft_strlen(*buf) > 4096)
+        return (1);
     return (0);
 }

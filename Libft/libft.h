@@ -43,6 +43,7 @@ char	*ft_strchr(const char *str, int ch);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
+int		ft_strcmp(const char *str1, const char *str2);
 int		ft_strncmp(const char *str1, const char *str2, size_t number);
 char	*ft_strnstr(const char *dest, const char *src, size_t count);
 char	*ft_strrchr(const char *str, int ch);

@@ -27,7 +27,7 @@ t_env	*ft_create_elem(t_env *new, char *key_value, int value_start)
 	new->key = (char *) ft_calloc(value_start, 1);
 	if (!new->key)
 		return (NULL);
-	new->value = (char *) ft_calloc(ft_strlen(key_value) * 1000, 1);
+	new->value = (char *) ft_calloc((ft_strlen(key_value) - value_start) + 1, 1);
 	if (!new->value)
 		return (NULL);
 	while (++i < value_start)

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <ctype.h>
 
 static int	is_alias(char *str)
 {
@@ -70,18 +69,18 @@ int	ft_execve(t_env *env, char **names)
 {
 	int	ret;
 
-	if (!(strcmp(*names, "bash"))
-		|| !(strcmp(*names, "./minishell"))
-		|| !(strcmp(*names, "zsh")))
+	if (!(ft_strcmp(*names, "bash"))
+		|| !(ft_strcmp(*names, "./minishell"))
+		|| !(ft_strcmp(*names, "zsh")))
 	{
 		env->envp = ft_create_envp(env);
 		if (!env->envp)
 		{
-			ft_putstr_fd("malloc fail, please try again\n", 2);
+			ft_putstr_fd("malloc fail\n", 2);
 			return (1);
 		}
 	}
-	if (is_alias(names[0]))
+	if (is_alias(names[0]) || !ft_expand(env, "PATH"))
 	{
 		ret = ft_find_exec(env, names);
 		if (ret)

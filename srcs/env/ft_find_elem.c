@@ -19,9 +19,9 @@ t_env	*ft_find_elem_before(t_env *env, char *key)
 	aux = env;
 	while (aux != NULL)// ITERATING THROUGH ENV LIST
 	{
-		if (strncmp(aux->key, key, ft_strlen(key)) == 0)
+		if (ft_strncmp(aux->key, key, ft_strlen(key)) == 0)
 			return (NULL);
-		if (strncmp(aux->next->key, key, ft_strlen(key)) == 0)
+		if (ft_strncmp(aux->next->key, key, ft_strlen(key)) == 0)
 			return (aux);
 		aux = aux->next;
 	}

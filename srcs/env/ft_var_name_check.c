@@ -15,7 +15,7 @@
 int	ft_var_name_check(char *str, int len)
 {
 	int		i;
-	char	buf[100];
+	char	buf[200];
 
 	i = 0;
 	if (len < 1)   // not sure why this exists, maybe some NULL case?

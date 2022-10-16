@@ -18,6 +18,7 @@ static void	ft_runpipecmd(struct cmd *cmd, t_env *env)
 	int				file_d[2];
 
 	pipecmd = (struct dopipe *)cmd;
+	// printf("going to run names[0]: %s\n", pipecmd->left->[0]);
 	if (pipe(file_d) < 0)
 		ft_error("pipe error", 1);
 	if (fork1() == 0)
@@ -56,19 +57,22 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 		execcmd = (struct doexec *)cmd;
 		if (execcmd->names[0] == 0)
 			exit (1);
-		else if (!(strcmp(execcmd->names[0], "env")))
+		else if (!(ft_strcmp(execcmd->names[0], "env")))
 			ret = ft_env(env, execcmd->names);
-		else if (!(strcmp(execcmd->names[0], "echo")))
+		else if (!(ft_strcmp(execcmd->names[0], "echo")))
 			ret = ft_echo(execcmd->names);
-		else if (!(strcmp(execcmd->names[0], "export")))
+		else if (!(ft_strcmp(execcmd->names[0], "export")))
+		{
 			ret = ft_export(execcmd->names, env);
-		else if (!(strcmp(execcmd->names[0], "exit")))
+			free(env);
+		}
+		else if (!(ft_strcmp(execcmd->names[0], "exit")))
 			ft_exit(execcmd->names);
-		else if (!(strcmp(execcmd->names[0], "unset")))
+		else if (!(ft_strcmp(execcmd->names[0], "unset")))
 			ret = ft_unset(execcmd->names, &env);
-		else if (!(ft_strncmp(execcmd->names[0], "cd", 2)))
+		else if (!(ft_strcmp(execcmd->names[0], "cd")))
 			ret = ft_cd(env, execcmd->names);
-		else if (!(ft_strncmp(execcmd->names[0], "pwd", 3)))
+		else if (!(ft_strcmp(execcmd->names[0], "pwd")))
 			ret = ft_pwd(env);
 		else
 			ret = ft_execve(env, execcmd->names);

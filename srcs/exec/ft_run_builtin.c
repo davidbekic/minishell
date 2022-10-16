@@ -20,6 +20,8 @@ int	ft_run_builtin(t_env *env, char **buf)
 
 	ft_memcpy(temp, *buf, ft_strlen(*buf) + 1);
 	builtin_cmd = builtparse(temp);
+	if (!builtin_cmd)
+		ft_free_env(env, 1);
 	builtin_doexec = (doexec *) builtin_cmd;
 	if (!(ft_strncmp(builtin_doexec->names[0], "echo", 4)))
 		g_exit = ft_echo(builtin_doexec->names);
@@ -31,9 +33,9 @@ int	ft_run_builtin(t_env *env, char **buf)
 		g_exit = ft_unset(builtin_doexec->names, &env);
 	if (!(ft_strncmp(builtin_doexec->names[0], "exit", 4)))
 	{
-		ft_free_env(env, 0);
-		free(builtin_doexec);
-		free(*buf);
+		// ft_free_env(env, 0);
+		// free(builtin_doexec);
+		// free(*buf);
 		ft_exit(builtin_doexec->names);
 	}
 	if (!(ft_strncmp(builtin_doexec->names[0], "cd", 2)))

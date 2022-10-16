@@ -15,21 +15,22 @@
 
 int g_exit;
 
-static int	getcmd(char **buf, t_env *env)
+static int	ft_getcmd(char **buf, t_env *env)
 {
 	char	*rl_copy;
 	
 	ft_memset(*buf, 0, ft_strlen(*buf) + 1);
-	*buf[0] = 'c';
 	rl_copy = readline("🐚 ");
 	ft_memcpy(*buf, rl_copy, ft_strlen(rl_copy) + 1);
 	if (*buf && **buf)
 		add_history(rl_copy);
-	if (ft_prompt_parser(buf, env))
+	g_exit = ft_prompt_parser(buf, env);
+	if (g_exit)
 	{
-		perror("syntax error\n");
-		g_exit = 258;
+		ft_memset(*buf, 0, ft_strlen(*buf) + 1);
+		return (1);
 	}
+		
 	if (ft_is_builtin(*buf))
 		return (ft_run_builtin(env, buf));
 	return (1);
@@ -50,11 +51,11 @@ int	main(int ac, char **av, char **main_env)
 	buf = (char *)ft_calloc(sizeof(char) * 4096, 1);
 	if (!buf)
 		ft_free_env(env, 1);
-	while (getcmd(&buf, env) >= 0)
+	while (ft_getcmd(&buf, env) >= 0)
 	{	
 		if (ft_is_builtin(buf))
-			continue;
-		if (fork() == 0)			
+			continue ;
+		if (fork() == 0)
 			ft_runcmd(parsecmd(buf), env);
 		wait(0);
 	}
