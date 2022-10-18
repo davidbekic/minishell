@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_create_elem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:15:38 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/13 18:24:11 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/18 22:50:08 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ t_env	*ft_create_elem(t_env *new, char *key_value, int value_start)
 
 	i = 0;
 	j = 0;
-	if (value_start == 0)
-		return (NULL);
 	new = (t_env *) ft_calloc(1, sizeof(t_env));
 	if (!new)
 		return (NULL);
@@ -34,11 +32,7 @@ t_env	*ft_create_elem(t_env *new, char *key_value, int value_start)
 		new->key[i - 1] = key_value[i - 1];
 	i = 0;
 	while (*(key_value + value_start + i) != 0)
-	{
-		new->value[j] = key_value[value_start + i];
-		j++;
-		i++;
-	}
+		new->value[++j - 1] = key_value[value_start + (++i - 1)];
 	new->value[j] = 0;
 	if (key_value[value_start - 1] == 0)
 	{

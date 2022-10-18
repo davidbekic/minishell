@@ -27,20 +27,30 @@ int	ft_envsize(t_env *env)
 	return (counter);
 }
 
+void	ft_alphabetic_write(t_env *temp)
+{
+	if (ft_strncmp(temp->key, "_", 3) != 0)
+	{
+		printf("declare -x %s", temp->key);
+		if (temp->value)
+			printf("=\"%s\"", temp->value);
+		printf("\n");
+	}
+
+}
+
 void	ft_alphabetic_env(t_env *env)
 {
 	int		i;
 	int		j;
-	int		lst_size;
 	t_env	*aux;
 	t_env	*temp;
 
 	i = 0;
 	j = 0;
-	lst_size = ft_envsize(env);
 	aux = env;
 	temp = aux;
-	while (j < lst_size - 1)
+	while (j < ft_envsize(env) - 1)
 	{
 		while (aux != NULL)
 		{
@@ -48,15 +58,9 @@ void	ft_alphabetic_env(t_env *env)
 				i++;
 			aux = aux->next;
 		}
-		if (i == lst_size - j - 2)
+		if (i == ft_envsize(env) - j - 2)
 		{
-			if (strncmp(temp->key, "_", 3) != 0)
-			{
-				printf("declare -x %s", temp->key);
-				if (temp->value)
-					printf("=\"%s\"", temp->value);
-				printf("\n");
-			}
+			ft_alphabetic_write(temp);
 			aux = env;
 			temp = env;
 			j++;
@@ -84,7 +88,9 @@ int	ft_env(t_env *env, char **names)
 	while (aux != NULL)
 	{
 		if (aux->value != NULL)
+		{
 			printf("%s=%s\n", aux->key, aux->value);
+		}
 	aux = aux->next;
 	i++;
 	}

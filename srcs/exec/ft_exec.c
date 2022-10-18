@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/13 18:18:22 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/18 22:42:37 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,9 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 		execcmd = (struct doexec *)cmd;
 		if (execcmd->names[0] == 0)
 			exit (1);
-		else if (!(ft_strcmp(execcmd->names[0], "env")))
-			ret = ft_env(env, execcmd->names);
-		else if (!(ft_strcmp(execcmd->names[0], "echo")))
-			ret = ft_echo(execcmd->names);
-		else if (!(ft_strcmp(execcmd->names[0], "export")))
-		{
-			ret = ft_export(execcmd->names, env);
-			free(env);
-		}
-		else if (!(ft_strcmp(execcmd->names[0], "exit")))
-			ft_exit(execcmd->names);
-		else if (!(ft_strcmp(execcmd->names[0], "unset")))
-			ret = ft_unset(execcmd->names, &env);
-		else if (!(ft_strcmp(execcmd->names[0], "cd")))
-			ret = ft_cd(env, execcmd->names);
-		else if (!(ft_strcmp(execcmd->names[0], "pwd")))
-			ret = ft_pwd(env);
-		else
-			ret = ft_execve(env, execcmd->names);
+		ret = ft_find_command(execcmd, env);
+		if (!(ft_strcmp(execcmd->names[0], "export")))
+        	free(env);
 	}
 	else if (cmd->type == REDIR)
 	{
@@ -87,6 +71,5 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 	}
 	else if (cmd->type == PIPE)
 		ft_runpipecmd(cmd, env);
-	// printf("ret in child: %d\n", ret);
 	exit (ret);
 }

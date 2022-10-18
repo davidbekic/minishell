@@ -50,7 +50,7 @@ int	ft_echo(char **names)
 	while (*(++names + n_flag))
 	{
 		printf("%s", *(names + n_flag));
-		if (*(names + 1 + n_flag) != NULL && ft_strlen(*(names + n_flag)))
+		if (*(names + 1 + n_flag) != NULL && strlen(*(names + n_flag)))
 			printf(" ");
 	}
 	if (!n_flag)

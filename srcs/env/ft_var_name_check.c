@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_var_name_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:57:51 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/13 18:31:55 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/18 22:43:14 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int	ft_var_name_check(char *str, int len)
 {
 	int		i;
-	char	buf[200];
+	char	buf[BUFFER_SIZE];
 
 	i = 0;
-	if (len < 1)   // not sure why this exists, maybe some NULL case?
+	if (len < 1)
 		return (1);
-	ft_memcpy(buf, str, len); // putting only var_NAME in buf
-	buf[len] = 0; // NULL-terminating manually, otherwise we would copy one char too much
+	ft_memcpy(buf, str, len);
+	buf[len] = 0;
 	while (str[i] != 0 && i < len)
 	{
 		if (str[i] >= '0' && str[i] <= '9' && i == 0)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
+#    By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/13 17:23:21 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/18 18:15:11 by davidbekic       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRC = srcs/main/main.c \
 	  srcs/env/ft_init_env.c    \
 	  srcs/env/ft_var_name_check.c    \
 	  srcs/exec/ft_run_builtin.c    \
+	  srcs/exec/ft_find_command.c    \
 	  srcs/exec/ft_execve.c    
 
 OBJ = $(SRC:%.c=$(OBJDIR)/%.o)
@@ -113,4 +114,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-

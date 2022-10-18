@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:22:00 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/07 12:30:13 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/14 13:34:48 by irifarac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../Libft/libft.h"
-
-
 
 /*static void	ft_case(char **tmp, char **estr, int *result)
 {
@@ -76,10 +74,12 @@ int	gettoken(char **pstr, char *estr, char **ftoken, char **eftoken)
 	int			result;
 
 	tmp = *pstr;
-//	printf("tmp %s\n", tmp);
-	if (*tmp == 34)
+	if (*tmp == 34 || *tmp == 39)
 	{
-		ft_quotes(pstr, estr, ftoken, eftoken);
+		if (*tmp == 34)
+			ft_quotes(pstr, estr, ftoken, eftoken);
+		else if (*tmp == 39)
+			ft_quotes_simple(pstr, estr, ftoken, eftoken);
 		result = 'z';
 		return (result);
 	}
@@ -94,7 +94,14 @@ int	gettoken(char **pstr, char *estr, char **ftoken, char **eftoken)
 	else if (*tmp == '|')
 		tmp = tmp + 1;
 	else if (*tmp == '<')
+	{
 		tmp = tmp + 1;
+		if (*tmp == '<')
+		{
+			result = '-';
+			tmp = tmp + 1;
+		}
+	}
 	else if (*tmp == '>')
 	{
 		tmp = tmp + 1;
@@ -108,9 +115,12 @@ int	gettoken(char **pstr, char *estr, char **ftoken, char **eftoken)
 	{
 		result = 'z';
 //		printf("tmp antes antes es #%s#\n", tmp);
-		while (tmp < estr && !ft_strchr("\t\r\n\v ", *tmp)
+		while (tmp < estr && !ft_strchr("\t\r\n\v\" ", *tmp)
 			&& !ft_strchr("<|>", *tmp))
+		{
+		//	printf("tmp es %c\n", *tmp);
 			tmp = tmp + 1;
+		}
 	}
 //	ft_case(&tmp, &estr, &result);
 	if (eftoken)

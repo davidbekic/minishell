@@ -12,6 +12,19 @@
 
 #include "../../includes/minishell.h"
 
+static void	increase_shlvl(t_env *env)
+{
+	char	shlvl[20];
+	int		shlvl_int;
+
+	shlvl_int = ft_atoi(ft_expand(env, "SHLVL")) + 1;
+	ft_bzero(shlvl, 20);
+	ft_memcpy(shlvl, "SHLVL=", 7);
+	ft_memcpy(shlvl + ft_strlen(shlvl),
+		ft_itoa(shlvl_int), ft_strlen(ft_itoa(shlvl_int)));
+	ft_update_var(shlvl, 6, env);
+}
+
 char	**ft_create_envp(t_env *env)
 {
 	t_env	*ptr;
@@ -30,26 +43,14 @@ char	**ft_create_envp(t_env *env)
 			return (NULL);
 		ft_memcpy(*env->envp, ptr->key, ft_strlen(ptr->key) + 1);
 		ft_memcpy(*env->envp + ft_strlen(ptr->key), "=", 2);
-		ft_memcpy(*env->envp + ft_strlen(ptr->key) + 1,
-			ptr->value, ft_strlen(ptr->value) + 1);
+		if (ptr->value)
+			ft_memcpy(*env->envp + ft_strlen(ptr->key) + 1,
+				ptr->value, ft_strlen(ptr->value) + 1);
 		env->envp++;
 		ptr = ptr->next;
 	}
 	*env->envp = NULL;
 	return (env->envp - (env->envp - head));
-}
-
-static void	increase_shlvl(t_env *env)
-{
-	char	shlvl[20];
-	int		shlvl_int;
-
-	shlvl_int = ft_atoi(ft_expand(env, "SHLVL")) + 1;
-	ft_bzero(shlvl, 20);
-	ft_memcpy(shlvl, "SHLVL=", 7);
-	ft_memcpy(shlvl + ft_strlen(shlvl),
-		ft_itoa(shlvl_int), ft_strlen(ft_itoa(shlvl_int)));
-	ft_update_var(shlvl, 6, env);
 }
 
 t_env	*ft_init_env(char **main_env)

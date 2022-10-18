@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/13 18:21:53 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/18 22:22:36 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	ft_getcmd(char **buf, t_env *env)
 		ft_memset(*buf, 0, ft_strlen(*buf) + 1);
 		return (1);
 	}
-		
 	if (ft_is_builtin(*buf))
 		return (ft_run_builtin(env, buf));
 	return (1);

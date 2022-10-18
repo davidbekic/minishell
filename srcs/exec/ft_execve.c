@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42barcelon>         +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:41:04 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/13 18:42:25 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/18 22:41:41 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	*ft_strchrnul(const char *s, int c)
 
 static int	ft_find_exec(t_env *env, char **names)
 {
-	char	tstr[126];
+	char	tstr[BUFFER_SIZE];
 	char	*path;
 	char	*pstr;
 	char	*cpath;
@@ -56,7 +56,7 @@ static int	ft_find_exec(t_env *env, char **names)
 			ft_memcpy(tstr + (pstr - cpath) + (pstr > cpath),
 				names[0], ft_strlen(names[0]));
 			execve(tstr, names, env->envp);
-			memset(tstr, 0, 126);
+			memset(tstr, 0, BUFFER_SIZE);
 			cpath = pstr + 1;
 			if (pstr[0] != ':')
 				return (1);

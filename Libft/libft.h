@@ -17,6 +17,8 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stddef.h>
+# include <stdarg.h>
+# include <limits.h>
 
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
@@ -71,5 +73,18 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+int		ft_printf(const char *str, ...);
+int		ft_specifier(va_list lst, int str);
+int		ft_putchar(char c);
+int		ft_putstr(char *str);
+int		ft_putunsigned(long long int n);
+int		ft_puthex(unsigned int n, int str);
+int		ft_putptr(unsigned long long ptr);
+char	*ft_print_itoa(long long n, int base);
+int		ft_len(long long n, int base);
+int		ft_tolower(int c);
+char	*ft_unsigned_itoa(unsigned long long n, int base);
+int		ft_unsigned_len(unsigned long long n, int base);
+
 
 #endif

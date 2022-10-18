@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt_parser.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:45:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/13 16:55:43 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/18 22:39:37 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static void    prompt_expander(char **buf, t_env *env)
         if (ft_is_exit(dump + i) && quote_type != '\'')
         {
             ft_memcpy(*(buf) + j, ft_itoa(g_exit), ft_strlen(ft_itoa(g_exit)));
-            j += ft_strlen(ft_itoa(g_exit));   
+            j += ft_strlen(ft_itoa(g_exit));
         }
         else if (ft_home_check(dump, (i)) && !quote_type)
         {
@@ -148,9 +148,15 @@ int ft_prompt_parser(char **buf, t_env *env)
     if (ft_syntax_checker(*buf))
         return (128);    
     if (ft_strlen(*buf) > 4096)
+    {
+        printf("too long prompt\n");
         return (1);
+    }
     prompt_expander(buf, env);
     if (ft_strlen(*buf) > 4096)
+    {
+        printf("too long prompt\n");
         return (1);
+    }
     return (0);
 }

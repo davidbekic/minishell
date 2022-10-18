@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/13 17:23:01 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/18 18:15:17 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define PIPE 3
 # define MAXARGS 10
 # define RWRR (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
+# define BUFFER_SIZE 4096
 //# define O_WRONLY 10
 //# define O_CREAT 11
 //# define O_RDONLY 12
@@ -83,6 +84,7 @@ struct cmd	*parseexec(char **pstr, char *estr);
 struct cmd	*terminate(struct cmd *cmd);
 struct cmd	*builtexec(char **pstr, char *estr);
 struct cmd	*builtparse(char *str);
+int			ft_quotes_simple(char **pstr, char *estr, char **ftoken, char **eftoken);
 void		ft_runcmd(struct cmd *cmd, t_env *env);
 int			ft_prompt_parser(char **buf, t_env *env);
 int			ft_setcmd(struct doexec **cmd, char *ftoken, char *eftoken, int sign);
@@ -120,6 +122,7 @@ int	ft_update_var(char *key_value, int value_start, t_env *env);
 // exec
 int	ft_run_builtin(t_env *env, char **buf);
 int	ft_execve(t_env *env, char **names);
+int ft_find_command(struct doexec *cmd, t_env *env);
 
 // signals
 void		ft_info_handler(int signo, siginfo_t *info, void *context);
@@ -136,6 +139,4 @@ int			ft_unset(char **names, t_env **env);
 int			ft_cd(t_env *env, char **names);
 void		ft_exit(char **names);
 
-
 #endif
-

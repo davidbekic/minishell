@@ -30,13 +30,9 @@ void	ft_free_envp(char **envp)
 
 void	ft_free_env(t_env *env, int err)
 {
-	int		i;
 	t_env	*aux;
-	t_env	*head;
 
-	i = 0;
 	aux = env;
-	head = env;
 	if (env->envp)
 		ft_free_envp(env->envp);
 	while (aux != NULL)

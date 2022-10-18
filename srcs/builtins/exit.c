@@ -17,12 +17,13 @@ void	ft_exit(char **names)
 	unsigned char	ret;
 
 	ret = 0;
+	printf("exit\n");
 	if (names[2])
 	{
 		printf("minishell: exit: too many arguments\n");
 		ret = 1;
 	}
-	else if (names[1])
+	else if (names[1]) // NEED TO CHECK IF NUMERIC OR NOT AS WELL
 		ret = (unsigned char) ft_atoi(names[1]);
 	exit (ret);
 }

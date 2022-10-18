@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:32:59 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/13 18:26:32 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/18 22:50:04 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ char	*ft_expand(t_env *env, char *key)
 {
 	int			i;
 	void		*ret;
-	char		temp_buf[4096];
+	char		temp_buf[BUFFER_SIZE];
 
 	i = 0;
 	ret = NULL;
-	ft_memcpy(temp_buf, key, strlen(key));
+	ft_bzero(temp_buf, BUFFER_SIZE);
+	ft_memcpy(temp_buf, key, ft_strlen(key));
 	temp_buf[ft_strlen(key)] = 0;
 	while (temp_buf[i] != 0)
 	{
