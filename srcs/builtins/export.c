@@ -6,14 +6,14 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 13:26:32 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 14:34:54 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 
-static int	ft_update_existing_var(char *key_value, int value_start, t_env *elem)
+static int	ft_update_ex_var(char *key_value, int value_start, t_env *elem)
 {
 	int	i;
 	int	j;
@@ -52,18 +52,18 @@ int	ft_update_var(char *key_value, int value_start, t_env *env)
 	ft_memcpy(key, key_value, value_start - 1);
 	key[ft_strlen(key)] = 0;
 	elem = ft_find_elem(env, key);
-	if (!elem) 
+	if (!elem)
 	{
 		while (ft_strcmp(env->next->key, "_") != 0)
 			env = env->next;
-		elem = ft_create_elem(elem, key_value, value_start);	
+		elem = ft_create_elem(elem, key_value, value_start);
 		aux = env->next;
 		env->next = elem;
 		elem->next = aux;
 	}
 	else
 	{
-		if (ft_update_existing_var(key_value, value_start, elem))
+		if (ft_update_ex_var(key_value, value_start, elem))
 			return (1);
 	}
 	return (0);
@@ -81,7 +81,7 @@ int	ft_export(char **names, t_env *env)
 		if (ft_strlen(*names) > BUFFER_SIZE)
 		{
 			ft_printf(2, "too long variable name or value\n");
-			return 1;
+			return (1);
 		}
 		ret = ft_var_name_check(*names, ft_find_value(*(names)) - 1);
 		if (ret)

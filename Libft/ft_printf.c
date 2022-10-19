@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 12:12:12 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 12:18:35 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 14:23:14 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,36 +22,9 @@ static int ft_putstring(int fd, char *str)
 		return (write(fd, "(null)", 6));
 	while (str[i] != 0)
 		i++;
-	write(fd, str, i);
+	if (write(fd, str, i) < 0)
+		return (-1);
 	return (i);
-}
-
-static int ft_put_number(int fd, int nb)
-{
-	int rem;
-	static int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	if (nb == INT_MIN)
-		return (write(fd, "-2147483648", 11));
-	if (nb < 0)
-	{
-		nb *= -1;
-		j++;
-		write(fd, "-", 1);
-	}
-	if (nb > 9)
-	{
-		rem = nb % 10;
-		ft_put_number(fd, nb/10);
-	}
-	rem = nb % 10;
-	rem += 48;
-	i++;
-	write (fd, &rem, 1);
-	return (i + j);
 }
 
 static int ft_argcheck(int fd, va_list arg, char c)
@@ -61,8 +34,6 @@ static int ft_argcheck(int fd, va_list arg, char c)
 	i = 0;
 	if (c == 's')
 		i = ft_putstring(fd, va_arg(arg, char *));
-	if (c == 'd')
-		i = ft_put_number(fd, va_arg(arg, int));
 	return (i);
 }
 
@@ -83,7 +54,8 @@ int ft_printf(int fd, const char *format, ...)
 			i += 2;
 			continue ;
 		}
-		write(fd, &format[i], 1);
+		if (write(fd, &format[i], 1) < 0)
+			return (-1);
 		i++;
 		j++;
 	}

@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:41:04 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 13:06:34 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 14:30:20 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,19 @@ int	ft_execve(t_env *env, char **names)
 	{
 		env->envp = ft_create_envp(env);
 		if (!env->envp)
-		{
-			ft_putstr_fd("malloc fail\n", 2);
-			return (1);
-		}
+			ft_error("malloc error", 1);
 	}
 	if (is_alias(names[0]) && ft_expand(env, "PATH"))
 	{
 		ret = ft_find_exec(env, names);
 		if (ret)
-			ft_putstr_fd("minishell: command not found\n", 2);
+			ft_printf(2, "minishell: %s: command not found\n", names[0]);
 	}
 	else
 	{
 		ret = execve(names[0], names, env->envp) * -1;
 		if (ret || !ft_expand(env, "PATH"))
-			ft_putstr_fd("minishell: No such file or directory\n", 2);
+			ft_printf(2, "minishell: %s: No such file or directory\n", names[0]);
 	}
 	return (ret);
 }

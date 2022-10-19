@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/19 13:49:27 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 14:32:56 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	ft_runpipecmd(struct cmd *cmd, t_env *env)
 {
-	struct dopipe	*pipecmd;
+	struct dopipe		*pipecmd;
 	int				file_d[2];
 
 	pipecmd = (struct dopipe *)cmd;
@@ -89,7 +89,6 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 		if (execcmd->names[0] == 0)
 			exit (1);
 		ret = ft_find_command(execcmd, env);
-		printf("exec %s failed\n", execcmd->names[0]);
 	}
 	else if (cmd->type == REDIR)
 		ft_runredir(cmd, env);
@@ -97,60 +96,3 @@ void	ft_runcmd(struct cmd *cmd, t_env *env)
 		ft_runpipecmd(cmd, env);
 	exit (ret);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// void	ft_runcmd(struct cmd *cmd, t_env *env)
-// {
-// 	struct doexec	*execcmd;
-// 	struct doredir	*redircmd;
-// 	int				ret;
-
-// 	ret = 0;
-// 	if (cmd == 0)
-// 		exit (1);
-// 	if (cmd->type == EXEC)
-// 	{
-// 		execcmd = (struct doexec *)cmd;
-// 		if (execcmd->names[0] == 0)
-// 			exit (1);
-// 		ret = ft_find_command(execcmd, env);
-// 		if (!(ft_strcmp(execcmd->names[0], "export")))
-//         	free(env);
-// 	}
-// 	else if (cmd->type == REDIR)
-// 	{
-// 		redircmd = (struct doredir *)cmd;
-// 		close(redircmd->fd);
-// 		if (open(redircmd->file, redircmd->right) < 0)
-// 			printf("redir %s failed\n", redircmd->file);
-// 		exit (1);
-// 	}
-// 	else if (cmd->type == PIPE)
-// 		ft_runpipecmd(cmd, env);
-// 	exit (ret);
-// }

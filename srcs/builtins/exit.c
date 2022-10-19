@@ -6,11 +6,25 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:21:35 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 12:24:24 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 15:09:09 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static int	ft_num_arg(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != 0)
+	{
+		if (!ft_isdigit(str[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 void	ft_exit(char **names)
 {
@@ -23,7 +37,16 @@ void	ft_exit(char **names)
 		ft_printf(2, "minishell: exit: too many arguments\n");
 		ret = 1;
 	}
-	else if (names[1]) // NEED TO CHECK IF NUMERIC OR NOT AS WELL
-		ret = (unsigned char) ft_atoi(names[1]);
+	else if (names[1])
+	{
+		if (ft_num_arg(names[1]))
+		{
+			ft_printf(2, "minishell: exit: %s: numeric argument required\n",
+				names[1]);
+			ret = -1;
+		}
+		else
+			ret = (unsigned char) ft_atoi(names[1]);
+	}
 	exit (ret);
 }
