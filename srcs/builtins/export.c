@@ -6,12 +6,11 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 14:34:54 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 16:16:56 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 static int	ft_update_ex_var(char *key_value, int value_start, t_env *elem)
 {
@@ -62,10 +61,7 @@ int	ft_update_var(char *key_value, int value_start, t_env *env)
 		elem->next = aux;
 	}
 	else
-	{
-		if (ft_update_ex_var(key_value, value_start, elem))
-			return (1);
-	}
+		return (ft_update_ex_var(key_value, value_start, elem));
 	return (0);
 }
 

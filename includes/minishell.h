@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 13:51:22 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 18:17:41 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <string.h>
@@ -93,6 +94,7 @@ int			ft_is_builtin(char *buf);
 void		ft_redir_exec(struct cmd *cmd);
 void	ft_simple_redir(struct cmd *cmd, char *array[2], char file[20], int operator);
 void	p_struct(struct cmd *cmd, struct cmd *srcmd[]);
+void	ft_prompt_expander(char **buf, t_env *env);
 
 //Building tree structs
 struct cmd	*buildexec(void);
@@ -121,12 +123,15 @@ void	ft_free_envp(char **envp);
 //void    ft_update_var(char *key, char *value, t_env *list);
 void	ft_alphabetic_env(t_env *env);
 int	ft_var_name_check(char *str, int len);
+int	ft_var_name_stop(char *str);
 int	ft_update_var(char *key_value, int value_start, t_env *env);
 
 // exec
-int	ft_run_builtin(t_env *env, char **buf);
-int	ft_execve(t_env *env, char **names);
-int ft_find_command(struct doexec *cmd, t_env *env);
+int		ft_run_builtin(t_env *env, char **buf);
+int		ft_execve(t_env *env, char **names);
+int 	ft_find_command(struct doexec *cmd, t_env *env);
+void	ft_word_to_lower(char *command);
+int 	ft_is_file_or_dir(char *str);
 
 // signals
 void		ft_info_handler(int signo, siginfo_t *info, void *context);

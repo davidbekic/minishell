@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/19 13:48:01 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/19 18:18:33 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC = srcs/main/main.c \
 	  srcs/parser/ft_builtin_parser.c \
 	  srcs/parser/ft_quotes.c \
 	  srcs/parser/ft_aux_redir.c \
+	  srcs/parser/ft_prompt_expander.c \
 	  srcs/main/ft_signals.c \
 	  srcs/builtins/echo.c    \
 	  srcs/builtins/env.c    \
@@ -62,6 +63,7 @@ SRC = srcs/main/main.c \
 	  srcs/env/ft_var_name_check.c    \
 	  srcs/exec/ft_run_builtin.c    \
 	  srcs/exec/ft_find_command.c    \
+	  srcs/exec/ft_is_file_or_dir.c    \
 	  srcs/exec/ft_execve.c    
 
 OBJ = $(SRC:%.c=$(OBJDIR)/%.o)

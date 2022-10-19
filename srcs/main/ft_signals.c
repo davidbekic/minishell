@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:30:38 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/19 10:47:26 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 17:11:47 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,9 @@ void	ft_info_handler(int signo, siginfo_t *info, void *context)
 	child = info->si_pid;
 	// if (info->si_status)
 	status = info->si_status;
-	g_exit = status;
-	printf("status: %d\n", info->si_status);
+	if (g_exit < 256)
+		g_exit = status;
+	// printf("status: %d\n", info->si_status);
 	// printf("signo: %d AND SIGCHLD: %d\n", signo, SIGCHLD);
 	if (signo == SIGCHLD)
 	{

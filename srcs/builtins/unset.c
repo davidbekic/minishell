@@ -6,11 +6,18 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:22:21 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/13 18:40:19 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 16:25:16 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static void	ft_free_elem(t_env *to_delete)
+{
+	free(to_delete->key);
+	free(to_delete->value);
+	free(to_delete);
+}
 
 int	ft_unset(char **names, t_env **env)
 {
@@ -24,7 +31,8 @@ int	ft_unset(char **names, t_env **env)
 		if (ft_var_name_check(*names, ft_strlen(*names)))
 		{
 			ret = 1;
-			printf("minishell: unset: `%s' not a valid identifier\n", *names);
+			ft_printf(2, "minishell: unset: `%s' not a valid identifier\n",
+				*names);
 			continue ;
 		}
 		to_delete = ft_find_elem(*env, *names);
@@ -35,9 +43,7 @@ int	ft_unset(char **names, t_env **env)
 			*env = to_delete->next;
 		else
 			to_redirect->next = to_delete->next;
-		free(to_delete->key);
-		free(to_delete->value);
-		free(to_delete);
 	}
+	ft_free_elem(to_delete);
 	return (ret);
 }

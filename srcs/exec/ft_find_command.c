@@ -6,13 +6,13 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 18:08:29 by davidbekic        #+#    #+#             */
-/*   Updated: 2022/10/19 14:32:01 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 17:10:01 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	ft_command_to_lower(char *command)
+void	ft_word_to_lower(char *command)
 {
 	while (*command++)
 		*(command - 1) = ft_tolower(*(command - 1));
@@ -23,7 +23,7 @@ int	ft_find_command(struct doexec *execcmd, t_env *env)
 	int	ret;
 
 	ret = 0;
-	ft_command_to_lower(execcmd->names[0]);
+	ft_word_to_lower(execcmd->names[0]);
 	if (!(ft_strcmp(execcmd->names[0], "env")))
 		ret = ft_env(env, execcmd->names);
 	else if (!(ft_strcmp(execcmd->names[0], "echo")))

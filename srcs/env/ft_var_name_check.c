@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_var_name_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:57:51 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/18 22:43:14 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/19 16:31:05 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	ft_var_name_stop(char *str)
+{
+	int		i;
+	char	buf[4096];
+
+	i = 0;
+	ft_memcpy(buf, str, ft_strlen(str) + 1);
+	while (str[i] != 0)
+	{
+		if (!(str[i] >= 'a' && str[i] <= 'z')
+			&& !(str[i] >= 'A' && str[i] <= 'Z')
+			&& str[i] != '_' && !i && str[i] != '$')
+			return (1);
+		if (!(str[i] >= 'a' && str[i] <= 'z')
+			&& !(str[i] >= 'A' && str[i] <= 'Z')
+			&& str[i] != '_' && !(str[i] >= '0' && str[i] <= '9'))
+			return (i);
+		i++;
+	}
+	return (i);
+}
 
 int	ft_var_name_check(char *str, int len)
 {

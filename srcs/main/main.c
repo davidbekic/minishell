@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/19 14:09:07 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 16:44:40 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ int g_exit;
 static int	ft_getcmd(char **buf, t_env *env)
 {
 	char	*rl_copy;
-	
+	int		ret;
+
 	rl_copy = readline("🐚 ");
 	ft_memset(*buf, 0, ft_strlen(*buf) + 1);
 	ft_memcpy(*buf, rl_copy, ft_strlen(rl_copy) + 1);
 	if (*buf && **buf)
 		add_history(rl_copy);
-	g_exit = ft_prompt_parser(buf, env);
-	if (g_exit)
+	ret = ft_prompt_parser(buf, env);
+	if (ret)
 	{
 		ft_memset(*buf, 0, ft_strlen(*buf) + 1);
 		return (1);
