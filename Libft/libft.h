@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 12:30:04 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/19 18:12:58 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 18:40:05 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ int		ft_printf(int fd, const char *format, ...);
 char	*ft_unsigned_itoa(unsigned long long n, int base);
 int		ft_unsigned_len(unsigned long long n, int base);
 char	*ft_strchrnul(const char *s, int c);
-void    ft_init_zero(int *i, int *j);
+void	ft_init_zero(int *i, int *j);
 
 #endif

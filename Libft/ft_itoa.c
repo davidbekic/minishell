@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 15:31:16 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/19 13:07:26 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 18:40:58 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 char	*ft_itoa(int n)
 {
-	static int i;
-	static char str[4096];
+	static int	i;
+	static char	str[4096];
 
 	ft_bzero(str, 4096);
 	i = 0;

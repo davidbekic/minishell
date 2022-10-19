@@ -6,14 +6,14 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/19 16:44:40 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 18:41:28 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../Libft/libft.h"
 
-int g_exit;
+int	g_exit;
 
 static int	ft_getcmd(char **buf, t_env *env)
 {
@@ -40,7 +40,7 @@ int	main(int ac, char **av, char **main_env)
 {
 	static char		*buf;
 	t_env			*env;
- 
+
 	if ((ac > 1 && av[0][0] == '&') || !*main_env)
 		exit(1);
 	env = ft_init_env(main_env);

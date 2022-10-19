@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:16:58 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 18:17:36 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 18:44:00 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,46 +29,54 @@ static int	ft_is_exit(char *str)
 		return (0);
 }
 
+void	ft_quote_exit_home(char *dump, char **buf, int *i, t_env *env)
+{
+	unsigned char	quote_type;
+
+	quote_type = 0;
+	if ((dump[i[0]] == '\"' || dump[i[0]] == '\'')
+		&& (dump[i[0]] != quote_type) && !quote_type)
+		quote_type = dump[i[0]];
+	else if (dump[i[0]] == quote_type)
+		quote_type = 0;
+	if (ft_is_exit(dump + i[0]) && quote_type != '\'')
+	{
+		ft_memcpy(*(buf) + i[1], ft_itoa(g_exit), ft_strlen(ft_itoa(g_exit)));
+		i[1] += ft_strlen(ft_itoa(g_exit));
+	}
+	else if (ft_home_check(dump, (i[0])) && !quote_type)
+	{
+		ft_memcpy(*(buf) + i[1], ft_expand(env, "HOME"),
+			ft_strlen(ft_expand(env, "HOME")) + 1);
+		i[0] += 1;
+		i[1] += ft_strlen(ft_expand(env, "HOME"));
+	}
+}
+
 void	ft_prompt_expander(char **buf, t_env *env)
 {
-	int				i;
-	int				j;
+	int				i[3];
 	char			dump[4096];
-	unsigned char		quote_type;
 
-	i = 0;
-	j = 0;
-	quote_type = 0;
+	ft_memset(i, 0, 12);
 	bzero(dump, 4096);
 	ft_memcpy(dump, *buf, ft_strlen(*buf));
-	while (*(dump + i) && j < 4096)
+	while (*(dump + i[0]) && i[1] < 4096)
 	{
-		if ((dump[i] == '\"' || dump[i] == '\'') && (dump[i] != quote_type) && !quote_type)
-			quote_type = dump[i];
-		else if (dump[i] == quote_type)
-			quote_type = 0;
-		if (ft_is_exit(dump + i) && quote_type != '\'')
+		ft_quote_exit_home(dump, buf, i, env);
+		if (dump[i[0]] == '$' && i[2] != '\'')
 		{
-			ft_memcpy(*(buf) + j, ft_itoa(g_exit), ft_strlen(ft_itoa(g_exit)));
-			j += ft_strlen(ft_itoa(g_exit));
-		}
-		else if (ft_home_check(dump, (i)) && !quote_type)
-		{
-			ft_memcpy(*(buf) + j, ft_expand(env, "HOME"), ft_strlen(ft_expand(env, "HOME")) + 1);
-			i++;
-			j += ft_strlen(ft_expand(env, "HOME"));
-		}
-		if (dump[i] == '$' && quote_type != '\'')
-		{
-			if (ft_expand(env, dump + i + 1) != NULL)
-				ft_memcpy(*(buf) + j, ft_expand(env, dump + i + 1), ft_strlen(ft_expand(env, dump + i + 1)) + 1);
-			if (!ft_var_name_stop(dump + i + 1) && dump[i] != '~')
-			ft_memcpy(*buf + (++j - 1), dump + (i), 1);
-			j += ft_strlen(ft_expand(env, dump + i + 1));
-			i += ft_var_name_stop(dump + i + 1) + 1;
+			if (ft_expand(env, dump + i[0] + 1) != NULL)
+				ft_memcpy(*(buf) + i[1],
+					ft_expand(env, dump + i[0] + 1),
+					ft_strlen(ft_expand(env, dump + i[0] + 1)) + 1);
+			if (!ft_var_name_stop(dump + i[0] + 1) && dump[i[0]] != '~')
+				ft_memcpy(*buf + (++i[1] - 1), dump + (i[0]), 1);
+			i[1] += ft_strlen(ft_expand(env, dump + i[0] + 1));
+			i[0] += ft_var_name_stop(dump + i[0] + 1) + 1;
 			continue ;
 		}
-		ft_memcpy(*buf + (++j - 1), dump + (++i - 1), 1);
+		ft_memcpy(*buf + (++i[1] - 1), dump + (++i[0] - 1), 1);
 	}
-	buf[0][j] = 0;
+	buf[0][i[1]] = 0;
 }

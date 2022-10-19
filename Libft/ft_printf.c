@@ -6,14 +6,14 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 12:12:12 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 14:23:14 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 18:39:29 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "libft.h"
 
-static int ft_putstring(int fd, char *str)
+static int	ft_putstring(int fd, char *str)
 {
 	int	i;
 
@@ -27,7 +27,7 @@ static int ft_putstring(int fd, char *str)
 	return (i);
 }
 
-static int ft_argcheck(int fd, va_list arg, char c)
+static int	ft_argcheck(int fd, va_list arg, char c)
 {
 	int	i;
 
@@ -37,11 +37,11 @@ static int ft_argcheck(int fd, va_list arg, char c)
 	return (i);
 }
 
-int ft_printf(int fd, const char *format, ...)
+int	ft_printf(int fd, const char *format, ...)
 {
-	int	i;
-	int	j;
-	va_list arg;
+	int		i;
+	int		j;
+	va_list	arg;
 
 	i = 0;
 	j = 0;
