@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 11:58:05 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/13 18:34:38 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 13:28:38 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,18 @@ int	ft_echo(char **names)
 	n_flag = ft_check_n_flag(names);
 	while (*(++names + n_flag))
 	{
-		printf("%s", *(names + n_flag));
+		if (ft_printf(1, "%s", *(names + n_flag)) < 0)
+			return (1);
 		if (*(names + 1 + n_flag) != NULL && strlen(*(names + n_flag)))
-			printf(" ");
+		{
+			if (ft_printf(1, " ") < 0)
+				return (1);
+		}
 	}
 	if (!n_flag)
-		printf("\n");
+	{
+		if (ft_printf(1, "\n") < 0)
+			return (1);
+	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 18:08:29 by davidbekic        #+#    #+#             */
-/*   Updated: 2022/10/18 22:34:29 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/19 13:46:49 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int ft_find_command(struct doexec *execcmd, t_env *env)
     else if (!(ft_strcmp(execcmd->names[0], "export")))
         ret = ft_export(execcmd->names, env);
     else if (!(ft_strcmp(execcmd->names[0], "exit")))
+    {
+        ft_free_env(env, 0);
         ft_exit(execcmd->names);
+    }
     else if (!(ft_strcmp(execcmd->names[0], "unset")))
         ret = ft_unset(execcmd->names, &env);
     else if (!(ft_strcmp(execcmd->names[0], "cd")))

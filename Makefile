@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+         #
+#    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/18 18:15:11 by davidbekic       ###   ########.fr        #
+#    Updated: 2022/10/19 13:48:01 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ UNAME_S := $(shell uname -s)
 NAME = minishell
 CFLAGS = -Wall -Werror -Wextra -MMD
 
-LDFLAGS = /opt/homebrew/opt/readline/lib
-RFLAGS = /opt/homebrew/opt/readline/include
-#LDFLAGS = /Users/${USER}/homebrew/opt/readline/lib
-#RFLAGS = /Users/${USER}/homebrew/opt/readline/include
+# LDFLAGS = /opt/homebrew/opt/readline/lib
+# RFLAGS = /opt/homebrew/opt/readline/include
+LDFLAGS = /Users/${USER}/homebrew/opt/readline/lib
+RFLAGS = /Users/${USER}/homebrew/opt/readline/include
 
 
 
@@ -41,8 +41,10 @@ SRC = srcs/main/main.c \
 	  srcs/parser/ft_termination.c \
 	  srcs/exec/ft_exec.c    \
 	  srcs/parser/ft_prompt_parser.c \
+	  srcs/parser/ft_heredoc.c \
 	  srcs/parser/ft_builtin_parser.c \
 	  srcs/parser/ft_quotes.c \
+	  srcs/parser/ft_aux_redir.c \
 	  srcs/main/ft_signals.c \
 	  srcs/builtins/echo.c    \
 	  srcs/builtins/env.c    \

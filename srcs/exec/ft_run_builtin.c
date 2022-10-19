@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_run_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:15:16 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/18 22:33:14 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/19 13:31:54 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_run_builtin(t_env *env, char **buf)
 	if (!builtin_cmd)
 		ft_free_env(env, 1);
 	builtin_doexec = (doexec *) builtin_cmd;
-	ft_find_command(builtin_doexec, env);
+	g_exit = ft_find_command(builtin_doexec, env, buf);
 	free(builtin_doexec);
 	return (0);
 }

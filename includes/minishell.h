@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/18 18:15:17 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/19 13:51:22 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@
 # define PIPE 3
 # define MAXARGS 10
 # define RWRR (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
+# define WCA O_WRONLY | O_CREAT | O_APPEND
+# define RDCE O_RDWR | O_CREAT | O_EXCL
 # define BUFFER_SIZE 4096
-//# define O_WRONLY 10
-//# define O_CREAT 11
-//# define O_RDONLY 12
+
 
 extern int g_exit;
 
@@ -90,6 +90,9 @@ int			ft_prompt_parser(char **buf, t_env *env);
 int			ft_setcmd(struct doexec **cmd, char *ftoken, char *eftoken, int sign);
 int			ft_quotes(char **pstr, char *estr, char **ftoken, char **eftoken);
 int			ft_is_builtin(char *buf);
+void		ft_redir_exec(struct cmd *cmd);
+void	ft_simple_redir(struct cmd *cmd, char *array[2], char file[20], int operator);
+void	p_struct(struct cmd *cmd, struct cmd *srcmd[]);
 
 //Building tree structs
 struct cmd	*buildexec(void);
@@ -100,6 +103,7 @@ void		ft_error(char *str, int exit_code);
 int			fork1(void);
 int			ft_find(char **pstr, char *estr, char *tokens);
 int			gettoken(char **pstr, char *estr, char **ftoken, char **eftoken);
+void		ft_heredoc(struct cmd *cmd, t_env *env);
 
 //Env
 t_env   *ft_init_env(char **main_env);

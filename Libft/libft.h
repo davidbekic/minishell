@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 12:30:04 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/13 14:12:22 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 12:19:44 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-int		ft_printf(const char *str, ...);
 int		ft_specifier(va_list lst, int str);
 int		ft_putchar(char c);
 int		ft_putstr(char *str);
@@ -83,8 +82,9 @@ int		ft_putptr(unsigned long long ptr);
 char	*ft_print_itoa(long long n, int base);
 int		ft_len(long long n, int base);
 int		ft_tolower(int c);
+int		ft_printf(int fd, const char *format, ...);
 char	*ft_unsigned_itoa(unsigned long long n, int base);
 int		ft_unsigned_len(unsigned long long n, int base);
-
+char	*ft_strchrnul(const char *s, int c);
 
 #endif

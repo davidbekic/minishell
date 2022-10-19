@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:09:19 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/13 13:46:42 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/19 12:30:18 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	ft_pwd(t_env *env)
 {
-	printf("%s\n", ft_expand(env, "PWD"));
+	if (ft_printf(2, "%s\n", ft_expand(env, "PWD") < 0))
+		return (1);
 	return (0);
 }

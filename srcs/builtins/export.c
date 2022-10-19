@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/18 22:59:18 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/19 13:26:32 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	ft_export(char **names, t_env *env)
 	{
 		if (ft_strlen(*names) > BUFFER_SIZE)
 		{
-			printf("too long variable name or value\n");
+			ft_printf(2, "too long variable name or value\n");
 			return 1;
 		}
 		ret = ft_var_name_check(*names, ft_find_value(*(names)) - 1);
@@ -90,7 +90,7 @@ int	ft_export(char **names, t_env *env)
 			printf("minishell: export: `%s': not a valid identifier\n", *names);
 		}
 		else if (!ret)
-			ft_update_var(*names, ft_find_value(*names), env);
+			ret = ft_update_var(*names, ft_find_value(*names), env);
 	}
 	return (ret);
 }

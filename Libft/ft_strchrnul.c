@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_string.c                                 :+:      :+:    :+:   */
+/*   ft_strchrnul.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irifarac <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/03 10:04:24 by irifarac          #+#    #+#             */
-/*   Updated: 2022/03/05 14:15:41 by irifarac         ###   ########.fr       */
+/*   Created: 2022/10/19 11:51:35 by dbekic            #+#    #+#             */
+/*   Updated: 2022/10/19 12:19:39 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_putchar(char c)
+char	*ft_strchrnul(const char *s, int c)
 {
-	return (write(1, &c, 1));
-}
-
-int	ft_putstr(char *str)
-{
-	if (str == NULL)
-		return (write(1, "(null)", 6));
-	return (write(1, str, ft_strlen(str)));
+	while (*s)
+	{
+		if (c == *s)
+			break ;
+		s++;
+	}
+	return ((char *)s);
 }
