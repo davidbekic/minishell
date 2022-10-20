@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:41:04 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 17:38:48 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/20 14:52:10 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	ft_find_exec(t_env *env, char **names)
 			ft_memset(tstr, 0, BUFFER_SIZE);
 			cpath = pstr + 1;
 			if (pstr[0] != ':')
-				return (1);
+				return (127);
 		}
 	}
 	return (0);

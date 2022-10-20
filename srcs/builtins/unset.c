@@ -6,7 +6,7 @@
 /*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:22:21 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 20:11:43 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/20 13:09:07 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	ft_unset(char **names, t_env **env)
 	t_env			*to_redirect;
 
 	ret = 0;
-	if (!names[1])
-		return (ret);
 	while (*(names++ + 1) != NULL)
 	{
 		if (ft_var_name_check(*names, ft_strlen(*names)))

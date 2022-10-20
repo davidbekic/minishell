@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:09:19 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 12:30:18 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/20 15:20:22 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	ft_pwd(t_env *env)
 {
-	if (ft_printf(2, "%s\n", ft_expand(env, "PWD") < 0))
-		return (1);
+	ft_printf(2, "%s\n", ft_expand(env, "PWD"));
 	return (0);
 }

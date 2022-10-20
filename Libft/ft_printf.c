@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 12:12:12 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 18:39:29 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/20 14:21:17 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ int	ft_printf(int fd, const char *format, ...)
 		i++;
 		j++;
 	}
+	va_end(arg);
 	return (j);
 }

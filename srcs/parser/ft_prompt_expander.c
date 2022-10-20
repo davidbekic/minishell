@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt_expander.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:16:58 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 18:44:00 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/20 14:05:38 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern int	g_exit;
 
 static int	ft_home_check(char *str, int pos)
 {
@@ -31,20 +33,17 @@ static int	ft_is_exit(char *str)
 
 void	ft_quote_exit_home(char *dump, char **buf, int *i, t_env *env)
 {
-	unsigned char	quote_type;
-
-	quote_type = 0;
 	if ((dump[i[0]] == '\"' || dump[i[0]] == '\'')
-		&& (dump[i[0]] != quote_type) && !quote_type)
-		quote_type = dump[i[0]];
-	else if (dump[i[0]] == quote_type)
-		quote_type = 0;
-	if (ft_is_exit(dump + i[0]) && quote_type != '\'')
+		&& (dump[i[0]] != i[2]) && !i[2])
+		i[2] = dump[i[0]];
+	else if (dump[i[0]] == i[2])
+		i[2] = 0;
+	if (ft_is_exit(dump + i[0]) && i[2] != '\'')
 	{
 		ft_memcpy(*(buf) + i[1], ft_itoa(g_exit), ft_strlen(ft_itoa(g_exit)));
 		i[1] += ft_strlen(ft_itoa(g_exit));
 	}
-	else if (ft_home_check(dump, (i[0])) && !quote_type)
+	else if (ft_home_check(dump, (i[0])) && !i[2])
 	{
 		ft_memcpy(*(buf) + i[1], ft_expand(env, "HOME"),
 			ft_strlen(ft_expand(env, "HOME")) + 1);

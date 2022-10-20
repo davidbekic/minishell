@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 18:17:41 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/20 18:27:22 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdio.h>
-#include <sys/signal.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <string.h>
-#include <fcntl.h>
-#include "../Libft/libft.h"
+# include <stdio.h>
+# include <sys/signal.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <string.h>
+# include <fcntl.h>
+# include "../Libft/libft.h"
 
 # define EXEC 1
 # define REDIR 2
@@ -35,31 +35,28 @@
 # define RDCE O_RDWR | O_CREAT | O_EXCL
 # define BUFFER_SIZE 4096
 
-
-extern int g_exit;
-
-typedef struct s_env
+typedef	struct s_env
 {
-  char          *key;
-  char          *value;
-  char			**envp;
-  int			lst_len;
-  struct s_env  *next;
+  char            *key;
+  char            *value;
+  char            **envp;
+  int             lst_len;
+  struct s_env    *next;
 }     t_env;
 
-typedef struct cmd
+typedef	struct cmd
 {
-	int	type;
+	int type;
 }	cmd;
 
-typedef struct doexec
+typedef	struct doexec
 {
-	int		type;
+	int		  type;
 	char	*names[10];
 	char	*end_names[10];
 }	doexec;
 
-typedef struct doredir
+typedef	struct  doredir
 {
 	int			type;
 	struct cmd	*cmd;
@@ -69,7 +66,7 @@ typedef struct doredir
 	int			fd;
 }	doredir;
 
-typedef struct dopipe
+typedef	struct dopipe
 {
 	int			type;
 	struct cmd	*left;
@@ -132,6 +129,7 @@ int		ft_execve(t_env *env, char **names);
 int 	ft_find_command(struct doexec *cmd, t_env *env);
 void	ft_word_to_lower(char *command);
 int 	ft_is_file_or_dir(char *str);
+int		ft_is_file(const char *path);
 
 // signals
 void		ft_info_handler(int signo, siginfo_t *info, void *context);

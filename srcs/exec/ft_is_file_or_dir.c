@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_file_or_dir.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:24:20 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 17:41:27 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/20 15:21:11 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	ft_is_file(const char *path)
+int	ft_is_file(const char *path)
 {
 	struct stat	path_stat;
 
@@ -31,6 +31,8 @@ static int	ft_is_directory(const char *path)
 
 int	ft_is_file_or_dir(char *str)
 {
+	if (!str)
+		return (0);
 	if (!ft_is_directory(str) && !ft_is_file(str))
 	{
 		ft_printf(2, "minishell: %s: No such file or directory\n", str);

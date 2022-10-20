@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:39:37 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 18:15:05 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/20 15:03:54 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,18 @@ int	ft_env(t_env *env, char **names)
 	int		i;
 	t_env	*aux;
 
+	i = 0;
+	i = ft_is_file_or_dir(names[1]);
+	if (i)
+		return (i);
 	if (*(names + 1))
-	{
-		ft_printf(2, "env: %s: no such file or directory\n", *(names + 1));
-		return (127);
-	}
+		return (126);
 	i = 0;
 	aux = env;
 	while (aux != NULL)
 	{
 		if (aux->value != NULL)
-			ft_printf(1, "%s=%s\n", aux->key, aux->value);
+			printf("%s=%s\n", aux->key, aux->value);
 	aux = aux->next;
 	i++;
 	}

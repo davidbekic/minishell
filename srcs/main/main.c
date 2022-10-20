@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/19 18:41:28 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/20 14:14:43 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,21 @@
 #include "../../Libft/libft.h"
 
 int	g_exit;
+
+static int	ft_is_isspace(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[++i] != 0)
+	{
+		if (!((str[i]) == '\t' || (str[i]) == '\v'
+				|| (str[i]) == '\r' || (str[i]) == '\n'
+				|| (str[i]) == '\f' || (str[i]) == 32))
+					return (0);
+	}
+	return (1);
+}
 
 static int	ft_getcmd(char **buf, t_env *env)
 {
@@ -51,7 +66,7 @@ int	main(int ac, char **av, char **main_env)
 	ft_signals();
 	while (ft_getcmd(&buf, env) >= 0)
 	{	
-		if (ft_is_builtin(buf))
+		if (ft_is_builtin(buf) || ft_is_isspace(buf))
 			continue ;
 		if (fork() == 0)
 			ft_runcmd(parsecmd(buf), env);

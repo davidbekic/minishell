@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 16:16:56 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/20 18:57:53 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,18 @@ static int	ft_update_ex_var(char *key_value, int value_start, t_env *elem)
 
 	i = 0;
 	j = 0;
+	free(elem->value);
+	elem->value = malloc((ft_strlen(key_value) - value_start) + 1);
 	if (!elem->value)
-	{
-		elem->value = malloc((ft_strlen(key_value) - value_start) + 1);
-		if (!elem->value)
-			return (1);
-	}
-	while (key_value[value_start + i] != 0)
+		return (1);
+	while (key_value[value_start + j] != 0)
 	{
 		i++;
 		if (key_value[value_start + i - 1] != '\''
 			&& key_value[value_start + i - 1] != '\"' )
 			elem->value[++j - 1] = key_value[value_start + i - 1];
 	}
-	elem->value[i] = 0;
+	elem->value[j] = 0;
 	return (0);
 }
 

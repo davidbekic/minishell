@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_run_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:15:16 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 16:29:05 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/20 13:31:27 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern int	g_exit;
 
 int	ft_run_builtin(t_env *env, char **buf)
 {

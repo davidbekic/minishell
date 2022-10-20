@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:21:35 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 15:57:33 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/20 14:36:20 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ static int	ft_num_arg(char *str)
 {
 	int	i;
 
-	i = 0;
-	while (str[i] != 0)
+	i = -1;
+	while (str[++i] != 0)
 	{
+		if (i == 0 && (str[i] == '-' || str[i] == '+'))
+			continue;
 		if (!ft_isdigit(str[i]))
 			return (1);
-		i++;
 	}
 	return (0);
 }
@@ -39,7 +40,7 @@ void	ft_exit(char **names)
 	}
 	else if (names[1])
 	{
-		if (ft_num_arg(names[1]))
+		if (ft_num_arg(names[1]) || (!ft_atoi(names[1]) && ft_strlen(names[1]) > 5))
 		{
 			ft_printf(2, "minishell: exit: %s: numeric argument required\n",
 				names[1]);

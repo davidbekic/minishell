@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_termination.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 12:17:51 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/07 15:46:20 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/20 14:11:36 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	ft_setcmd(struct doexec **cmd, char *ftoken, char *eftoken, int sign)
 	(*cmd)->end_names[i] = eftoken;
 	i++;
 	if (i >= MAXARGS)
-		ft_error("too many arguments", 1);
+		ft_error("too many arguments\n", 1);
 	return (i);
 }

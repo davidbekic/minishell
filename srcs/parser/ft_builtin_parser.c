@@ -3,26 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtin_parser.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:34:06 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/19 13:03:21 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/20 14:12:43 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+static int	ft_find_marker(char *str)
+{
+	int	marker;
+
+	marker = 0;
+	while (str[marker] != 0)
+	{
+		if (str[marker] == 32 || str[marker] == 0)
+			break ;
+		marker++;
+	}
+	return (marker);
+}
 
 int	ft_is_builtin(char *buf)
 {
-	int	marker;
-	int	i;
-	char	*head;
-	char	comparison_str[4096];
-	static char	*built_ins[400] = {"echo", "export", "unset", "pwd", "cd", "exit", "env"};
-	
+	int			marker;
+	int			i;
+	char		*head;
+	char		comparison_str[4096];
+	static char	*built_ins[400] = {"echo", "export",
+		"unset", "pwd", "cd", "exit", "env"};
+
 	ft_bzero(comparison_str, 4096);
-	marker = 0;
 	i = -1;
 	head = buf;
 	while ((*buf))
@@ -32,14 +45,7 @@ int	ft_is_builtin(char *buf)
 		buf++;
 	}
 	buf = head;
-	while ((*buf))
-	{
-		if (*buf == 32 || *buf == 0)
-			break ;
-		buf++;
-		marker++;
-	}
-	buf = head;
+	marker = ft_find_marker(buf);
 	while (built_ins[++i])
 	{
 		if (!(ft_strcmp(ft_memcpy(comparison_str, buf, marker), built_ins[i])))
