@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:30:38 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/19 17:11:47 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/21 22:01:25 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,9 @@ void	ft_termios(void)
 		ft_error("this fd is not a tty", 130);
 	if (tcgetattr(STDIN_FILENO, &term) < 0)
 		ft_error("get attributes error", 130);
-	//turn off echo octal
 	term.c_lflag &= ~(ECHOCTL);
-	//TCSADRAIN the change occurs after all ouput has been transmitted
 	if (tcsetattr(STDIN_FILENO, TCSADRAIN, &term) < 0)
 		ft_error("set attributes error", 130);
-	//Check if the changes were set properly
 	if (term.c_lflag & (ECHOCTL))
 		ft_error("attributes wrongly set", 130);
 }
@@ -48,6 +45,7 @@ void	ft_signals(void)
 		ft_error("sigaction error", 130);
 	if (sigaction(SIGINT, &act, &oact) < 0)
 		ft_error("sigaction error", 130);
+	signal(SIGSEGV, ft_ssh);
 }
 
 void	ft_handler(int signo)
@@ -80,6 +78,7 @@ void	ft_info_handler(int signo, siginfo_t *info, void *context)
 		//	ft_error("ioctl erro", 130);
 		//printf("state %lu\n", rl_readline_state);
 		//write(2, "\n", 1);
+		g_exit = 1;
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);

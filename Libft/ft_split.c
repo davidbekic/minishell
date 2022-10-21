@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irifarac <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:24:32 by irifarac          #+#    #+#             */
-/*   Updated: 2022/02/26 14:22:08 by irifarac         ###   ########.fr       */
+/*   Updated: 2022/10/21 11:45:42 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_counter(char const *s, char c)
+size_t	ft_counter(char const *s, char c)
 {
 	unsigned int	counter;
 	char			*buffer;

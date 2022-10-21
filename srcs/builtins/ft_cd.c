@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 17:09:38 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/20 23:38:36 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/21 21:43:29 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int	ft_cd(t_env *env, char **names)
 	ft_memcpy(old_pwd + 7, getcwd(s, BUFFER_SIZE),
 		ft_strlen(getcwd(s, BUFFER_SIZE)) + 1);
 	if ((!(ft_strncmp(*(names + 1), "--", ft_strlen(*(names + 1))))))
+	{
 		ret = chdir((ft_expand(env, "OLDPWD")));
+		printf("%s\n", getcwd(s, BUFFER_SIZE));
+	}
 	else if (!(*(names + 1)))
 		ret = chdir(ft_expand(env, "HOME"));
 	else

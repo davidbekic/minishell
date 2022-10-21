@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 12:41:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/21 22:01:33 by dbekic           ###   ########.fr       */
+/*   Created: 2022/10/21 20:53:31 by dbekic            #+#    #+#             */
+/*   Updated: 2022/10/21 21:09:44 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
-void	ft_ssh(int signal)
+void	ft_error(char *str, int exit_code)
 {
-	signal = 1;
-	printf("ooops\n");
-	exit(signal);
-}
-
-int	ft_isdigit(int c)
-{
-	if ((c >= 48) && (c <= 57))
-	{
-		return (1);
-	}
-	else
-		return (0);
+	write(2, str, ft_strlen(str) + 1);
+	exit((unsigned char)exit_code);
 }

@@ -3,25 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/20 13:33:16 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/21 21:46:57 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../Libft/libft.h"
 
-static void	ft_runpipecmd(struct cmd *cmd, t_env *env)
+static void	ft_close(int file_d[2])
 {
-	struct dopipe		*pipecmd;
-	int				file_d[2];
+	close(file_d[0]);
+	close(file_d[1]);
+}
 
-	pipecmd = (struct dopipe *)cmd;
+static void	ft_runpipecmd(t_cmd *cmd, t_env *env)
+{
+	t_dopipe	*pipecmd;
+	int			file_d[2];
+
+	pipecmd = (t_dopipe *)cmd;
 	if (pipe(file_d) < 0)
 		ft_error("pipe error", 1);
-	if (fork1() == 0)
+	if (ft_fork1() == 0)
 	{
 		close(1);
 		dup(file_d[1]);
@@ -29,7 +35,7 @@ static void	ft_runpipecmd(struct cmd *cmd, t_env *env)
 		close(file_d[1]);
 		ft_runcmd(pipecmd->left, env);
 	}
-	if (fork1() == 0)
+	if (ft_fork1() == 0)
 	{
 		close(0);
 		dup(file_d[0]);
@@ -37,30 +43,26 @@ static void	ft_runpipecmd(struct cmd *cmd, t_env *env)
 		close(file_d[1]);
 		ft_runcmd(pipecmd->right, env);
 	}
-	close(file_d[0]);
-	close(file_d[1]);
+	ft_close(file_d);
 	wait(0);
 	wait(0);
 }
 
-static void	ft_runredir(struct cmd *cmd, t_env *env)
+static void	ft_runredir(t_cmd *cmd, t_env *env)
 {
-	struct doredir	*redircmd;
-	struct cmd		*srcmd[_POSIX_OPEN_MAX];
+	t_doredir		*redircmd;
+	t_cmd			*srcmd[_POSIX_OPEN_MAX];
 	int				j;
 
 	j = 1;
-	p_struct(cmd, srcmd);
-	redircmd = (struct doredir *)srcmd[0];
+	ft_p_struct(cmd, srcmd);
+	redircmd = (t_doredir *)srcmd[0];
 	if (redircmd->right & O_RDWR)
-	{
-		printf("running heredoc\n");
 		ft_heredoc(cmd, env);
-	}
-	redircmd = (struct doredir *)srcmd[j];
+	redircmd = (t_doredir *)srcmd[j];
 	while (redircmd->type == 2)
 	{
-		redircmd = (struct doredir *)srcmd[j];
+		redircmd = (t_doredir *)srcmd[j];
 		if ((access(redircmd->file, F_OK)) == 0)
 		{
 			if (open(redircmd->file, redircmd->right) < 0)
@@ -69,23 +71,23 @@ static void	ft_runredir(struct cmd *cmd, t_env *env)
 		else
 			if ((open(redircmd->file, redircmd->right, RWRR)) < 0)
 				ft_error("open error", 1);
-		redircmd = (struct doredir *)srcmd[++j];
+		redircmd = (t_doredir *)srcmd[++j];
 	}
 	ft_redir_exec(srcmd[0]);
 	ft_runcmd(srcmd[j], env);
 }
 
-void	ft_runcmd(struct cmd *cmd, t_env *env)
+void	ft_runcmd(t_cmd *cmd, t_env *env)
 {
-	struct doexec	*execcmd;
-	int				ret;
+	t_doexec	*execcmd;
+	int			ret;
 
 	ret = 0;
 	if (cmd == 0)
 		exit (1);
 	if (cmd->type == EXEC)
 	{
-		execcmd = (struct doexec *)cmd;
+		execcmd = (t_doexec *)cmd;
 		if (execcmd->names[0] == 0)
 			exit (1);
 		ret = ft_find_command(execcmd, env);

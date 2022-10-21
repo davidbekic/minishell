@@ -6,28 +6,29 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:04:56 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/11 17:05:15 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/21 21:34:39 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../Libft/libft.h"
 
-struct cmd	*buildexec(void)
+t_cmd	*ft_buildexec(void)
 {
-	struct doexec	*cmd;
+	t_doexec	*cmd;
 
 	cmd = malloc(sizeof(*cmd));
 	if (!cmd)
 		return (NULL);
 	ft_memset(cmd, 0, sizeof(*cmd));
 	cmd->type = EXEC;
-	return ((struct cmd *)cmd);
+	return ((t_cmd *)cmd);
 }
 
-struct cmd	*buildredir(struct cmd *scmd, char *file, char *efile, int right, int fd)
+t_cmd	*ft_buildredir(t_cmd *scmd, char *file, char *efile,
+int pointers[2])
 {
-	struct doredir	*cmd;
+	t_doredir	*cmd;
 
 	cmd = malloc(sizeof(*cmd));
 	if (!cmd)
@@ -37,15 +38,14 @@ struct cmd	*buildredir(struct cmd *scmd, char *file, char *efile, int right, int
 	cmd->cmd = scmd;
 	cmd->file = file;
 	cmd->efile = efile;
-	cmd->right = right;
-	cmd->fd = fd;
-	printf("cmd doreadir address %p\n", cmd);
-	return ((struct cmd *)cmd);
+	cmd->right = pointers[0];
+	cmd->fd = pointers[1];
+	return ((t_cmd *)cmd);
 }
 
-struct cmd	*buildpipe(struct cmd *left, struct cmd *right)
+t_cmd	*ft_buildpipe(t_cmd *left, t_cmd *right)
 {
-	struct dopipe	*cmd;
+	t_dopipe	*cmd;
 
 	cmd = malloc(sizeof(*cmd));
 	if (!cmd)
@@ -54,5 +54,5 @@ struct cmd	*buildpipe(struct cmd *left, struct cmd *right)
 	cmd->type = PIPE;
 	cmd->left = left;
 	cmd->right = right;
-	return ((struct cmd *)cmd);
+	return ((t_cmd *)cmd);
 }

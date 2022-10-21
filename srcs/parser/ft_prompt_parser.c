@@ -6,13 +6,11 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:45:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/19 18:20:04 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/21 13:03:10 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-extern int	g_exit;
 
 static int	ft_quote_checker(char *str)
 {
@@ -40,8 +38,6 @@ static int	ft_syntax_checker(char *str)
 	err_flag = 0;
 	while (str[i] != 0)
 	{
-		if (str[0] == '|')
-			return (1);
 		if ((str[i] == '>' || str[i] == '<' || str[i] == '|'))
 		{
 			if (!err_flag)
@@ -52,8 +48,13 @@ static int	ft_syntax_checker(char *str)
 			err_flag = 0;
 		i++;
 	}
+	if (str[0] == '|')
+		err_flag = 1;
 	if (err_flag)
+	{
+		ft_printf(2, "minishell: `%s': syntax error\n", str);
 		return (1);
+	}
 	return (0);
 }
 
@@ -62,11 +63,13 @@ int	ft_prompt_parser(char **buf, t_env *env)
 	if (ft_quote_checker(*buf))
 	{
 		perror("minishell: open quotes\n");
-		return (124);
+		return (258);
 	}
 	if (ft_syntax_checker(*buf))
+		return (258);
+	if (ft_counter(*buf, 32) > MAXARGS)
 	{
-		g_exit = 258;
+		ft_printf(2, "too many arguments\n");
 		return (1);
 	}
 	if (ft_strlen(*buf) > 4096)

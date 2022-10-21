@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:39:37 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/20 15:03:54 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/21 17:15:00 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int	ft_alphabetic_write(t_env **temp, t_env **aux, t_env *env, int *j)
 {
 	if (ft_strncmp((*temp)->key, "_", 3) != 0)
 	{
+		if (!strcmp("A", (*temp)->key))
+			printf("temp->key: %s\n", (*temp)->key);
 		ft_printf(1, "declare -x %s", (*temp)->key);
 		if ((*temp)->value)
 			ft_printf(1, "=\"%s\"", (*temp)->value);
@@ -54,7 +56,7 @@ void	ft_alphabetic_env(t_env *env)
 	temp = aux;
 	while (j < ft_envsize(env) - 1)
 	{
-		while (aux != NULL)
+		while (aux->next != NULL)
 		{
 			if (ft_strcmp(temp->key, aux->key) < 0)
 				i++;

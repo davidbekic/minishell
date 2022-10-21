@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 18:08:29 by davidbekic        #+#    #+#             */
-/*   Updated: 2022/10/19 17:10:01 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/21 21:29:36 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_word_to_lower(char *command)
 		*(command - 1) = ft_tolower(*(command - 1));
 }
 
-int	ft_find_command(struct doexec *execcmd, t_env *env)
+int	ft_find_command(t_doexec *execcmd, t_env *env)
 {
 	int	ret;
 

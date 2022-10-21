@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/19 18:18:33 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/21 21:52:36 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ UNAME_S := $(shell uname -s)
 NAME = minishell
 CFLAGS = -Wall -Werror -Wextra -MMD
 
-LDFLAGS = /opt/homebrew/opt/readline/lib
-RFLAGS = /opt/homebrew/opt/readline/include
-#LDFLAGS = /Users/${USER}/homebrew/opt/readline/lib
-#RFLAGS = /Users/${USER}/homebrew/opt/readline/include
+#LDFLAGS = /opt/homebrew/opt/readline/lib
+#RFLAGS = /opt/homebrew/opt/readline/include
+LDFLAGS = /Users/${USER}/homebrew/opt/readline/lib
+RFLAGS = /Users/${USER}/homebrew/opt/readline/include
 
 
 
@@ -46,14 +46,15 @@ SRC = srcs/main/main.c \
 	  srcs/parser/ft_quotes.c \
 	  srcs/parser/ft_aux_redir.c \
 	  srcs/parser/ft_prompt_expander.c \
+	  srcs/parser/ft_error.c \
 	  srcs/main/ft_signals.c \
-	  srcs/builtins/echo.c    \
-	  srcs/builtins/env.c    \
-	  srcs/builtins/export.c    \
-	  srcs/builtins/pwd.c     \
-	  srcs/builtins/unset.c    \
-	  srcs/builtins/cd.c    \
-	  srcs/builtins/exit.c   \
+	  srcs/builtins/ft_echo.c    \
+	  srcs/builtins/ft_env.c    \
+	  srcs/builtins/ft_export.c    \
+	  srcs/builtins/ft_pwd.c     \
+	  srcs/builtins/ft_unset.c    \
+	  srcs/builtins/ft_cd.c    \
+	  srcs/builtins/ft_exit.c   \
 	  srcs/env/ft_create_elem.c    \
 	  srcs/env/ft_expand.c    \
 	  srcs/env/ft_find_elem.c    \

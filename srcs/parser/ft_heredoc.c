@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:05:05 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/19 13:47:45 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/21 21:47:50 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ static int	getbuf(char **buf, int size, char *delimit)
 	return (0);
 }
 
-void	ft_heredoc(struct cmd *cmd, t_env *env)
+void	ft_heredoc(t_cmd *cmd, t_env *env)
 {
 	char			*buf;
-	struct doredir	*redircmd;
+	t_doredir		*redircmd;
 
 	buf = (char *)malloc(sizeof(char) * 200);
 	if (!buf)
 		ft_error("malloc error", 1);
-	redircmd = (struct doredir *)cmd;
+	redircmd = (t_doredir *)cmd;
 	if ((open(".tmp", redircmd->right, 0600)) < 0)
 		ft_error("open error", 1);
 	while (getbuf(&buf, sizeof(buf), redircmd->file) >= 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/20 18:57:53 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/21 21:15:17 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int	ft_update_ex_var(char *key_value, int value_start, t_env *elem)
 	j = 0;
 	free(elem->value);
 	elem->value = malloc((ft_strlen(key_value) - value_start) + 1);
+	if ((key_value[value_start - 1]) == 0)
+		elem->value = NULL;
 	if (!elem->value)
 		return (1);
 	while (key_value[value_start + j] != 0)
@@ -49,10 +51,10 @@ int	ft_update_var(char *key_value, int value_start, t_env *env)
 	ft_memcpy(key, key_value, value_start - 1);
 	key[ft_strlen(key)] = 0;
 	elem = ft_find_elem(env, key);
+	if (ft_strcmp(env->next->key, "_") == 0)
+		return (0);
 	if (!elem)
 	{
-		while (ft_strcmp(env->next->key, "_") != 0)
-			env = env->next;
 		elem = ft_create_elem(elem, key_value, value_start);
 		aux = env->next;
 		env->next = elem;
@@ -66,6 +68,7 @@ int	ft_update_var(char *key_value, int value_start, t_env *env)
 int	ft_export(char **names, t_env *env)
 {
 	short	ret;
+	short	name;
 
 	ret = 0;
 	if (!names[1])
@@ -77,14 +80,14 @@ int	ft_export(char **names, t_env *env)
 			ft_printf(2, "too long variable name or value\n");
 			return (1);
 		}
-		ret = ft_var_name_check(*names, ft_find_value(*(names)) - 1);
-		if (ret)
+		name = ft_var_name_check(*names, ft_find_value(*(names)) - 1);
+		if (name)
 		{
 			ret = 1;
 			printf("minishell: export: `%s': not a valid identifier\n", *names);
 		}
-		else if (!ret)
-			ret = ft_update_var(*names, ft_find_value(*names), env);
+		else if (!name)
+			ft_update_var(*names, ft_find_value(*names), env);
 	}
 	return (ret);
 }
