@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:22:21 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/20 13:09:07 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/22 18:38:00 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_unset(char **names, t_env **env)
 		if (ft_var_name_check(*names, ft_strlen(*names)))
 		{
 			ret = 1;
-			ft_printf(2, "minishell: unset: `%s' not a valid identifier\n",
+			ft_printf(2, "minishell: unset: `%s': not a valid identifier\n",
 				*names);
 			continue ;
 		}

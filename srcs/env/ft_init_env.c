@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:19:20 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/21 18:44:37 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/22 17:08:22 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,15 @@ static void	increase_shlvl(t_env *env)
 	shlvl_int = ft_atoi(ft_expand(env, "SHLVL")) + 1;
 	ft_bzero(shlvl, 20);
 	ft_memcpy(shlvl, "SHLVL=", 7);
-	ft_memcpy(shlvl + ft_strlen(shlvl),
-		ft_itoa(shlvl_int), ft_strlen(ft_itoa(shlvl_int)));
+	if (shlvl_int > 999)
+	{
+		ft_printf(2, "minishell: warning: shell level too high, resetting to 1\n"
+			);
+		ft_memcpy(shlvl + ft_strlen(shlvl), "1", 2);
+	}
+	else
+		ft_memcpy(shlvl + ft_strlen(shlvl),
+			ft_itoa(shlvl_int), ft_strlen(ft_itoa(shlvl_int)) + 1);
 	ft_update_var(shlvl, 6, env);
 }
 

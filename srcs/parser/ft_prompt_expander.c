@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:16:58 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/21 21:09:37 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/22 17:24:08 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	ft_is_exit(char *str)
 		return (0);
 }
 
-void	ft_quote_exit_home(char *dump, char **buf, int *i, t_env *env)
+void	ft_quote_exit_home(char *dump, char **buf, int *i)
 {
 	if ((dump[i[0]] == '\"' || dump[i[0]] == '\'')
 		&& (dump[i[0]] != i[2]) && !i[2])
@@ -45,24 +45,24 @@ void	ft_quote_exit_home(char *dump, char **buf, int *i, t_env *env)
 	}
 	else if (ft_home_check(dump, (i[0])) && !i[2])
 	{
-		ft_memcpy(*(buf) + i[1], ft_expand(env, "HOME"),
-			ft_strlen(ft_expand(env, "HOME")) + 1);
+		ft_memcpy(*(buf) + i[1], getenv("HOME"),
+			ft_strlen(getenv("HOME")) + 1);
 		i[0] += 1;
-		i[1] += ft_strlen(ft_expand(env, "HOME"));
+		i[1] += ft_strlen(getenv("HOME"));
 	}
 }
 
 void	ft_prompt_expander(char **buf, t_env *env)
 {
 	int				i[3];
-	char			dump[4096];
+	char			dump[BUFFER_SIZE];
 
 	ft_memset(i, 0, 12);
-	bzero(dump, 4096);
+	bzero(dump, BUFFER_SIZE);
 	ft_memcpy(dump, *buf, ft_strlen(*buf));
-	while (*(dump + i[0]) && i[1] < 4096)
+	while (*(dump + i[0]) && i[1] < BUFFER_SIZE)
 	{
-		ft_quote_exit_home(dump, buf, i, env);
+		ft_quote_exit_home(dump, buf, i);
 		if (dump[i[0]] == '$' && i[2] != '\'')
 		{
 			if (ft_expand(env, dump + i[0] + 1) != NULL)

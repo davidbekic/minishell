@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 17:09:38 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/21 21:43:29 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/22 16:18:24 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,12 @@ int	ft_cd(t_env *env, char **names)
 		printf("%s\n", getcwd(s, BUFFER_SIZE));
 	}
 	else if (!(*(names + 1)))
-		ret = chdir(ft_expand(env, "HOME"));
+	{
+		if (!ft_expand(env, "HOME"))
+			ret = ft_printf(2, "minishell: cd: HOME not set\n");
+		else
+			ret = chdir(ft_expand(env, "HOME"));
+	}
 	else
 		ret = chdir (*(names + 1));
 	if (ret == -1)

@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/21 21:52:36 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/22 16:07:52 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,6 @@ CFLAGS = -Wall -Werror -Wextra -MMD
 #RFLAGS = /opt/homebrew/opt/readline/include
 LDFLAGS = /Users/${USER}/homebrew/opt/readline/lib
 RFLAGS = /Users/${USER}/homebrew/opt/readline/include
-
-
 
 # Folders
 OBJDIR = obj
@@ -79,19 +77,18 @@ makelibs:
 
 #incluir dependencias
 -include $(DEPENDS)
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) includes/minishell.h Libft/libft.h
 	@echo "$(GREEN)Creando ejecutable 🛠 $@ $(RESET)"
 	gcc $(CFLAGS) $(OBJ) -LLibft -lft -L$(LDFLAGS) -lreadline -o $@
 	@rm -f minishell.d
 	@echo "$(GREEN)Compilado ✅ $@ $(RESET)"
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
+$(OBJDIR)/%.o: $(SRCDIR)/%.c includes/minishell.h Libft/libft.h
 	@echo "$(GREEN)Compilando $< de $@ $(RESET)"
 	@mkdir -p $(@D)
 	gcc -I$(RFLAGS) $(CFLAGS) -o $@ -c $<
 
 clean:
-
 	rm -rf ./obj
 	rm -rf minishell
 	@make fclean -C $(LIBFT)

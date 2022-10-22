@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/21 21:42:06 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/22 18:33:56 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <sys/stat.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <string.h>
 # include <fcntl.h>
 # include "../Libft/libft.h"
 
@@ -133,10 +132,10 @@ int		ft_var_name_stop(char *str);
 int		ft_update_var(char *key_value, int value_start, t_env *env);
 
 // exec
-int		ft_run_builtin(t_env *env, char **buf);
+int		ft_run_builtin(t_env **env, char **buf);
 int		ft_execve(t_env *env, char **names);
-int		ft_find_command(t_doexec *cmd, t_env *env);
-void	ft_word_to_lower(char *command);
+int		ft_find_command(t_doexec *cmd, t_env **env);
+// void	ft_word_to_lower(char *command);
 int		ft_is_file_or_dir(char *str);
 int		ft_is_file(const char *path);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:32:59 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/18 22:50:04 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/22 18:38:48 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ char	*ft_expand(t_env *env, char *key)
 	{
 		if (key[i] >= '0' && key[i] <= '9' && i == 0)
 			return (NULL);
-		if (!(key[i] >= 'a' && key[i] <= 'z')
-			&& !(key[i] >= 'A' && key[i] <= 'Z') && key[i] != '_')
+		else if (!(key[i] >= 'a' && key[i] <= 'z')
+			&& !(key[i] >= 'A' && key[i] <= 'Z')
+			&& !(key[i] >= '0' && key[i] <= '9') && key[i] != '_')
 			break ;
 		i++;
 	}
