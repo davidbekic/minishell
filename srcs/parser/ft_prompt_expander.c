@@ -6,19 +6,17 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:16:58 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/22 17:24:08 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/23 13:03:02 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern int	g_exit;
-
 static int	ft_home_check(char *str, int pos)
 {
 	if (str[pos] == '~' && str[pos - 1] != '~' && str[pos + 1] != '~'
 		&& (str[pos + 1] == '/' || str[pos + 1] == 0 || str[pos + 1] == 32)
-		&& (str[pos - 1] == 32 || str[pos - 1] == 0))
+		&& (str[pos - 1] == 32 || str[pos - 1] == 0 || str[pos - 1] == '='))
 		return (1);
 	return (0);
 }

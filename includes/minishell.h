@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/22 18:33:56 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/23 13:02:52 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define WCA O_WRONLY | O_CREAT | O_APPEND
 # define RDCE O_RDWR | O_CREAT | O_EXCL
 # define BUFFER_SIZE 4096
+
+extern int	g_exit;
 
 typedef struct s_env
 {

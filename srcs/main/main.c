@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/22 18:39:03 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/23 20:30:20 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	ft_getcmd(char **buf, t_env **env)
 	if (*buf && **buf)
 		add_history(rl_copy);
 	g_exit = ft_prompt_parser(buf, *env);
+	free(rl_copy);
 	if (g_exit)
 	{
 		ft_memset(*buf, 0, ft_strlen(*buf) + 1);
@@ -54,19 +55,21 @@ int	main(int ac, char **av, char **main_env)
 {
 	static char		*buf;
 	t_env			*env;
-	// int				exit_status;
 
 	if ((ac > 1 && av[0][0] == '&') || !*main_env)
 		exit(1);
 	env = ft_init_env(main_env);
 	// if (ft_strncmp(av[2], "exit", 4))
 	// 	ft_runcmd(ft_parsecmd(buf), env);
+	buf = (char *)ft_calloc(sizeof(char) * BUFFER_SIZE, 1);
 	if (ac >= 3 && !ft_strncmp(av[1], "-c", 3))
 	{
-		ft_runcmd(ft_parsecmd(av[2]), env);
+//		ft_memset(buf, 0, ft_strlen(buf) + 1);
+		ft_memcpy(buf, av[2], ft_strlen(av[2]) + 1);
+		ft_prompt_parser(&buf, env);
+		ft_runcmd(ft_parsecmd(buf), env);
 		exit(0);
 	}
-	buf = (char *)ft_calloc(sizeof(char) * BUFFER_SIZE, 1);
 	if (!buf | !env)
 		ft_free_env(env, 1);
 	ft_termios();
@@ -75,7 +78,7 @@ int	main(int ac, char **av, char **main_env)
 	{	
 		if (ft_is_builtin(buf) || ft_is_isspace(buf))
 			continue ;
-		else if (fork() == 0)
+		if (fork() == 0)
 			ft_runcmd(ft_parsecmd(buf), env);
 		wait(0);
 	}

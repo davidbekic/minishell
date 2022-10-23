@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/23 12:43:39 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/23 12:46:43 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,14 +104,14 @@ clean:
 # 	@echo "$(RED)Los objetos no existen, no se borra$(RESET)"
 # endif
 
-fclean: clean
-	ifneq ("$(wildcard $(NAME))", "")
+fclean:	clean
+ifneq ("$(wildcard $(NAME))", "")
 # 	rm -f $(NAME)
- 	@make fclean -C $(LIBFT)
- 	@echo "$(GREEN)Ejecutables borrados$(RESET)"
-	else
+	@make fclean -C $(LIBFT)
+	@echo "$(GREEN)Ejecutables borrados$(RESET)"
+else
 	@echo "$(RED)Los ejecutables no existen, no se borra$(RESET)"
-	endif
+endif
 
 re: fclean all
 

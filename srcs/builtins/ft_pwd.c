@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:09:19 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/20 15:20:22 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/23 13:15:34 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 int	ft_pwd(t_env *env)
 {
-	ft_printf(2, "%s\n", ft_expand(env, "PWD"));
-	return (0);
+	if (ft_expand(env, "PWD"))
+	{
+		ft_printf(2, "%s\n", ft_expand(env, "PWD"));
+		return (0);
+	}
+	else
+	{
+		ft_printf(2, "minishell: pwd: PWD variable deleted\n");
+		return (1);
+	}
 }

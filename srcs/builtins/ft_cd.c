@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 17:09:38 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/23 12:30:11 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/23 16:33:18 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,7 @@ static int	ft_special_cd_cases(t_env *env, char **names)
 
 	ret = 2;
 	if (!(*(names + 1)))
-	{
-		if (!ft_expand(env, "HOME"))
-			ft_printf(2, "minishell: cd: HOME not set\n");
-		else
 			ret = chdir(ft_expand(env, "HOME"));
-	}
 	if (names[1] && ft_is_file(names[1]))
 	{
 		ft_printf(2, "minishell: cd: %s: Not a directory\n", names[1]);
@@ -32,13 +27,19 @@ static int	ft_special_cd_cases(t_env *env, char **names)
 	}
 	else if (!ft_strlen(ft_expand(env, "OLDPWD")) && !ft_strcmp(names[1], "-"))
 	{
-		ft_printf(2, "minishell: cd: HOME not set\n");
+		ft_printf(2, "minishell: cd: OLDPWD not set\n");
 		ret = 1;	
 	}
 	else if ((!(ft_strncmp(*(names + 1), "--", ft_strlen(*(names + 1))))))
 	{
 		ret = chdir((ft_expand(env, "OLDPWD")));
 		printf("%s\n", getcwd(s, BUFFER_SIZE));
+	}
+	else if (!ft_strlen(ft_expand(env, "HOME")) && ft_strcmp(names[1], getenv("HOME")))
+	{
+		printf("names[1]: %s\n", names[1]);
+		ft_printf(2, "minishell: cd: HOME not set\n");
+		ret = 1;	
 	}
 	return (ret);
 }
@@ -57,7 +58,6 @@ int	ft_cd(t_env *env, char **names)
 	ft_memcpy(old_pwd + 7, getcwd(s, BUFFER_SIZE),
 	ft_strlen(getcwd(s, BUFFER_SIZE)) + 1);
 	ret = ft_special_cd_cases(env, names);
-	printf("ret after special cases: %d\n", ret);
 	if (ret == 2 && (*(names + 1)))
 		ret = chdir (*(names + 1));
 	if (ret == -1)
