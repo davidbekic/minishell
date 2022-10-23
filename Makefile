@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/22 16:07:52 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/23 12:43:39 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,7 @@ makelibs:
 
 #incluir dependencias
 -include $(DEPENDS)
-$(NAME): $(OBJ) includes/minishell.h Libft/libft.h
+$(NAME): $(OBJ) includes/minishell.h Libft/libft.h Libft/libft.a
 	@echo "$(GREEN)Creando ejecutable 🛠 $@ $(RESET)"
 	gcc $(CFLAGS) $(OBJ) -LLibft -lft -L$(LDFLAGS) -lreadline -o $@
 	@rm -f minishell.d
@@ -105,13 +105,13 @@ clean:
 # endif
 
 fclean: clean
-# ifneq ("$(wildcard $(NAME))", "")
+	ifneq ("$(wildcard $(NAME))", "")
 # 	rm -f $(NAME)
-# 	@make fclean -C $(LIBFT)
-# 	@echo "$(GREEN)Ejecutables borrados$(RESET)"
-# else
-# 	@echo "$(RED)Los ejecutables no existen, no se borra$(RESET)"
-# endif
+ 	@make fclean -C $(LIBFT)
+ 	@echo "$(GREEN)Ejecutables borrados$(RESET)"
+	else
+	@echo "$(RED)Los ejecutables no existen, no se borra$(RESET)"
+	endif
 
 re: fclean all
 
