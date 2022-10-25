@@ -6,38 +6,35 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/25 14:59:03 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/25 16:59:29 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../Libft/libft.h"
 
-static void	ft_close(int file_d[2])
+static void	ft_exit_code_listener(int pid)
 {
-	close(file_d[0]);
-	close(file_d[1]);
+	if (WIFEXITED(pid))
+		g_exit = WEXITSTATUS(pid);
+	else if (WIFSIGNALED(pid))
+	{
+		printf("two times? with code: %d\n", WTERMSIG(pid));
+		if (WTERMSIG(pid) == 2 || WTERMSIG(pid) == 3)
+			g_exit = WTERMSIG(pid) + 128;
+	}
 }
 
-static void	ft_exit_code_listener(int pid1, int pid2)
+static void	ft_exec_pipes(int file_d[2], t_dopipe *pipecmd, int close_int, t_env *env)
 {
-	g_exit = 0; 
-	//printf("entering code listener with: %d\n", g_exit);
-	if (pid2 > pid1)
-	{	
-		if (WIFEXITED(pid2))
-		{
-			//printf("entering WIFEXITED\n");
-			g_exit = WEXITSTATUS(pid2);
-			printf("with exit code: %d\n", g_exit);
-		}
-		else if (WIFSIGNALED(pid2))
-		{
-			if (WTERMSIG(pid2) == 2 || WTERMSIG(pid2) == 3)
-				g_exit = WTERMSIG(pid2) + 128;
-		}
-	}
-	// printf("exiting code listener with: %d\n", g_exit);
+	close(close_int);
+	dup(file_d[close_int]);
+	close(file_d[0]);
+	close(file_d[1]);
+	if (close_int)
+		ft_runcmd(pipecmd->left, env);
+	else
+		ft_runcmd(pipecmd->right, env);
 }
 
 static void	ft_runpipecmd(t_cmd *cmd, t_env *env)
@@ -46,36 +43,23 @@ static void	ft_runpipecmd(t_cmd *cmd, t_env *env)
 	int			pid1;
 	int			pid2;
 	int			file_d[2];
-	// t_doexec	*tmp;
 
 	pipecmd = (t_dopipe *)cmd;
-	// tmp = (t_doexec *)cmd;
 	if (pipe(file_d) < 0)
 		ft_error("pipe error", 1);
 	pid1 = ft_fork1();
 	if (!pid1)
-	{
-		close(1);
-		dup(file_d[1]);
-		close(file_d[0]);
-		close(file_d[1]);
-		ft_runcmd(pipecmd->left, env);
-	}
+		ft_exec_pipes(file_d, pipecmd, 1, env);
 	wait(&pid1);
+	if (WIFSIGNALED(pid1))
+		exit(WTERMSIG(pid1) + 128);
 	pid2 = ft_fork1();
 	if (!pid2)
-	{
-		//usleep(2000);
-		close(0);
-		dup(file_d[0]);
-		close(file_d[0]);
-		close(file_d[1]);
-		ft_runcmd(pipecmd->right, env);
-	}
-	ft_close(file_d);
+		ft_exec_pipes(file_d, pipecmd, 0, env);
+	ft_exit_code_listener(pid2);
+	close(file_d[0]);
+	close(file_d[1]);
 	wait(&pid2);
-	ft_exit_code_listener(pid1, pid2);
-
 }
 
 static void	ft_runredir(t_cmd *cmd, t_env *env)
@@ -113,6 +97,7 @@ void	ft_runcmd(t_cmd *cmd, t_env *env)
 	// int			ret;
 
 	// ret = 0;
+	signal(SIGQUIT, SIG_DFL);
 	if (cmd == 0)
 		exit (1);
 	if (cmd->type == EXEC)
@@ -126,5 +111,6 @@ void	ft_runcmd(t_cmd *cmd, t_env *env)
 		ft_runredir(cmd, env);
 	else if (cmd->type == PIPE)
 		ft_runpipecmd(cmd, env);
+	printf("exiting first child with g_exit: %d\n", g_exit);
 	exit (g_exit);
 }
