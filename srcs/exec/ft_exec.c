@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/24 18:52:50 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/25 14:59:03 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,41 @@ static void	ft_close(int file_d[2])
 	close(file_d[1]);
 }
 
+static void	ft_exit_code_listener(int pid1, int pid2)
+{
+	g_exit = 0; 
+	//printf("entering code listener with: %d\n", g_exit);
+	if (pid2 > pid1)
+	{	
+		if (WIFEXITED(pid2))
+		{
+			//printf("entering WIFEXITED\n");
+			g_exit = WEXITSTATUS(pid2);
+			printf("with exit code: %d\n", g_exit);
+		}
+		else if (WIFSIGNALED(pid2))
+		{
+			if (WTERMSIG(pid2) == 2 || WTERMSIG(pid2) == 3)
+				g_exit = WTERMSIG(pid2) + 128;
+		}
+	}
+	// printf("exiting code listener with: %d\n", g_exit);
+}
+
 static void	ft_runpipecmd(t_cmd *cmd, t_env *env)
 {
 	t_dopipe	*pipecmd;
+	int			pid1;
+	int			pid2;
 	int			file_d[2];
+	// t_doexec	*tmp;
 
 	pipecmd = (t_dopipe *)cmd;
+	// tmp = (t_doexec *)cmd;
 	if (pipe(file_d) < 0)
 		ft_error("pipe error", 1);
-	if (ft_fork1() == 0)
+	pid1 = ft_fork1();
+	if (!pid1)
 	{
 		close(1);
 		dup(file_d[1]);
@@ -35,8 +61,11 @@ static void	ft_runpipecmd(t_cmd *cmd, t_env *env)
 		close(file_d[1]);
 		ft_runcmd(pipecmd->left, env);
 	}
-	if (ft_fork1() == 0)
+	wait(&pid1);
+	pid2 = ft_fork1();
+	if (!pid2)
 	{
+		//usleep(2000);
 		close(0);
 		dup(file_d[0]);
 		close(file_d[0]);
@@ -44,8 +73,9 @@ static void	ft_runpipecmd(t_cmd *cmd, t_env *env)
 		ft_runcmd(pipecmd->right, env);
 	}
 	ft_close(file_d);
-	wait(0);
-	wait(0);
+	wait(&pid2);
+	ft_exit_code_listener(pid1, pid2);
+
 }
 
 static void	ft_runredir(t_cmd *cmd, t_env *env)
@@ -80,9 +110,9 @@ static void	ft_runredir(t_cmd *cmd, t_env *env)
 void	ft_runcmd(t_cmd *cmd, t_env *env)
 {
 	t_doexec	*execcmd;
-	int			ret;
+	// int			ret;
 
-	ret = 0;
+	// ret = 0;
 	if (cmd == 0)
 		exit (1);
 	if (cmd->type == EXEC)
@@ -90,11 +120,11 @@ void	ft_runcmd(t_cmd *cmd, t_env *env)
 		execcmd = (t_doexec *)cmd;
 		if (execcmd->names[0] == 0)
 			exit (1);
-		ret = ft_find_command(execcmd, &env);
+		g_exit = ft_find_command(execcmd, &env);
 	}
 	else if (cmd->type == REDIR)
 		ft_runredir(cmd, env);
 	else if (cmd->type == PIPE)
 		ft_runpipecmd(cmd, env);
-	exit (ret);
+	exit (g_exit);
 }

@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/24 13:59:46 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/25 11:08:55 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,12 +79,12 @@ makelibs:
 #incluir dependencias
 -include $(DEPENDS)
 $(NAME): $(OBJ) includes/minishell.h Libft/libft.h Libft/libft.a
-	@echo "$(GREEN)Creando ejecutable 🛠 $@ $(RESET)"
+	@echo "$(GREEN)Creando ejecutable 🛠 $@ $(RESET)"s
 	gcc $(CFLAGS) $(OBJ) -LLibft -lft -L$(LDFLAGS) -lreadline -o $@
 	@rm -f minishell.d
 	@echo "$(GREEN)Compilado ✅ $@ $(RESET)"
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c includes/minishell.h Libft/libft.h
+$(OBJDIR)/%.o: $(SRCDIR)/%.c includes/minishell.h 
 	@echo "$(GREEN)Compilando $< de $@ $(RESET)"
 	@mkdir -p $(@D)
 	gcc -I$(RFLAGS) $(CFLAGS) -o $@ -c $<

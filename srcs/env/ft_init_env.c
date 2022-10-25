@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:19:20 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/23 11:42:35 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/25 13:54:52 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	increase_shlvl(t_env *env)
 		ft_memcpy(shlvl + ft_strlen(shlvl),
 			ft_itoa(shlvl_int), ft_strlen(ft_itoa(shlvl_int)) + 1);
 	ft_update_var(shlvl, 6, env);
+	// ft_find_elem(env, "OLDPWD")->value = NULL;
 	ft_update_var("OLDPWD=", 7, env);
 }
 

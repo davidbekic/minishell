@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:21:35 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/24 19:02:53 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/25 12:16:40 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_exit(char **names)
 	unsigned char	ret;
 
 	ret = 0;
-	ft_printf(1, "exit\n");
+	// ft_printf(1, "exit\n");
 	if (names[2] && !ft_num_arg(names[1]))
 	{
 		ft_printf(2, "minishell: exit: too many arguments\n");

@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:45:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/24 18:52:07 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/25 13:26:32 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	ft_quote_checker(char *str)
 {
 	unsigned char	quote_type;
 
-	quote_type = 0;
 	while (*str != 0)
 	{
 		if ((*str == '\"' || *str == '\'')

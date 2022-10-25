@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:41:04 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/23 14:16:37 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/25 12:48:41 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_execve(t_env *env, char **names)
 	int	ret;
 
 	ret = 0;
-	if (!ft_is_alias(names[0]))
+	if (!ft_is_alias(names[0]) || !ft_expand(env, "PATH"))
 		ret = ft_is_file_or_dir(names[0]);
 	if (ret)
 		return (ret);
