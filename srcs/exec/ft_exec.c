@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/23 14:19:14 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/24 18:52:50 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	ft_runpipecmd(t_cmd *cmd, t_env *env)
 {
 	t_dopipe	*pipecmd;
 	int			file_d[2];
-
 
 	pipecmd = (t_dopipe *)cmd;
 	if (pipe(file_d) < 0)

@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:57:51 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/23 13:07:38 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/24 18:56:56 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,8 @@ int	ft_var_name_check(char *str, int len)
 	buf[len] = 0;
 	while (str[i] != 0 && i < len)
 	{
-		if ((str[i] >= '0' && str[i] <= '9')&& i == 0)
-		{
-			printf("should be true no?\n");
+		if ((str[i] >= '0' && str[i] <= '9') && i == 0)
 			return (1);
-		}
 		if (!(str[i] >= 'a' && str[i] <= 'z') && !(str[i] >= 'A' && str[i]
 				<= 'Z') && str[i] != '_' && !(str[i] >= '0' && str[i] <= '9'))
 			return (1);

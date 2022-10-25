@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/23 13:02:52 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/24 13:59:21 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ t_cmd	*ft_double_redir(t_cmd *cmd,
 void	ft_p_struct(t_cmd *cmd, t_cmd *srcmd[]);
 void	ft_prompt_expander(char **buf, t_env *env);
 void	ft_error(char *str, int exit_code);
+void	*ft_swap(void *dest, void *src, size_t count);
 
 //Building tree structs
 t_cmd	*ft_buildexec(void);

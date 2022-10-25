@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:22:00 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/21 21:26:34 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/24 13:58:18 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ static int	ft_list_redir(char **tmp, int *result)
 
 static int	ft_case(char **tmp, char **estr, int *result)
 {
+	char	*fptr;
+
+	fptr = *tmp;
 	if (**tmp == 0)
 		return (0);
 	else if (**tmp == '|')
@@ -75,9 +78,17 @@ static int	ft_case(char **tmp, char **estr, int *result)
 	else
 	{
 		*result = 'z';
-		while (*tmp < *estr && !ft_strchr("\t\r\n\v\" ", **tmp)
+		while (*tmp < *estr && !ft_strchr("\t\r\n\v ", **tmp)
 			&& !ft_strchr("<|>", **tmp))
+		{
+			if (**tmp == '"' && ft_isalpha(*(*tmp + 1)))
+			{
+				ft_swap(*tmp, *tmp + 1, 1);
+			}
+			if (**tmp == '"')
+				break ;
 			*tmp = *tmp + 1;
+		}
 	}
 	return (1);
 }
