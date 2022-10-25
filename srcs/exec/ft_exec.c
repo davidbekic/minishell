@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/25 16:59:29 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/25 18:10:25 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ static void	ft_exit_code_listener(int pid)
 		g_exit = WEXITSTATUS(pid);
 	else if (WIFSIGNALED(pid))
 	{
-		printf("two times? with code: %d\n", WTERMSIG(pid));
+		printf("entering with WTERMSIG: %d\n", WTERMSIG(pid));
 		if (WTERMSIG(pid) == 2 || WTERMSIG(pid) == 3)
 			g_exit = WTERMSIG(pid) + 128;
 	}
 }
 
-static void	ft_exec_pipes(int file_d[2], t_dopipe *pipecmd, int close_int, t_env *env)
+static void	ft_exec_pipes(int file_d[2], t_dopipe *pipecmd,
+				int close_int, t_env *env)
 {
 	close(close_int);
 	dup(file_d[close_int]);
@@ -52,7 +53,7 @@ static void	ft_runpipecmd(t_cmd *cmd, t_env *env)
 		ft_exec_pipes(file_d, pipecmd, 1, env);
 	wait(&pid1);
 	if (WIFSIGNALED(pid1))
-		exit(WTERMSIG(pid1) + 128);
+		g_exit = WTERMSIG(pid1) + 128;
 	pid2 = ft_fork1();
 	if (!pid2)
 		ft_exec_pipes(file_d, pipecmd, 0, env);
@@ -94,9 +95,7 @@ static void	ft_runredir(t_cmd *cmd, t_env *env)
 void	ft_runcmd(t_cmd *cmd, t_env *env)
 {
 	t_doexec	*execcmd;
-	// int			ret;
 
-	// ret = 0;
 	signal(SIGQUIT, SIG_DFL);
 	if (cmd == 0)
 		exit (1);
@@ -111,6 +110,6 @@ void	ft_runcmd(t_cmd *cmd, t_env *env)
 		ft_runredir(cmd, env);
 	else if (cmd->type == PIPE)
 		ft_runpipecmd(cmd, env);
-	printf("exiting first child with g_exit: %d\n", g_exit);
+	printf("returning g_exit: %d\n", g_exit);
 	exit (g_exit);
 }

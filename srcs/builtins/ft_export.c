@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/25 12:30:31 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/25 18:12:58 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,16 @@ int	ft_update_var(char *key_value, int value_start, t_env *env)
 	return (0);
 }
 
+static int	ft_options(char *str)
+{
+	if (str[0] == '-')
+	{
+		ft_printf(2, "minishell: export: options not implemented\n");
+		return (2);
+	}
+	return (0);
+}
+
 int	ft_export(char **names, t_env *env)
 {
 	short	ret;
@@ -73,14 +83,11 @@ int	ft_export(char **names, t_env *env)
 	ret = 0;
 	if (!names[1])
 		ft_alphabetic_env(env);
-	if (names[1][0] == '-')
-	{
-		ft_printf(2, "minishell: export: options not implemented\n");
+	if (ft_options(names[1]))
 		return (2);
-	}
 	while (*++names || ft_strlen(*names))
 	{
-		if (ft_strlen(*names) > BUFFER_SIZE)
+		if (ft_strlen(*names) > 300)
 		{
 			ft_printf(2, "too long variable name or value\n");
 			return (1);
