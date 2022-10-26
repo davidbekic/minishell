@@ -6,22 +6,25 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/25 18:10:25 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 11:57:14 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../Libft/libft.h"
 
-static void	ft_exit_code_listener(int pid)
+static void	ft_exit_code_listener(int pid1, int pid2)
 {
-	if (WIFEXITED(pid))
-		g_exit = WEXITSTATUS(pid);
-	else if (WIFSIGNALED(pid))
+	printf("pid1: %d\npid2: %d\n", pid1, pid2);
+	printf("WIF: %d\n", WIFEXITED(pid2));
+	// exit(WIFEXITED(pid2));	
+	if (WIFEXITED(pid2))
+		g_exit = WEXITSTATUS(pid2);
+	else if (WIFSIGNALED(pid2))
 	{
-		printf("entering with WTERMSIG: %d\n", WTERMSIG(pid));
-		if (WTERMSIG(pid) == 2 || WTERMSIG(pid) == 3)
-			g_exit = WTERMSIG(pid) + 128;
+		printf("entering with WTERMSIG: %d\n", WTERMSIG(pid2));
+		if (WTERMSIG(pid2) == 2 || WTERMSIG(pid2) == 3)
+			g_exit = WTERMSIG(pid2) + 128;
 	}
 }
 
@@ -51,16 +54,18 @@ static void	ft_runpipecmd(t_cmd *cmd, t_env *env)
 	pid1 = ft_fork1();
 	if (!pid1)
 		ft_exec_pipes(file_d, pipecmd, 1, env);
-	wait(&pid1);
 	if (WIFSIGNALED(pid1))
 		g_exit = WTERMSIG(pid1) + 128;
 	pid2 = ft_fork1();
 	if (!pid2)
 		ft_exec_pipes(file_d, pipecmd, 0, env);
-	ft_exit_code_listener(pid2);
 	close(file_d[0]);
 	close(file_d[1]);
-	wait(&pid2);
+	// wait(&pid1);
+	// wait(&pid2);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
+	ft_exit_code_listener(pid1, pid2);
 }
 
 static void	ft_runredir(t_cmd *cmd, t_env *env)
@@ -110,6 +115,5 @@ void	ft_runcmd(t_cmd *cmd, t_env *env)
 		ft_runredir(cmd, env);
 	else if (cmd->type == PIPE)
 		ft_runpipecmd(cmd, env);
-	printf("returning g_exit: %d\n", g_exit);
 	exit (g_exit);
 }

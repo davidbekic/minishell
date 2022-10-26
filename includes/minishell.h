@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/24 13:59:21 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 12:04:27 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <signal.h>
+# include <termios.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
@@ -102,6 +103,10 @@ void	ft_p_struct(t_cmd *cmd, t_cmd *srcmd[]);
 void	ft_prompt_expander(char **buf, t_env *env);
 void	ft_error(char *str, int exit_code);
 void	*ft_swap(void *dest, void *src, size_t count);
+int		ft_is_space(char *str);
+
+// main
+int		ft_getcmd(char **buf, t_env **env);
 
 //Building tree structs
 t_cmd	*ft_buildexec(void);
@@ -144,9 +149,11 @@ int		ft_is_file(const char *path);
 
 // signals
 void	ft_info_handler(int signo, siginfo_t *info, void *context);
-void	ft_handler(int signo);
-void	ft_signals(void);
+// void    ft_handler(int signo, siginfo_t *info, void *context);
+// void	ft_signals(void);
 void	ft_termios(void);
+void	ft_termios_child(void);
+void	ft_signals(void);
 
 //Built-ins
 int		ft_env(t_env *env, char **names);

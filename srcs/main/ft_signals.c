@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:30:38 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/25 16:37:48 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 11:45:54 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,79 +14,120 @@
 #include <signal.h>
 #include <termios.h>
 
-extern int g_exit;
-
-void	ft_termios(void)
-{
-	struct termios	term;
-
-	if (isatty(STDIN_FILENO) == 0)
-		ft_error("this fd is not a tty", 130);
-	if (tcgetattr(STDIN_FILENO, &term) < 0)
-		ft_error("get attributes error", 130);
-	term.c_lflag &= ~(ECHOCTL);
-	if (tcsetattr(STDIN_FILENO, TCSADRAIN, &term) < 0)
-		ft_error("set attributes error", 130);
-	if (term.c_lflag & (ECHOCTL))
-		ft_error("attributes wrongly set", 130);
-}
-
 void	ft_signals(void)
 {
 	struct sigaction	act;
 	struct sigaction	oact;
 
-	act.sa_handler = SIG_IGN;
+	act.sa_handler = SIG_DFL;
 //	act.sa_mask = 0;
+	ft_memset(&act, 0, sizeof(act));
 	sigemptyset(&act.sa_mask);
-	act.sa_flags = SA_RESTART | SA_SIGINFO;
+	act.sa_flags = SA_RESTART | SA_SIGINFO; //| SA_NOCLDWAIT;
 	act.sa_sigaction = ft_info_handler;
-	if (sigaction(SIGCHLD, &act, &oact) < 0)
-		ft_error("sigaction error", 130);
+	signal(SIGSEGV, ft_ssh);
 	if (sigaction(SIGINT, &act, &oact) < 0)
 		ft_error("sigaction error", 130);
-	signal(SIGSEGV, ft_ssh);
+	if (sigaction(SIGQUIT, &act, &oact) < 0)
+		ft_error("sigaction error", 130);
+	if (sigaction(SIGUSR1, &act, &oact) < 0)
+		ft_error("sigaction error", 130);
+	if (sigaction(SIGUSR2, &act, &oact) < 0)
+		ft_error("sigaction error", 130);
+	if (sigaction(SIGTTOU, &act, &oact) < 0)
+		ft_error("sigaction error", 130);
+	if (sigaction(SIGTTIN, &act, &oact) < 0)
+		ft_error("sigaction error", 130);
 }
 
-void	ft_handler(int signo)
-{
-	printf("chield died with signo:%d\n", signo);
-}
+// void	ft_handler(int signo, siginfo_t *info, void *context)
+// {
+// 	printf("entro en handler\n");
+// 	if (signo == SIGINT)
+// 	{
+// 		rl_on_new_line();
+// 		rl_replace_line("", 0);
+// 		rl_redisplay();
+// 	}
+// 	(void)context;
+// 	(void)info;
+// 	printf("chield died with signo:%d\n", signo);
+// }
 
 void	ft_info_handler(int signo, siginfo_t *info, void *context)
 {
+//	int	child;
+	static int	state;
 	int	status;
- 	int	child;
+//	int	signo2;
+//	pid_t	pid;
 
 	(void)context;
+
+//	(void)info;
+	//printf("entro en info handler\n");
+//	child = info->si_pid;
 	status = info->si_status;
-	child = info->si_pid;
-	
-	// printf("child: %d\n", child);
-	// printf("si_pid: %d\n", info->si_pid);
-	// // if (info->si_status)
-	// printf("status of %d: %d\n", child, info->si_status);
-	if (g_exit < 256)
-		g_exit = status;
-	// printf("signo: %d AND SIGCHLD: %d\n", signo, SIGCHLD);
-	if (signo == SIGCHLD)
+	//g_exit = status;
+//	signo2 = info->si_signo;
+//	pid = info->si_pid;
+//	printf("pid: %d status: %d y signo: %d, pid info: %d\n", child, status,	signo2, pid);
+//	printf("signo %d\n", signo2);
+	if (signo == SIGTTOU)
+		printf("hola\n");
+	if (signo == SIGTTIN)
+		write(2, "hola\n", 5);
+	if (signo == SIGUSR1)
 	{
-		//printf("child died\n");
+//		printf("estoy en child\n");
+		state = 1;
+			//	printf("state es %d\n", state);
 	}
-	if (signo == SIGINT)
+//	printf("child %d\n", child);
+//	printf("state despues es %d\n", state);
+	if (signo == SIGUSR2)
 	{
+		state = 0;
+	}
+//	printf("antes state %d child %d\n", state, child);
+
+	if (state == 0)
+	{
+		if (signo == SIGINT)
+		{
+			g_exit = 1;
+			write(2, "\n", 1);
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
+		else if (signo == SIGQUIT)
+		{
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
 		
-		//printf("sigint %s\n", rl_line_buffer);
-		//if (ioctl(STDIN_FILENO, TIOCSTI, "\n") < 0)
-		//	ft_error("ioctl erro", 130);
-		//printf("state %lu\n", rl_readline_state);
-		//write(2, "\n", 1);
-		g_exit = 1;
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		//if (RL_STATE_REDISPLAYING)
-		//	printf("true\n");
 	}
+	if (state == 1)
+	{
+		printf("SIGNO: %d\n", signo);
+		if (signo == SIGQUIT)
+		{
+			write(2, "Quit: 3", 7);
+			g_exit = 128 + status;
+			kill(0, SIGINT);
+		}
+		else if (signo == SIGINT && g_exit != 131)
+			g_exit = 128 + status;
+	/*	else if (signo == SIGINT)
+		{
+			state = 0;
+			write(1, "\n", 1);
+			rl_on_new_line();
+			rl_replace_line("", 0);
+		}*/
+
+	}
+
 }

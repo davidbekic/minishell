@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap.c                                          :+:      :+:    :+:   */
+/*   ft_getcmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 12:04:25 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/24 19:02:43 by dbekic           ###   ########.fr       */
+/*   Created: 2022/10/26 11:36:23 by dbekic            #+#    #+#             */
+/*   Updated: 2022/10/26 11:36:59 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	*ft_swap(void *dest, void *src, size_t count)
+int	ft_getcmd(char **buf, t_env **env)
 {
-	char	tmp;
-	char	*ptr;
-	char	*ptr_src;
+	char	*rl_copy;
 
-	ptr = (char *)dest;
-	ptr_src = (char *)src;
-	tmp = *ptr;
-	while (count--)
+	rl_copy = readline("🐚 ");
+	ft_memset(*buf, 0, ft_strlen(*buf) + 1);
+	ft_memcpy(*buf, rl_copy, ft_strlen(rl_copy) + 1);
+	if (*buf && **buf)
+		add_history(rl_copy);
+	g_exit = ft_prompt_parser(buf, *env);
+	free(rl_copy);
+	if (g_exit)
 	{
-		*ptr = *ptr_src;
-		*ptr_src = tmp;
+		ft_memset(*buf, 0, ft_strlen(*buf) + 1);
+		return (1);
 	}
-	return (dest);
+	if (ft_is_builtin(*buf))
+		return (ft_run_builtin(env, buf));
+	return (1);
 }

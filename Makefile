@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/25 11:08:55 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/26 11:53:53 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ SRC = srcs/main/main.c \
 	  srcs/parser/ft_aux_redir.c \
 	  srcs/parser/ft_prompt_expander.c \
 	  srcs/main/ft_signals.c \
-	  srcs/parser/ft_swap.c \
+	  srcs/main/ft_getcmd.c \
+	  srcs/main/ft_termios.c \
 	  srcs/parser/ft_error.c \
 	  srcs/builtins/ft_echo.c    \
 	  srcs/builtins/ft_env.c    \

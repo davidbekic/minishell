@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:34:06 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/21 21:48:52 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 11:52:13 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ t_cmd	*ft_builtparse(char *str)
 	ft_find(&str, estr, "");
 	if (str != estr)
 	{
-		printf("leftovers: %s\n", str);
-		ft_error("syntax", 1);
+		printf("leftovers, exiting minishell: %s\n", str);
+		return (NULL);
 	}
 	ft_terminate(cmd);
 	return (cmd);

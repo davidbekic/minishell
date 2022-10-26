@@ -6,11 +6,33 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:45:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/25 13:26:32 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 11:45:23 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	ft_is_space(char *str)
+{
+	int	i;
+
+	i = -1;
+	if (str[0] == '.' && str[1] == 0)
+	{
+		ft_printf(2, "minishell: .: filename argument required\n");
+		ft_printf(2, ".: usage: . filename [arguments]\n");
+		g_exit = 2;
+		return (1);
+	}	
+	while (str[++i] != 0)
+	{
+		if (!((str[i]) == '\t' || (str[i]) == '\v'
+				|| (str[i]) == '\r' || (str[i]) == '\n'
+				|| (str[i]) == '\f' || (str[i]) == 32))
+			return (0);
+	}
+	return (1);
+}
 
 static int	ft_quote_checker(char *str)
 {

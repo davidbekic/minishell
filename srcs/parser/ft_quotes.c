@@ -6,12 +6,28 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 13:48:44 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/21 21:09:31 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 11:53:25 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include "../../Libft/libft.h"
+
+void	*ft_swap(void *dest, void *src, size_t count)
+{
+	char	tmp;
+	char	*ptr;
+	char	*ptr_src;
+
+	ptr = (char *)dest;
+	ptr_src = (char *)src;
+	tmp = *ptr;
+	while (count--)
+	{
+		*ptr = *ptr_src;
+		*ptr_src = tmp;
+	}
+	return (dest);
+}
 
 int	ft_quotes(char **pstr, char *estr, char **ftoken, char **eftoken)
 {

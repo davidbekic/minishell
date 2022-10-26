@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/25 18:05:56 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 11:55:59 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,6 @@
 #include "../../Libft/libft.h"
 
 int	g_exit;
-
-static int	ft_is_space(char *str)
-{
-	int	i;
-
-	i = -1;
-	if (str[0] == '.' && str[1] == 0)
-	{
-		ft_printf(2, "minishell: .: filename argument required\n");
-		ft_printf(2, ".: usage: . filename [arguments]\n");
-		g_exit = 2;
-		return (1);
-	}
-		
-	while (str[++i] != 0)
-	{
-		if (!((str[i]) == '\t' || (str[i]) == '\v'
-				|| (str[i]) == '\r' || (str[i]) == '\n'
-				|| (str[i]) == '\f' || (str[i]) == 32))
-			return (0);
-	}
-	return (1);
-}
-
-static int	ft_getcmd(char **buf, t_env **env)
-{
-	char	*rl_copy;
-
-	rl_copy = readline("🐚 ");
-	ft_memset(*buf, 0, ft_strlen(*buf) + 1);
-	ft_memcpy(*buf, rl_copy, ft_strlen(rl_copy) + 1);
-	if (*buf && **buf)
-		add_history(rl_copy);
-	g_exit = ft_prompt_parser(buf, *env);
-	free(rl_copy);
-	if (g_exit)
-	{
-		ft_memset(*buf, 0, ft_strlen(*buf) + 1);
-		return (1);
-	}
-	if (ft_is_builtin(*buf))
-		return (ft_run_builtin(env, buf));
-	return (1);
-}
 
 int	main(int ac, char **av, char **main_env)
 {
@@ -88,10 +44,15 @@ int	main(int ac, char **av, char **main_env)
 			continue ;
 		pid = fork();
 		if (!pid)
+		{
+			kill(0, SIGUSR1);
+			ft_termios_child();
 			ft_runcmd(ft_parsecmd(buf), env);
+		}
 		wait(&pid);
-		if (WTERMSIG(pid) == 2 || WTERMSIG(pid) == 3)
-			g_exit = WTERMSIG(pid) + 128;
+		kill(0, SIGUSR2);
+		// if (WTERMSIG(pid) == 2 || WTERMSIG(pid) == 3)
+		// 	g_exit = WTERMSIG(pid) + 128;
 	}
 	return (0);
 }

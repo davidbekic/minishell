@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 20:39:31 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/21 21:47:26 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 11:52:38 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_p_struct(t_cmd *cmd, t_cmd *srcmd[])
 		tmp = tmpredir->cmd;
 		i++;
 		if (i >= _POSIX_OPEN_MAX)
-			ft_error("maximum number of open files exceed", 1);
+			ft_error("maximum number of open files exceeded", 1);
 	}
 }
 
