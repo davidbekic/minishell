@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/26 14:23:41 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 18:01:58 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 # define PIPE 3
 # define MAXARGS 250
 # define BUFFER_SIZE 4096
-
 
 extern int	g_exit;
 

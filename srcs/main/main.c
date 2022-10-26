@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/26 14:25:02 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 18:02:04 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ int	main(int ac, char **av, char **main_env)
 		kill(0, SIGUSR2);
 		if (WIFEXITED(pid))
 			g_exit = WEXITSTATUS(pid);
-		// if (WTERMSIG(pid) == 2 || WTERMSIG(pid) == 3)
-		// 	g_exit = WTERMSIG(pid) + 128;
 	}
 	return (0);
 }

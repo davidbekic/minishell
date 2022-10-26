@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:30:38 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/26 14:25:48 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 18:04:33 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,9 @@ void	ft_info_handler(int signo, siginfo_t *info, void *context)
 			kill(0, SIGINT);
 		}
 		else if (signo == SIGINT && g_exit != 131)
+		{
 			g_exit = 128 + status;
+		}
 		
 	/*	else if (signo == SIGINT)
 		{

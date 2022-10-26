@@ -6,31 +6,15 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/26 13:52:48 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 17:58:48 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../Libft/libft.h"
 
-static void	ft_exit_code_listener(int status)
-{
-	if (WIFEXITED(status))
-	{
-		printf("WEXITSTATUS: %d\n", WEXITSTATUS(status));
-		g_exit = WEXITSTATUS(status);
-	}
-	else if (WIFSIGNALED(status))
-	{
-		printf("status: %d\n", status);
-		printf("entering with WTERMSIG: %d\n", WTERMSIG(status));
-		if (WTERMSIG(status) == 2 || WTERMSIG(status) == 3)
-			g_exit = WTERMSIG(status) + 128;
-	}
-}
-
 static void	ft_exec_pipes(int file_d[2], t_dopipe *pipecmd,
-				int close_int, t_env *env)	
+				int close_int, t_env *env)
 {
 	close(close_int);
 	dup(file_d[close_int]);
@@ -47,9 +31,10 @@ static void	ft_runpipecmd(t_cmd *cmd, t_env *env)
 	t_dopipe	*pipecmd;
 	int			pid1;
 	int			pid2;
-	int			status2 = 0;
+	int			status;
 	int			file_d[2];
 
+	status = 0;
 	pipecmd = (t_dopipe *)cmd;
 	if (pipe(file_d) < 0)
 		ft_error("pipe error", 1);
@@ -64,8 +49,9 @@ static void	ft_runpipecmd(t_cmd *cmd, t_env *env)
 	close(file_d[0]);
 	close(file_d[1]);
 	waitpid(pid1, NULL, 0);
-	waitpid(pid2, &status2, 0);
-	ft_exit_code_listener(status2);
+	waitpid(pid2, &status, 0);
+	if (WIFEXITED(status))
+		g_exit = WEXITSTATUS(status);
 }
 
 static void	ft_runredir(t_cmd *cmd, t_env *env)
@@ -90,7 +76,7 @@ static void	ft_runredir(t_cmd *cmd, t_env *env)
 		}
 		else
 			if ((open(redircmd->file, redircmd->right, S_IRUSR
-					| S_IWUSR | S_IRGRP | S_IROTH)) < 0)
+						| S_IWUSR | S_IRGRP | S_IROTH)) < 0)
 				ft_error("open error", 1);
 		redircmd = (t_doredir *)srcmd[++j];
 	}
