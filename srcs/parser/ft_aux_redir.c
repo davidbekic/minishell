@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 20:39:31 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/26 11:52:38 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 13:34:14 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	ft_redir_exec(t_cmd *cmd)
 	else
 	{
 		close(redircmd->fd);
-		if ((open(redircmd->file, redircmd->right, RWRR)) < 0)
+		if ((open(redircmd->file, redircmd->right, S_IRUSR
+					| S_IWUSR | S_IRGRP | S_IROTH)) < 0)
 			ft_error("open error", 1);
 	}
 }
@@ -100,7 +101,7 @@ char **eftoken, int operator)
 	pointers[1] = 1;
 	if (operator == '+')
 	{
-		pointers[0] = WCA;
+		pointers[0] = O_WRONLY | O_CREAT | O_APPEND;
 		if (access(file, F_OK) == 0)
 			cmd = ft_buildredir(cmd, *ftoken, *eftoken, pointers);
 		else
@@ -108,7 +109,7 @@ char **eftoken, int operator)
 	}
 	else if (operator == '-')
 	{
-		pointers[0] = RDCE;
+		pointers[0] = O_RDWR | O_CREAT | O_EXCL;
 		cmd = ft_buildredir(cmd, *ftoken, *eftoken, pointers);
 	}
 	return (cmd);

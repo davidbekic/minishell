@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/26 11:55:59 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 14:25:02 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int ac, char **av, char **main_env)
 		exit(1);
 	env = ft_init_env(main_env);
 	buf = (char *)ft_calloc(sizeof(char) * BUFFER_SIZE, 1);
-	signal(SIGQUIT, SIG_IGN);
 	if (ac >= 3 && !ft_strncmp(av[1], "-c", 3))
 	{
 		ft_memset(buf, 0, ft_strlen(buf) + 1);
@@ -51,6 +50,8 @@ int	main(int ac, char **av, char **main_env)
 		}
 		wait(&pid);
 		kill(0, SIGUSR2);
+		if (WIFEXITED(pid))
+			g_exit = WEXITSTATUS(pid);
 		// if (WTERMSIG(pid) == 2 || WTERMSIG(pid) == 3)
 		// 	g_exit = WTERMSIG(pid) + 128;
 	}

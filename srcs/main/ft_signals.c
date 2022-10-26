@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:30:38 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/26 11:45:54 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 14:25:48 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_signals(void)
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = SA_RESTART | SA_SIGINFO; //| SA_NOCLDWAIT;
 	act.sa_sigaction = ft_info_handler;
-	signal(SIGSEGV, ft_ssh);
 	if (sigaction(SIGINT, &act, &oact) < 0)
 		ft_error("sigaction error", 130);
 	if (sigaction(SIGQUIT, &act, &oact) < 0)
@@ -38,6 +37,8 @@ void	ft_signals(void)
 		ft_error("sigaction error", 130);
 	if (sigaction(SIGTTIN, &act, &oact) < 0)
 		ft_error("sigaction error", 130);
+	signal(SIGUSR3, ft_ssh);
+	signal(SIGUSR4, ft_ssh);
 }
 
 // void	ft_handler(int signo, siginfo_t *info, void *context)
@@ -69,6 +70,7 @@ void	ft_info_handler(int signo, siginfo_t *info, void *context)
 //	child = info->si_pid;
 	status = info->si_status;
 	//g_exit = status;
+	// printf("status: %d\n", status);
 //	signo2 = info->si_signo;
 //	pid = info->si_pid;
 //	printf("pid: %d status: %d y signo: %d, pid info: %d\n", child, status,	signo2, pid);
@@ -85,8 +87,9 @@ void	ft_info_handler(int signo, siginfo_t *info, void *context)
 	}
 //	printf("child %d\n", child);
 //	printf("state despues es %d\n", state);
-	if (signo == SIGUSR2)
+	else if (signo == SIGUSR2)
 	{
+		// printf("entering here?\n");
 		state = 0;
 	}
 //	printf("antes state %d child %d\n", state, child);
@@ -111,15 +114,17 @@ void	ft_info_handler(int signo, siginfo_t *info, void *context)
 	}
 	if (state == 1)
 	{
-		printf("SIGNO: %d\n", signo);
+		// printf("SIGNO: %d\n", signo);
 		if (signo == SIGQUIT)
 		{
-			write(2, "Quit: 3", 7);
+			write(2, "Quit: 3\n", 8);
 			g_exit = 128 + status;
+			// printf("g_exit in SIGQUIT condition: %d\n", g_exit);
 			kill(0, SIGINT);
 		}
 		else if (signo == SIGINT && g_exit != 131)
 			g_exit = 128 + status;
+		
 	/*	else if (signo == SIGINT)
 		{
 			state = 0;

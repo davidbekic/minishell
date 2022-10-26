@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/26 12:04:27 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 14:23:41 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@
 # define REDIR 2
 # define PIPE 3
 # define MAXARGS 250
-# define RWRR (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
-# define WCA O_WRONLY | O_CREAT | O_APPEND
-# define RDCE O_RDWR | O_CREAT | O_EXCL
 # define BUFFER_SIZE 4096
+
 
 extern int	g_exit;
 

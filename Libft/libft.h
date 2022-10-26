@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 12:30:04 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/21 22:03:05 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 14:26:29 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
+# define SIGUSR3 SIGSEGV
+# define SIGUSR4 SIGBUS
 
 typedef struct s_list
 {

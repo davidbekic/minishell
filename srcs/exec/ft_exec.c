@@ -6,30 +6,31 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/26 11:57:14 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/26 13:52:48 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../Libft/libft.h"
 
-static void	ft_exit_code_listener(int pid1, int pid2)
+static void	ft_exit_code_listener(int status)
 {
-	printf("pid1: %d\npid2: %d\n", pid1, pid2);
-	printf("WIF: %d\n", WIFEXITED(pid2));
-	// exit(WIFEXITED(pid2));	
-	if (WIFEXITED(pid2))
-		g_exit = WEXITSTATUS(pid2);
-	else if (WIFSIGNALED(pid2))
+	if (WIFEXITED(status))
 	{
-		printf("entering with WTERMSIG: %d\n", WTERMSIG(pid2));
-		if (WTERMSIG(pid2) == 2 || WTERMSIG(pid2) == 3)
-			g_exit = WTERMSIG(pid2) + 128;
+		printf("WEXITSTATUS: %d\n", WEXITSTATUS(status));
+		g_exit = WEXITSTATUS(status);
+	}
+	else if (WIFSIGNALED(status))
+	{
+		printf("status: %d\n", status);
+		printf("entering with WTERMSIG: %d\n", WTERMSIG(status));
+		if (WTERMSIG(status) == 2 || WTERMSIG(status) == 3)
+			g_exit = WTERMSIG(status) + 128;
 	}
 }
 
 static void	ft_exec_pipes(int file_d[2], t_dopipe *pipecmd,
-				int close_int, t_env *env)
+				int close_int, t_env *env)	
 {
 	close(close_int);
 	dup(file_d[close_int]);
@@ -46,6 +47,7 @@ static void	ft_runpipecmd(t_cmd *cmd, t_env *env)
 	t_dopipe	*pipecmd;
 	int			pid1;
 	int			pid2;
+	int			status2 = 0;
 	int			file_d[2];
 
 	pipecmd = (t_dopipe *)cmd;
@@ -61,11 +63,9 @@ static void	ft_runpipecmd(t_cmd *cmd, t_env *env)
 		ft_exec_pipes(file_d, pipecmd, 0, env);
 	close(file_d[0]);
 	close(file_d[1]);
-	// wait(&pid1);
-	// wait(&pid2);
 	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
-	ft_exit_code_listener(pid1, pid2);
+	waitpid(pid2, &status2, 0);
+	ft_exit_code_listener(status2);
 }
 
 static void	ft_runredir(t_cmd *cmd, t_env *env)
@@ -89,7 +89,8 @@ static void	ft_runredir(t_cmd *cmd, t_env *env)
 				ft_error("open failed", 1);
 		}
 		else
-			if ((open(redircmd->file, redircmd->right, RWRR)) < 0)
+			if ((open(redircmd->file, redircmd->right, S_IRUSR
+					| S_IWUSR | S_IRGRP | S_IROTH)) < 0)
 				ft_error("open error", 1);
 		redircmd = (t_doredir *)srcmd[++j];
 	}
