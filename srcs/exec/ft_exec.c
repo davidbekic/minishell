@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/27 16:17:16 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 18:00:09 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	ft_runcmd(t_cmd *cmd, t_env *env)
 {
 	t_doexec	*execcmd;
 
-	signal(SIGQUIT, SIG_DFL);
 	if (cmd == 0)
 		exit (1);
 	if (cmd->type == EXEC)

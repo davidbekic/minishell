@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:19:20 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/26 11:24:12 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 18:05:14 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	increase_shlvl(t_env *env)
 	int		shlvl_int;
 
 	shlvl_int = ft_atoi(ft_expand(env, "SHLVL")) + 1;
+	if (!shlvl_int)
+		return ;
 	ft_bzero(shlvl, 20);
 	ft_memcpy(shlvl, "SHLVL=", 7);
 	if (shlvl_int > 999)
