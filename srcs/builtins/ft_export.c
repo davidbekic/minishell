@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/27 11:39:06 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 17:12:07 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ static int	ft_update_ex_var(char *key_value, int value_start, t_env *elem)
 
 	i = 0;
 	j = 0;
-	free(elem->value);
-	elem->value = malloc((ft_strlen(key_value) - value_start) + 1);
-	if ((key_value[value_start - 1]) == 0)
-		elem->value = NULL;
+	if (elem->value)
+		free(elem->value);
+	elem->value = NULL;
+	if ((key_value[value_start - 1]) != 0)
+		elem->value = malloc((ft_strlen(key_value) - value_start) + 1);
 	if (!elem->value)
-		return (1);
+		return (-1);
 	while (key_value[value_start + j] != 0)
 	{
 		i++;
@@ -56,6 +57,8 @@ int	ft_update_var(char *key_value, int value_start, t_env *env)
 	if (!elem)
 	{
 		elem = ft_create_elem(elem, key_value, value_start);
+		if (!elem)
+			return (-1);
 		aux = env->next;
 		env->next = elem;
 		elem->next = aux;
@@ -87,7 +90,7 @@ int	ft_export(char **names, t_env *env)
 		return (2);
 	while (*++names || ft_strlen(*names))
 	{
-		if (ft_strlen(*names) > 300)
+		if (ft_strlen(*names) > 600)
 		{
 			ft_printf(2, "too long variable name or value\n");
 			return (1);
@@ -99,7 +102,7 @@ int	ft_export(char **names, t_env *env)
 			printf("minishell: export: `%s': not a valid identifier\n", *names);
 		}
 		else if (!name)
-			ft_update_var(*names, ft_find_value(*names), env);
+			g_exit = ft_update_var(*names, ft_find_value(*names), env);
 	}
 	return (ret);
 }

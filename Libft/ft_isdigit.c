@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 12:41:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/27 11:39:57 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 16:55:38 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_ssh(int signal)
 {
 	signal = 1;
-	printf("\n");
+	printf("oops\n");
 	exit(signal);
 }
 

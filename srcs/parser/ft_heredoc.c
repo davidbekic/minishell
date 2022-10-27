@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:05:05 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/27 14:10:53 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 16:17:14 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_heredoc(t_cmd *cmd, t_env *env)
 			ft_error("write error", 1);
 	}
 	if ((open(".tmp", O_RDONLY)) < 0)
-		ft_error("open error", 1);
+		ft_error("open error\n", 1);
 	close(3);
 	unlink(".tmp");
 	dup2(4, 0);

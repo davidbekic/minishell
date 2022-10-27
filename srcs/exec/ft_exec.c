@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/27 14:38:36 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 16:17:16 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	ft_runredir(t_cmd *cmd, t_env *env)
 		}
 		else
 			if ((open(redircmd->file, redircmd->right, U | W | G | O)) < 0)
-				ft_error("open error", 1);
+				ft_error("open error\n", 1);
 		redircmd = (t_doredir *)srcmd[++j];
 	}
 	ft_redir_exec(srcmd[0]);

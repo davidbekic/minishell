@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:46:03 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/27 14:41:01 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 16:13:14 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ void	ft_main_loop(char **buf, t_env **env)
 		wait(&pid);
 		kill(0, SIGUSR2);
 		if (WIFEXITED(pid))
-        {
-            printf("WEXITSTATUS(pid): %d\n", WEXITSTATUS(pid));
 			g_exit = WEXITSTATUS(pid);
-        }
 	}
 }
