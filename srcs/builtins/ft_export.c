@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/25 18:12:58 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 11:39:06 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	ft_export(char **names, t_env *env)
 	ret = 0;
 	if (!names[1])
 		ft_alphabetic_env(env);
-	if (ft_options(names[1]))
+	else if (ft_options(names[1]))
 		return (2);
 	while (*++names || ft_strlen(*names))
 	{

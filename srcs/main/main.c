@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/26 18:02:04 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 12:10:49 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(int ac, char **av, char **main_env)
 {
 	static char		*buf;
 	t_env			*env;
-	int				pid;
 
 	if ((ac > 1 && av[0][0] == '&') || !*main_env)
 		exit(1);
@@ -35,23 +34,6 @@ int	main(int ac, char **av, char **main_env)
 	}
 	if (!buf | !env)
 		ft_free_env(env, 1);
-	ft_termios();
-	ft_signals();
-	while (ft_getcmd(&buf, &env) >= 0)
-	{
-		if (ft_is_builtin(buf) || ft_is_space(buf))
-			continue ;
-		pid = fork();
-		if (!pid)
-		{
-			kill(0, SIGUSR1);
-			ft_termios_child();
-			ft_runcmd(ft_parsecmd(buf), env);
-		}
-		wait(&pid);
-		kill(0, SIGUSR2);
-		if (WIFEXITED(pid))
-			g_exit = WEXITSTATUS(pid);
-	}
+	ft_main_loop(&buf, &env);
 	return (0);
 }

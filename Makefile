@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/26 11:53:53 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/27 14:28:27 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC = srcs/main/main.c \
 	  srcs/main/ft_signals.c \
 	  srcs/main/ft_getcmd.c \
 	  srcs/main/ft_termios.c \
+	  srcs/main/ft_main_loop.c \
 	  srcs/parser/ft_error.c \
 	  srcs/builtins/ft_echo.c    \
 	  srcs/builtins/ft_env.c    \
@@ -85,7 +86,7 @@ $(NAME): $(OBJ) includes/minishell.h Libft/libft.h Libft/libft.a
 	@rm -f minishell.d
 	@echo "$(GREEN)Compilado ✅ $@ $(RESET)"
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c includes/minishell.h 
+$(OBJDIR)/%.o: $(SRCDIR)/%.c includes/minishell.h
 	@echo "$(GREEN)Compilando $< de $@ $(RESET)"
 	@mkdir -p $(@D)
 	gcc -I$(RFLAGS) $(CFLAGS) -o $@ -c $<

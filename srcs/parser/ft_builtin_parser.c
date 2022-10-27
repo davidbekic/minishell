@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:34:06 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/26 11:52:13 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 13:16:01 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,11 @@ t_cmd	*ft_builtexec(char **pstr, char *estr)
 	{
 		token = ft_gettoken(pstr, estr, &ftoken, &eftoken);
 		if (token != 'z')
-			ft_error("syntax", 1);
+		{
+			printf("syntax\n");
+			return (NULL);
+			// ft_error("syntax", 1);
+		}
 		if ((ft_setcmd(&cmd, ftoken, eftoken, 0) >= MAXARGS))
 			break ;
 	}

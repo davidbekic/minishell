@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 13:46:45 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/19 18:14:40 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/27 12:15:09 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRC =	ft_atoi.c \
 		ft_strmapi.c \
 		ft_strnstr.c \
 		ft_strrchr.c \
+		ft_strchrflag.c \
 		ft_strchrnul.c \
 		ft_strtrim.c \
 		ft_substr.c \

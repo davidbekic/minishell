@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_strchrflag.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 12:41:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/27 11:39:57 by dbekic           ###   ########.fr       */
+/*   Created: 2022/10/25 12:41:52 by irifarac          #+#    #+#             */
+/*   Updated: 2022/10/27 12:14:59 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_ssh(int signal)
+char	*ft_strchrflag(const char *str, int ch, int flag)
 {
-	signal = 1;
-	printf("\n");
-	exit(signal);
-}
+	int	position;
 
-int	ft_isdigit(int c)
-{
-	if ((c >= 48) && (c <= 57))
+	position = 0;
+	while (str[position] != '\0')
 	{
-		return (1);
+		if (str[position] == (char)ch && flag == 0)
+			return ((char *)str + position);
+		position++;
 	}
-	else
-		return (0);
+	if (str[position] == (char)ch && flag == 0)
+		return ((char *)str + position);
+	return (0);
 }

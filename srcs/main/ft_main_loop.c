@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getcmd.c                                        :+:      :+:    :+:   */
+/*   ft_main_loop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 11:36:23 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/27 13:16:10 by dbekic           ###   ########.fr       */
+/*   Created: 2022/10/27 11:46:03 by dbekic            #+#    #+#             */
+/*   Updated: 2022/10/27 14:41:01 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_getcmd(char **buf, t_env **env)
+void	ft_main_loop(char **buf, t_env **env)
 {
-	char	*rl_copy;
+	int	pid;
 
-	ft_termios();
-	ft_signals();
-	rl_copy = readline("🐚 ");
-	ft_memset(*buf, 0, ft_strlen(*buf) + 1);
-	ft_memcpy(*buf, rl_copy, ft_strlen(rl_copy) + 1);
-	if (*buf && **buf)
-		add_history(rl_copy);
-	g_exit = ft_prompt_parser(buf, *env);
-	free(rl_copy);
-	if (g_exit)
+	while (ft_getcmd(buf, env) >= 0)
 	{
-		ft_memset(*buf, 0, ft_strlen(*buf) + 1);
-		return (1);
+		if (ft_is_builtin(*buf) || ft_is_space(*buf))
+			continue ;
+		pid = fork();
+		if (!pid)
+		{
+			kill(0, SIGUSR1);
+			ft_termios_child();
+			ft_runcmd(ft_parsecmd(*buf), *env);
+		}
+		wait(&pid);
+		kill(0, SIGUSR2);
+		if (WIFEXITED(pid))
+        {
+            printf("WEXITSTATUS(pid): %d\n", WEXITSTATUS(pid));
+			g_exit = WEXITSTATUS(pid);
+        }
 	}
-	if (ft_is_builtin(*buf))
-		return (ft_run_builtin(env, buf));
-	return (1);
 }

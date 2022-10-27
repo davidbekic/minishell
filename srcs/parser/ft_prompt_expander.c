@@ -6,11 +6,20 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:16:58 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/23 13:03:02 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 13:42:13 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+// static int	ft_unallowed_char(char *str)
+// {
+// 	if (!(str[0] >= 'a' && str[0] <= 'z')
+// 			&& !(str[0] >= 'A' && str[0] <= 'Z')
+// 			&& str[0] != '_' && !(str[0] >= '0' && str[0] <= '9'))
+// 		return (1);
+// 	return (0);
+// }
 
 static int	ft_home_check(char *str, int pos)
 {
@@ -61,7 +70,8 @@ void	ft_prompt_expander(char **buf, t_env *env)
 	while (*(dump + i[0]) && i[1] < BUFFER_SIZE)
 	{
 		ft_quote_exit_home(dump, buf, i);
-		if (dump[i[0]] == '$' && i[2] != '\'')
+		if (dump[i[0]] == '$' && i[2] != '\'' && dump[i[0] + 1] != 32
+			&& (dump[i[0] + 1] != '\"'))
 		{
 			if (ft_expand(env, dump + i[0] + 1) != NULL)
 				ft_memcpy(*(buf) + i[1],

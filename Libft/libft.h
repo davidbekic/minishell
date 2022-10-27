@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 12:30:04 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/26 14:26:29 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 12:15:23 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ char	*ft_strchrnul(const char *s, int c);
 void	ft_init_zero(int *i, int *j);
 size_t	ft_counter(char const *s, char c);
 void	ft_ssh(int signal);
+char	*ft_strchrflag(const char *str, int ch, int flag);
 
 #endif

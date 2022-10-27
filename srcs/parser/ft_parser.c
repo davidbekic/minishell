@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:19:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/21 21:48:35 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 14:11:47 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_cmd	*ft_parseredirs(char **pstr, char *estr, t_cmd *cmd)
 	{
 		operator = ft_gettoken(pstr, estr, 0, 0);
 		if (ft_gettoken(pstr, estr, &ftoken, &eftoken) != 'z')
-			ft_error("syntax error near unexpected token 'newline'\n", 127);
+			ft_error("syntax error near unexpected token 'newline'\n", 258);
 		if (operator == '<' || operator == '>')
 			cmd = ft_simple_redir(cmd, &ftoken, &eftoken, operator);
 		else if (operator == '+' || operator == '-')
