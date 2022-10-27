@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 18:08:29 by davidbekic        #+#    #+#             */
-/*   Updated: 2022/10/27 18:11:51 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 19:10:13 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_find_command(t_doexec *execcmd, t_env **env)
 	ret = 0;
 	if (!(ft_strcmp(execcmd->names[0], "export")))
 	{
-		ret = ft_export(execcmd->names, *env);
+		return (ft_export(execcmd->names, *env));
 		if (g_exit == -1)
 			return (g_exit);
 		else

@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:17:47 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/27 18:17:15 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 20:04:17 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,12 @@ int	main(int ac, char **av, char **main_env)
 	if ((ac > 1 && av[0][0] == '&') || !*main_env)
 		exit(1);
 	env = ft_init_env(main_env);
-	buf = (char *)ft_calloc(sizeof(char) * BUFFER_SIZE, 1);
+	buf = (char *)ft_calloc(sizeof(char) * BUFFER_SIZE, 1);	
 	if (!buf | !env)
 		ft_free_env(env, 1);
 	ft_main_loop(&buf, &env);
 	return (0);
 }
-
-
-
-
-
 
 	// if (ac >= 3 && !ft_strncmp(av[1], "-c", 3))
 	// {

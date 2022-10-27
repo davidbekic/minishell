@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/27 17:12:07 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 19:19:44 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@ static int	ft_update_ex_var(char *key_value, int value_start, t_env *elem)
 		free(elem->value);
 	elem->value = NULL;
 	if ((key_value[value_start - 1]) != 0)
+	{
 		elem->value = malloc((ft_strlen(key_value) - value_start) + 1);
-	if (!elem->value)
-		return (-1);
+		if (!elem->value)	
+			return (-1);
+	}
+	else
+		return (0);
 	while (key_value[value_start + j] != 0)
 	{
 		i++;
