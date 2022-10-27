@@ -19,10 +19,10 @@ UNAME_S := $(shell uname -s)
 NAME = minishell
 CFLAGS = -Wall -Werror -Wextra -MMD
 
-#LDFLAGS = /opt/homebrew/opt/readline/lib
-#RFLAGS = /opt/homebrew/opt/readline/include
-LDFLAGS = /Users/${USER}/homebrew/opt/readline/lib
-RFLAGS = /Users/${USER}/homebrew/opt/readline/include
+LDFLAGS = /opt/homebrew/opt/readline/lib
+RFLAGS = /opt/homebrew/opt/readline/include
+#LDFLAGS = /Users/${USER}/homebrew/opt/readline/lib
+#RFLAGS = /Users/${USER}/homebrew/opt/readline/include
 
 # Folders
 OBJDIR = obj

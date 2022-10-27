@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/27 19:19:44 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 23:23:45 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_update_ex_var(char *key_value, int value_start, t_env *elem)
 	if ((key_value[value_start - 1]) != 0)
 	{
 		elem->value = malloc((ft_strlen(key_value) - value_start) + 1);
-		if (!elem->value)	
+		if (!elem->value)
 			return (-1);
 	}
 	else
@@ -47,10 +47,8 @@ int	ft_update_var(char *key_value, int value_start, t_env *env)
 	t_env	*aux;
 	char	key[BUFFER_SIZE];
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	aux = env;
 	ft_bzero(key, BUFFER_SIZE);
 	ft_memcpy(key, key_value, value_start - 1);

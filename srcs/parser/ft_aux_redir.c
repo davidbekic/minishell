@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux_redir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 20:39:31 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/27 16:17:14 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 22:07:31 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char **eftoken, int operator)
 		pointers[1] = 1;
 		if (access(file, F_OK) == 0)
 		{
-			pointers[0] = O_WRONLY | O_APPEND;
+			pointers[0] = O_WRONLY | O_TRUNC;
 			cmd = ft_buildredir(cmd, *ftoken, *eftoken, pointers);
 		}
 		else

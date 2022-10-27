@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signals.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:30:38 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/27 14:41:30 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 23:08:08 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	ft_info_handler(int signo, siginfo_t *info, void *context)
 		}
 		else if (signo == SIGINT && g_exit != 131)
 		{
-			write(1, "\n", 1);
+			// write(1, "\n", 1);
 			g_exit = 128 + status;
 		}
 		

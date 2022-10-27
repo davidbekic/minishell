@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/27 14:27:09 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/27 23:05:09 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int		ft_update_var(char *key_value, int value_start, t_env *env);
 // exec
 int		ft_run_builtin(t_env **env, char **buf);
 int		ft_execve(t_env *env, char **names);
-int		ft_find_command(t_doexec *cmd, t_env **env);
+int		ft_find_command(t_doexec *cmd, t_env **env, char *buf);
 // void	ft_word_to_lower(char *command);
 int		ft_is_file_or_dir(char *str);
 int		ft_is_file(const char *path);
@@ -163,6 +163,6 @@ int		ft_pwd(t_env *env);
 int		ft_echo(char **names);
 int		ft_unset(char **names, t_env **env);
 int		ft_cd(t_env *env, char **names);
-void	ft_exit(char **names);
+void	ft_exit(t_doexec *execcmd);
 
 #endif
