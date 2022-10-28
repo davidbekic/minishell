@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/27 23:05:09 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/28 11:37:15 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ t_cmd	*ft_builtparse(char *str);
 void	ft_heredoc(t_cmd *cmd, t_env *env);
 void	ft_runcmd(t_cmd *cmd, t_env *env);
 int		ft_prompt_parser(char **buf, t_env *env);
+int		ft_in_quotes(char *tmp, unsigned char *in_quote, int *counter);
 int		ft_setcmd(t_doexec **cmd,
 			char *ftoken, char *eftoken, int sign);
 int		ft_is_builtin(char *buf);
@@ -100,7 +101,6 @@ t_cmd	*ft_double_redir(t_cmd *cmd,
 void	ft_p_struct(t_cmd *cmd, t_cmd *srcmd[]);
 void	ft_prompt_expander(char **buf, t_env *env);
 void	ft_error(char *str, int exit_code);
-void	*ft_swap(void *dest, void *src, size_t count);
 int		ft_is_space(char *str);
 int		ft_true_quotes(char **pstr, char *estr);
 int		ft_change_token(char **pstr, char *estr);
@@ -152,7 +152,7 @@ int		ft_is_file(const char *path);
 void	ft_info_handler(int signo, siginfo_t *info, void *context);
 // void    ft_handler(int signo, siginfo_t *info, void *context);
 // void	ft_signals(void);
-void	ft_termios(void);
+void	ft_termios(char *buf, t_env *env);
 void	ft_termios_child(void);
 void	ft_signals(void);
 

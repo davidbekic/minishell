@@ -6,12 +6,12 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 12:12:12 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/27 14:35:42 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/28 09:09:39 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include "libft.h"
+#include "../../includes/minishell.h"
 
 static int	ft_putstring(int fd, char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:34:06 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/27 16:15:30 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/28 12:12:38 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_cmd	*ft_builtparse(char *str)
 	ft_find(&str, estr, "");
 	if (str != estr)
 	{
-		printf("leftovers, exiting minishell: %s\n", str);
+		ft_printf(2, "leftovers, exiting minishell: %s\n", str);
 		return (NULL);
 	}
 	ft_terminate(cmd);
@@ -84,6 +84,8 @@ t_cmd	*ft_builtexec(char **pstr, char *estr)
 	while (*pstr < estr)
 	{
 		token = ft_gettoken(pstr, estr, &ftoken, &eftoken);
+		if (!token)
+			break ;
 		if (token != 'z')
 			return (NULL);
 		if ((ft_setcmd(&cmd, ftoken, eftoken, 0) >= MAXARGS))

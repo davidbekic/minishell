@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:16:58 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/27 17:41:24 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/28 08:02:49 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	ft_home_check(char *str, int pos)
 
 static int	ft_is_exit(char *str)
 {
-	if (!(strncmp(str, "$?", 2)))
+	if (!(ft_strncmp(str, "$?", 2)))
 		return (1);
 	else
 		return (0);
@@ -56,7 +56,7 @@ void	ft_prompt_expander(char **buf, t_env *env)
 	char			dump[BUFFER_SIZE];
 
 	ft_memset(i, 0, 12);
-	bzero(dump, BUFFER_SIZE);
+	ft_bzero(dump, BUFFER_SIZE);
 	ft_memcpy(dump, *buf, ft_strlen(*buf));
 	while (*(dump + i[0]) && i[1] < BUFFER_SIZE - 600)
 	{

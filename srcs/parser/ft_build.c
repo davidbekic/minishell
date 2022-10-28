@@ -6,14 +6,14 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:04:56 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/21 21:34:39 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/28 11:37:10 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../Libft/libft.h"
 
-t_cmd	*ft_buildexec(void)
+struct s_cmd	*ft_buildexec(void)
 {
 	t_doexec	*cmd;
 
@@ -25,7 +25,7 @@ t_cmd	*ft_buildexec(void)
 	return ((t_cmd *)cmd);
 }
 
-t_cmd	*ft_buildredir(t_cmd *scmd, char *file, char *efile,
+struct s_cmd	*ft_buildredir(t_cmd *scmd, char *file, char *efile,
 int pointers[2])
 {
 	t_doredir	*cmd;
@@ -43,7 +43,7 @@ int pointers[2])
 	return ((t_cmd *)cmd);
 }
 
-t_cmd	*ft_buildpipe(t_cmd *left, t_cmd *right)
+struct s_cmd	*ft_buildpipe(t_cmd *left, t_cmd *right)
 {
 	t_dopipe	*cmd;
 

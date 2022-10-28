@@ -6,7 +6,7 @@
 #    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 13:46:45 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/27 12:15:09 by dbekic           ###   ########.fr        #
+#    Updated: 2022/10/28 09:10:32 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ SRC =	ft_atoi.c \
 		ft_memmove.c \
 		ft_memset.c \
 		ft_strjoin.c \
-		ft_printf.c \
 		ft_putchar_fd.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c \

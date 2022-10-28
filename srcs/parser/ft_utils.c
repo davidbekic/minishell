@@ -6,22 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:22:00 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/27 16:15:11 by dbekic           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../../includes/minishell.h"
-#include "../../Libft/libft.h"
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: irifarac <irifarac@student.42barcel>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 12:22:00 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/27 11:52:34 by irifarac         ###   ########.fr       */
+/*   Updated: 2022/10/28 17:07:42 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +87,12 @@ int	ft_gettoken(char **pstr, char *estr, char **ftoken, char **eftoken)
 	int			flag;
 
 	flag = ft_true_quotes(pstr, estr);
-	if (flag != 0)
+	if (flag)
+	{
 		flag = ft_change_token(pstr, estr);
+		if (flag == 0)
+			flag = 1;
+	}
 	tmp = *pstr;
 	while (tmp < estr && ft_strchrflag("\t\r\n\v ", *tmp, flag))
 		tmp++;

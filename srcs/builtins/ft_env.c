@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:39:37 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/27 16:57:45 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/28 10:38:33 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	ft_alphabetic_write(t_env **temp, t_env **aux, t_env *env, int *j)
 {
 	if (ft_strncmp((*temp)->key, "_", 3) != 0)
 	{
-		if (!strcmp("A", (*temp)->key))
+		if (!ft_strcmp("A", (*temp)->key))
 			printf("temp->key: %s\n", (*temp)->key);
 		ft_printf(1, "declare -x %s", (*temp)->key);
 		if ((*temp)->value)

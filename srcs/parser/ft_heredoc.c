@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:05:05 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/27 16:17:14 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/28 08:07:38 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@ static int	getbuf(char **buf, int size, char *delimit)
 	if (ft_strncmp(*buf, delimit, ft_strlen(*buf)) == 0)
 		return (-1);
 	return (0);
+}
+
+void	ft_heredoc_reset(char *buf)
+{
+	close(3);
+	unlink(".tmp");
+	dup2(4, 0);
+	close(4);
+	free(buf);
 }
 
 void	ft_heredoc(t_cmd *cmd, t_env *env)
@@ -46,10 +55,6 @@ void	ft_heredoc(t_cmd *cmd, t_env *env)
 	}
 	if ((open(".tmp", O_RDONLY)) < 0)
 		ft_error("open error\n", 1);
-	close(3);
-	unlink(".tmp");
-	dup2(4, 0);
-	close(4);
-	free(buf);
+	ft_heredoc_reset(buf);
 	ft_runcmd(redircmd->cmd, env);
 }
