@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:41:04 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/25 12:48:41 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/28 19:05:13 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static int	ft_find_exec(t_env *env, char **names)
 	char	*cpath;
 
 	path = ft_expand(env, "PATH");
+	ft_bzero(tstr, BUFFER_SIZE);
 	cpath = path;
 	if (ft_is_alias(names[0]))
 	{
