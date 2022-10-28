@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/28 14:00:55 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/28 19:06:56 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ int	ft_update_var(char *key_value, int value_start, t_env *env)
 	t_env	*elem;
 	t_env	*aux;
 	char	key[BUFFER_SIZE];
-	int		i;
 
-	i = 0;
 	aux = env;
 	ft_bzero(key, BUFFER_SIZE);
 	ft_memcpy(key, key_value, value_start - 1);
