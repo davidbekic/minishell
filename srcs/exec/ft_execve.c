@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:41:04 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/28 19:05:13 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 12:53:48 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static int	ft_is_alias(char *str)
 
 static int	ft_find_exec(t_env *env, char **names)
 {
-	char	tstr[BUFFER_SIZE];
+	char	tstr[BUFFER_SIZE - 1];
 	char	*path;
 	char	*pstr;
 	char	*cpath;
 
 	path = ft_expand(env, "PATH");
-	ft_bzero(tstr, BUFFER_SIZE);
+	ft_bzero(tstr, BUFFER_SIZE - 1);
 	cpath = path;
 	if (ft_is_alias(names[0]))
 	{
@@ -46,7 +46,7 @@ static int	ft_find_exec(t_env *env, char **names)
 			ft_memcpy(tstr + (pstr - cpath) + (pstr > cpath),
 				names[0], ft_strlen(names[0]));
 			execve(tstr, names, env->envp);
-			ft_memset(tstr, 0, BUFFER_SIZE);
+			ft_memset(tstr, 0, BUFFER_SIZE - 1);
 			cpath = pstr + 1;
 			if (pstr[0] != ':')
 				return (127);

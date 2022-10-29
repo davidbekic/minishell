@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:15:16 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/28 14:01:45 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 14:09:36 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_run_builtin(t_env **env, char **buf)
 		ft_free_env(*env, 1);
 	}
 	builtin_doexec = (t_doexec *) builtin_cmd;
-	g_exit = ft_find_command(builtin_doexec, env, *buf);
+	g_exit = ft_find_command(builtin_doexec, env);
 	free(builtin_doexec);
 	if (g_exit == -1)
 	{

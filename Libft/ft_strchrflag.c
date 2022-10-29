@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 12:41:52 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/27 12:14:59 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 13:56:19 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	*ft_strchrflag(const char *str, int ch, int flag)
 	position = 0;
 	while (str[position] != '\0')
 	{
+		//printf("str[%d]: %c\n", position, str[position]);
 		if (str[position] == (char)ch && flag == 0)
 			return ((char *)str + position);
 		position++;

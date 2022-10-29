@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 18:08:29 by davidbekic        #+#    #+#             */
-/*   Updated: 2022/10/28 11:28:20 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 14:09:02 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_word_to_lower(char **command)
 		command[0][i] = ft_tolower(command[0][i]);
 }
 
-int	ft_find_command(t_doexec *execcmd, t_env **env, char *buf)
+int	ft_find_command(t_doexec *execcmd, t_env **env)
 {
 	int	ret;
 
@@ -29,12 +29,11 @@ int	ft_find_command(t_doexec *execcmd, t_env **env, char *buf)
 	// printf("execcmmd->names[0]: %s\n", execcmd->names[0]);
 	// printf("execcmmd->names[1]: %s\n", execcmd->names[1]);
 	if (!(ft_strcmp(execcmd->names[0], "export")))
-		return (ft_export(execcmd->names, *env));
+		return (ft_export(execcmd->names, env));
 	else if (!(ft_strcmp(execcmd->names[0], "unset")))
 		return (ft_unset(execcmd->names, env));
 	else if (!(ft_strcmp(execcmd->names[0], "exit")))
 	{
-		free(buf);
 		ft_free_env(*env, 0);
 		ft_exit(execcmd);
 	}

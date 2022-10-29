@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:21:35 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/29 10:43:36 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/29 14:17:39 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static int	ft_num_arg(char *str)
 {
-	size_t	i;
+	int	i;
 
-	i = 0;
-	while (str[i] != 0)
+	i = -1;
+	// while (i++ < (int) ft_strlen(str))
+	while (str[++i] != 0)
 	{
 		if (i == 0 && (str[i] == '-' || str[i] == '+'))
 			continue ;
-		if (str[i] >= '0' && str[i] <= '9')
+		if (!ft_isdigit(str[i]))
 			return (1);
-		i++;
 	}
 	return (0);
 }
@@ -33,7 +33,7 @@ void	ft_exit(t_doexec *execcmd)
 	unsigned char	ret;
 
 	ret = 0;
-	ft_printf(1, "exit\n");
+	// ft_printf(1, "exit\n");
 	if (execcmd->names[2] && !ft_num_arg(execcmd->names[1]))
 	{
 		ft_printf(2, "minishell: exit: too many arguments\n");
@@ -51,6 +51,7 @@ void	ft_exit(t_doexec *execcmd)
 		else
 			ret = (unsigned char) ft_atoi(execcmd->names[1]);
 	}
+	free(execcmd->names[0]);
 	free(execcmd);
 	exit (ret);
 }

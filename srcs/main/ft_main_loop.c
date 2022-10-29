@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 11:46:03 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/28 17:58:59 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 13:47:37 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_main_loop(char **buf, t_env **env)
 
 	while (ft_getcmd(buf, env) >= 0)
 	{
-		if (ft_is_builtin(*buf) || ft_is_space(*buf) || g_exit == 258)
+		if (ft_is_builtin(*buf) || ft_is_space(*buf))
 			continue ;
 		pid = fork();
 		if (!pid)

@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/28 11:37:15 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 14:09:11 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,16 +134,15 @@ int		ft_find_value(char *pattern);
 char	*ft_expand(t_env *env, char *key);
 void	ft_free_env(t_env *env, int err);
 void	ft_free_envp(char **envp);
-//void    ft_update_var(char *key, char *value, t_env *list);
 void	ft_alphabetic_env(t_env *env);
 int		ft_var_name_check(char *str, int len);
 int		ft_var_name_stop(char *str);
-int		ft_update_var(char *key_value, int value_start, t_env *env);
+int		ft_update_var(char *key_value, int value_start, t_env **env);
 
 // exec
 int		ft_run_builtin(t_env **env, char **buf);
 int		ft_execve(t_env *env, char **names);
-int		ft_find_command(t_doexec *cmd, t_env **env, char *buf);
+int		ft_find_command(t_doexec *cmd, t_env **env);
 // void	ft_word_to_lower(char *command);
 int		ft_is_file_or_dir(char *str);
 int		ft_is_file(const char *path);
@@ -158,7 +157,7 @@ void	ft_signals(void);
 
 //Built-ins
 int		ft_env(t_env *env, char **names);
-int		ft_export(char **names, t_env *env);
+int		ft_export(char **names, t_env **env);
 int		ft_pwd(t_env *env);
 int		ft_echo(char **names);
 int		ft_unset(char **names, t_env **env);

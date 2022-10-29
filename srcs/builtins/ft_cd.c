@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 17:09:38 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/24 19:04:47 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 13:06:05 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static int	ft_is_file_or_no_oldpwd_or_no_home(char **names, t_env *env)
 
 static void	ft_update_both_vars(t_env *env, char strs[3][BUFFER_SIZE])
 {
-	ft_update_var(strs[1], 4, env);
-	ft_update_var(strs[0], 7, env);
+	ft_update_var(strs[1], 4, &env);
+	ft_update_var(strs[0], 7, &env);
 }
 
 int	ft_cd(t_env *env, char **names)

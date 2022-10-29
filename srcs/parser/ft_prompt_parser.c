@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:45:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/28 17:20:07 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 14:27:10 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	ft_is_space(char *str)
 	int	i;
 
 	i = -1;
-	if (str[0] == '.' && str[1] == 0)
-	{
-		ft_printf(2, "minishell: .: filename argument required\n");
-		ft_printf(2, ".: usage: . filename [arguments]\n");
-		g_exit = 2;
-		return (1);
-	}	
+	// if (str[0] == '.' && str[1] == 0)
+	// {
+	// 	ft_printf(2, "minishell: .: filename argument required\n");
+	// 	ft_printf(2, ".: usage: . filename [arguments]\n");
+	// 	g_exit = 2;
+	// 	return (1);
+	// }	
 	while (str[++i] != 0)
 	{
 		if (!((str[i]) == '\t' || (str[i]) == '\v'

@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/28 19:06:56 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 13:22:59 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,26 @@ static int	ft_update_ex_var(char *key_value, int value_start, t_env *elem)
 	return (0);
 }
 
-int	ft_update_var(char *key_value, int value_start, t_env *env)
+int	ft_update_var(char *key_value, int value_start, t_env **env)
 {
 	t_env	*elem;
 	t_env	*aux;
-	char	key[BUFFER_SIZE];
+	char	key[BUFFER_SIZE - 1];
 
-	aux = env;
-	ft_bzero(key, BUFFER_SIZE);
+	aux = *env;
+	ft_bzero(key, BUFFER_SIZE - 1);
 	ft_memcpy(key, key_value, value_start - 1);
 	key[ft_strlen(key)] = 0;
-	elem = ft_find_elem(env, key);
-	if (ft_strcmp(env->next->key, "_") == 0)
+	elem = ft_find_elem(*env, key);
+	if (ft_strcmp((*env)->next->key, "_") == 0)
 		return (0);
 	if (!elem)
 	{
 		elem = ft_create_elem(elem, key_value, value_start);
 		if (!elem)
 			return (-1);
-		aux = env->next;
-		env->next = elem;
+		aux = (*env)->next;
+		(*env)->next = elem;
 		elem->next = aux;
 	}
 	else
@@ -78,14 +78,14 @@ static int	ft_options(char *str)
 	return (0);
 }
 
-int	ft_export(char **names, t_env *env)
+int	ft_export(char **names, t_env **env)
 {
 	short	ret;
 	short	name;
 
 	ret = 0;
 	if (!names[1])
-		ft_alphabetic_env(env);
+		ft_alphabetic_env(*env);
 	else if (ft_options(names[1]))
 		return (2);
 	while (*++names || ft_strlen(*names))

@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:32:59 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/27 13:13:39 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 12:53:34 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ char	*ft_expand(t_env *env, char *key)
 {
 	int			i;
 	void		*ret;
-	char		temp_buf[BUFFER_SIZE];
+	char		temp_buf[BUFFER_SIZE - 1];
 
 	i = 0;
 	ret = NULL;
-	ft_bzero(temp_buf, BUFFER_SIZE);
+	ft_bzero(temp_buf, BUFFER_SIZE - 1);
 	ft_memcpy(temp_buf, key, ft_strlen(key));
 	temp_buf[ft_strlen(key)] = 0;
 	while (temp_buf[i] != 0)

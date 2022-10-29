@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+         #
+#    By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/29 10:37:57 by davidbekic       ###   ########.fr        #
+#    Updated: 2022/10/29 14:33:37 by dbekic           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ UNAME_S := $(shell uname -s)
 NAME = minishell
 CFLAGS = -Wall -Werror -Wextra -MMD -fsanitize=address
 
-LDFLAGS = /opt/homebrew/opt/readline/lib
-RFLAGS = /opt/homebrew/opt/readline/include
-#LDFLAGS = /Users/${USER}/homebrew/opt/readline/lib
-#RFLAGS = /Users/${USER}/homebrew/opt/readline/include
+#LDFLAGS = /opt/homebrew/opt/readline/lib
+#RFLAGS = /opt/homebrew/opt/readline/include
+LDFLAGS = /Users/${USER}/homebrew/opt/readline/lib
+RFLAGS = /Users/${USER}/homebrew/opt/readline/include
 
 # Folders
 OBJDIR = obj

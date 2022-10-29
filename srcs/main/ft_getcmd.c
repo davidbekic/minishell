@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:36:23 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/28 18:07:12 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 13:52:15 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	ft_getcmd(char **buf, t_env **env)
 
 	ft_termios(*buf, *env);
 	ft_signals();
-	//ft_memset(*buf, 0, ft_strlen(*buf) + 1);
 	rl_copy = readline("🐚 ");
 	if (!rl_copy)
 	{

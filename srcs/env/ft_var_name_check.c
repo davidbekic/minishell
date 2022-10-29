@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:57:51 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/24 18:56:56 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 12:53:42 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_var_name_stop(char *str)
 {
 	int		i;
-	char	buf[BUFFER_SIZE];
+	char	buf[BUFFER_SIZE - 1];
 
 	i = 0;
 	ft_memcpy(buf, str, ft_strlen(str) + 1);
@@ -38,7 +38,7 @@ int	ft_var_name_stop(char *str)
 int	ft_var_name_check(char *str, int len)
 {
 	int		i;
-	char	buf[BUFFER_SIZE];
+	char	buf[BUFFER_SIZE - 1];
 
 	i = 0;
 	if (len < 1)

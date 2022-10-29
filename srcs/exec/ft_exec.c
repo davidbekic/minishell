@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 11:24:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/28 11:29:17 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 14:09:24 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_runcmd(t_cmd *cmd, t_env *env)
 		execcmd = (t_doexec *)cmd;
 		if (execcmd->names[0] == 0)
 			exit (1);
-		g_exit = ft_find_command(execcmd, &env, NULL);
+		g_exit = ft_find_command(execcmd, &env);
 	}
 	else if (cmd->type == REDIR)
 		ft_runredir(cmd, env);

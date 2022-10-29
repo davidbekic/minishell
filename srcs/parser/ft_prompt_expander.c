@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:16:58 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/28 08:02:49 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 12:55:16 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void	ft_quote_exit_home(char *dump, char **buf, int *i)
 void	ft_prompt_expander(char **buf, t_env *env)
 {
 	int				i[3];
-	char			dump[BUFFER_SIZE];
+	char			dump[BUFFER_SIZE - 1];
 
 	ft_memset(i, 0, 12);
-	ft_bzero(dump, BUFFER_SIZE);
+	ft_bzero(dump, BUFFER_SIZE - 1);
 	ft_memcpy(dump, *buf, ft_strlen(*buf));
-	while (*(dump + i[0]) && i[1] < BUFFER_SIZE - 600)
+	while (*(dump + i[0]) && i[1] < (BUFFER_SIZE - 1) - 600)
 	{
 		ft_quote_exit_home(dump, buf, i);
 		if (dump[i[0]] == '$' && i[2] != '\'' && dump[i[0] + 1] != 32
