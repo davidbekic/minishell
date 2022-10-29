@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:19:22 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/28 17:53:58 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/28 20:48:19 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_cmd	*ft_parseexec(char **pstr, char *estr)
 	char		*ftoken;
 	char		*eftoken;
 
-	printf("");
+	// printf("");
 	ret = ft_buildexec();
 	ret = ft_parseredirs(pstr, estr, ret);
 	cmd = (t_doexec *)ret;
