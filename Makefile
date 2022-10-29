@@ -6,7 +6,7 @@
 #    By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/05 13:42:29 by irifarac          #+#    #+#              #
-#    Updated: 2022/10/28 20:47:40 by davidbekic       ###   ########.fr        #
+#    Updated: 2022/10/29 10:37:57 by davidbekic       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ RESET = \033[0m
 
 UNAME_S := $(shell uname -s)
 NAME = minishell
-CFLAGS = -Wall -Werror -Wextra -MMD
+CFLAGS = -Wall -Werror -Wextra -MMD -fsanitize=address
 
 LDFLAGS = /opt/homebrew/opt/readline/lib
 RFLAGS = /opt/homebrew/opt/readline/include

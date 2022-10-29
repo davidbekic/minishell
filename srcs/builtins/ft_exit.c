@@ -6,7 +6,7 @@
 /*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:21:35 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/28 21:23:51 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/29 10:43:36 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static int	ft_num_arg(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (str[i] != 0 && i < ft_strlen(str))
+	while (str[i] != 0)
 	{
 		if (i == 0 && (str[i] == '-' || str[i] == '+'))
 			continue ;
