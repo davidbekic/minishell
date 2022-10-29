@@ -6,7 +6,7 @@
 /*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:30:38 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/29 14:41:16 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/29 15:22:52 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	ft_signals(void)
 		ft_error("sigaction error", 130);
 	if (sigaction(SIGTTIN, &act, &oact) < 0)
 		ft_error("sigaction error", 130);
-	signal(SIGUSR3, ft_ssh);
-	signal(SIGUSR4, ft_ssh);
+	// signal(SIGUSR3, ft_ssh);
+	// signal(SIGUSR4, ft_ssh);
 }
 
 void	ft_state_one(int signo)
