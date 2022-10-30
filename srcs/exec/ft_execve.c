@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 18:41:04 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/29 12:53:48 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:54:13 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 static int	ft_is_alias(char *str)
 {

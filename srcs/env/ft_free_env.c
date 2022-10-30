@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ft_free_env.c                                   :+:      :+:    :+:   */
+/*   ft_free_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 13:00:01 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/13 18:28:41 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:53:54 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 void	ft_free_envp(char **envp)
 {

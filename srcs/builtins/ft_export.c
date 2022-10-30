@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/29 13:22:59 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:53:01 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 static int	ft_update_ex_var(char *key_value, int value_start, t_env *elem)
 {

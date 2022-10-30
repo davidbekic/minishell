@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:22:00 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/28 17:07:42 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 01:54:47 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 static int	ft_list_redir(char **tmp, int *result)
 {
@@ -42,7 +43,11 @@ static int	ft_case(char **tmp, char **estr, int *result, int flag)
 	if (**tmp == 0)
 		return (0);
 	else if (**tmp == '|' && flag == 0)
+	{
 		*tmp = *tmp + 1;
+		if (ft_find(tmp, *estr, "|"))
+			ft_error("syntax error near unexpected token\n", 258);
+	}
 	else if (flag == 0 && (**tmp == '<' || **tmp == '>'))
 		ft_list_redir(tmp, result);
 	else
@@ -87,7 +92,7 @@ int	ft_gettoken(char **pstr, char *estr, char **ftoken, char **eftoken)
 	int			flag;
 
 	flag = ft_true_quotes(pstr, estr);
-	if (flag)
+	if (flag != 0)
 	{
 		flag = ft_change_token(pstr, estr);
 		if (flag == 0)

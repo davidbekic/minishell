@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 11:58:05 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/29 13:47:14 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:52:44 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 static	int	ft_check_n_flag(char **names)
 {

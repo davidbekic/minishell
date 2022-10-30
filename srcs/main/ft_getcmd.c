@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getcmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:36:23 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/29 13:52:15 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:52:33 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 int	ft_getcmd(char **buf, t_env **env)
 {

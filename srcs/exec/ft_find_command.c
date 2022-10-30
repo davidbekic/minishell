@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 18:08:29 by davidbekic        #+#    #+#             */
-/*   Updated: 2022/10/29 14:09:02 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:54:20 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 static void	ft_word_to_lower(char **command)
 {

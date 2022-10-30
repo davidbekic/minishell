@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_var_name_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:57:51 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/29 12:53:42 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:54:08 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 int	ft_var_name_stop(char *str)
 {

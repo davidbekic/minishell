@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_create_elem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:15:38 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/29 13:40:19 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:53:27 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 t_env	*ft_create_elem(t_env *new, char *key_value, int value_start)
 {

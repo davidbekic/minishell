@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 12:30:04 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/27 12:15:23 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:50:43 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int		ft_putptr(unsigned long long ptr);
 char	*ft_print_itoa(long long n, int base);
 int		ft_len(long long n, int base);
 int		ft_tolower(int c);
-int		ft_printf(int fd, const char *format, ...);
 char	*ft_unsigned_itoa(unsigned long long n, int base);
 int		ft_unsigned_len(unsigned long long n, int base);
 char	*ft_strchrnul(const char *s, int c);

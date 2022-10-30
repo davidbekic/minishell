@@ -6,11 +6,12 @@
 /*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:40:40 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/20 18:03:24 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/30 02:53:49 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 t_env	*ft_find_elem_before(t_env *env, char *key)
 {

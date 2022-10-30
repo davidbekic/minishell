@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtin_parser.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:34:06 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/28 12:12:38 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:51:36 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 static int	ft_find_marker(char *str)
 {

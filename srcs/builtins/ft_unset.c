@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:22:21 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/22 18:38:00 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:53:06 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 static void	ft_free_elem(t_env *to_delete)
 {

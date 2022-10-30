@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_quotes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 13:48:44 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/29 13:57:50 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:52:04 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 int	ft_true_quotes(char **pstr, char *estr)
 {
@@ -25,24 +26,6 @@ int	ft_true_quotes(char **pstr, char *estr)
 	}
 	return (0);
 }
-
-// void	ft_fillspace(char copy[256], int len)
-// {
-// 	int	i;
-// (void)len;
-
-// 	i = ft_strlen(copy);
-// 	i = 0;
-// 	while (copy[i] && copy[i] != ' ')
-// 	{
-// 		printf("entramos el bucle\n");
-// 		if (copy[i] == '"' )
-// 			copy[i] = ' ';
-// 		i++;
-// 		write(1, "A\n", 2);
-// 	}
-	
-// }
 
 void	ft_fillspace(char copy[256], int len)
 {

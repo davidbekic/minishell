@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/29 14:09:11 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:51:05 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
-# include "../Libft/libft.h"
+//# include "../Libft/libft.h"
 
 # define EXEC 1
 # define REDIR 2
@@ -146,6 +146,7 @@ int		ft_find_command(t_doexec *cmd, t_env **env);
 // void	ft_word_to_lower(char *command);
 int		ft_is_file_or_dir(char *str);
 int		ft_is_file(const char *path);
+int		ft_printf(int fd, const char *format, ...);
 
 // signals
 void	ft_info_handler(int signo, siginfo_t *info, void *context);

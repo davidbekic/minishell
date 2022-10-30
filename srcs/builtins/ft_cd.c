@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 17:09:38 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/29 13:06:05 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:53:12 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 static int	ft_is_file_or_no_oldpwd_or_no_home(char **names, t_env *env)
 {

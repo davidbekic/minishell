@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt_parser.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:45:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/29 14:27:10 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:51:32 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 int	ft_is_space(char *str)
 {
@@ -39,6 +40,7 @@ static int	ft_quote_checker(char *str)
 	unsigned char	quote_type;
 	char			*head;
 
+	quote_type = 0;
 	head = str;
 	while (*str != 0)
 	{

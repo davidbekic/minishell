@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
+/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:32:59 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/29 12:53:34 by dbekic           ###   ########.fr       */
+/*   Updated: 2022/10/30 02:53:42 by davidbekic       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../Libft/libft.h"
 
 char	*ft_expand(t_env *env, char *key)
 {
