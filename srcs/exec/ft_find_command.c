@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 18:08:29 by davidbekic        #+#    #+#             */
-/*   Updated: 2022/10/30 02:54:20 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/31 09:59:47 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	ft_find_command(t_doexec *execcmd, t_env **env)
 	int	ret;
 
 	ret = 0;
-	// printf("execcmmd->names[0]: %s\n", execcmd->names[0]);
-	// printf("execcmmd->names[1]: %s\n", execcmd->names[1]);
 	if (!(ft_strcmp(execcmd->names[0], "export")))
 		return (ft_export(execcmd->names, env));
 	else if (!(ft_strcmp(execcmd->names[0], "unset")))

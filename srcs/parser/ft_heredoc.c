@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:05:05 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/30 01:53:03 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/31 10:00:05 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 static int	ft_getbuf(char **buf, char *delimit)
 {
 	*buf = readline("> ");
+	if (!*buf)
+	{
+		close(3);
+		unlink(".tmp");
+		ft_error("here document at line 1 delimited by end-of-file\n", 0);
+	}
 	if (ft_strncmp(*buf, delimit, ft_strlen(*buf)) == 0)
 		return (-1);
 	return (0);

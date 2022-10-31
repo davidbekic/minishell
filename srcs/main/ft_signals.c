@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signals.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:30:38 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/30 02:52:25 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/31 10:02:54 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	ft_signals(void)
 		ft_error("sigaction error", 130);
 	if (sigaction(SIGTTIN, &act, &oact) < 0)
 		ft_error("sigaction error", 130);
-	// signal(SIGUSR3, ft_ssh);
-	// signal(SIGUSR4, ft_ssh);
+	signal(SIGUSR3, ft_ssh);
+	signal(SIGUSR4, ft_ssh);
 }
 
 void	ft_state_one(int signo)
@@ -57,6 +57,18 @@ void	ft_state_one(int signo)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
+}
+
+void	ft_state_two(int signo, int status)
+{
+	if (signo == SIGQUIT)
+	{
+		write(2, "Quit: 3\n", 8);
+		g_exit = 128 + status;
+		kill(0, SIGINT);
+	}
+	else if (signo == SIGINT && g_exit != 131)
+		g_exit = 128 + status;
 }
 
 void	ft_info_handler(int signo, siginfo_t *info, void *context)
@@ -78,14 +90,5 @@ void	ft_info_handler(int signo, siginfo_t *info, void *context)
 	if (state == 0)
 		ft_state_one(signo);
 	if (state == 1)
-	{
-		if (signo == SIGQUIT)
-		{
-			write(2, "Quit: 3\n", 8);
-			g_exit = 128 + status;
-			kill(0, SIGINT);
-		}
-		else if (signo == SIGINT && g_exit != 131)
-			g_exit = 128 + status;
-	}
+		ft_state_two(signo, status);
 }

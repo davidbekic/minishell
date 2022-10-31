@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 16:32:49 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/30 02:53:01 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/31 09:59:26 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	ft_export(char **names, t_env **env)
 		if (name)
 		{
 			ret = 1;
-			ft_printf(2, "minishell: export: `%s': not a valid identifier\n", *names);
+			ft_printf(2, "export: `%s': not a valid identifier\n", *names);
 		}
 		else if (!name)
 			g_exit = ft_update_var(*names, ft_find_value(*names), env);

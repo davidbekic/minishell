@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_quotes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 13:48:44 by irifarac          #+#    #+#             */
-/*   Updated: 2022/10/30 02:52:04 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/31 10:04:42 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,13 @@ int	ft_true_quotes(char **pstr, char *estr)
 void	ft_fillspace(char copy[256], int len)
 {
 	int	i;
-	(void) len;
-	//printf("copy: %s\n", copy);
+
 	i = ft_strlen(copy);
-	//i = 10;
-	while (i < 256)
+	while (i < len)
 	{
-		copy[i] = ' ';
+		copy[i] = 32;
 		i++;
-	}
-	
+	}	
 }
 
 static int	ft_getcleaned(char **pstr, char *estr, char copy[256], int *counter)
@@ -76,7 +73,7 @@ static int	ft_copycleaned(char **pstr, char *estr, char copy[256])
 	int		counter;
 	int		len;
 	int		i;
-	
+
 	counter = 0;
 	len = ft_getcleaned(pstr, estr, copy, &counter);
 	tmp = *pstr;

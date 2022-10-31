@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 09:31:46 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/30 02:51:05 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/31 10:31:25 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
-//# include "../Libft/libft.h"
 
 # define EXEC 1
 # define REDIR 2

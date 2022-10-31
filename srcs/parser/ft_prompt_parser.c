@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt_parser.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidbekic <davidbekic@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dbekic <dbekic@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:45:26 by dbekic            #+#    #+#             */
-/*   Updated: 2022/10/30 02:51:32 by davidbekic       ###   ########.fr       */
+/*   Updated: 2022/10/31 10:03:09 by dbekic           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,11 @@ int	ft_is_space(char *str)
 	int	i;
 
 	i = -1;
-	// if (str[0] == '.' && str[1] == 0)
-	// {
-	// 	ft_printf(2, "minishell: .: filename argument required\n");
-	// 	ft_printf(2, ".: usage: . filename [arguments]\n");
-	// 	g_exit = 2;
-	// 	return (1);
-	// }	
+	if (str[0] == '|')
+	{
+		g_exit = 2;
+		return (1);
+	}
 	while (str[++i] != 0)
 	{
 		if (!((str[i]) == '\t' || (str[i]) == '\v'
@@ -45,11 +43,11 @@ static int	ft_quote_checker(char *str)
 	while (*str != 0)
 	{
 		if ((*str == '\"' || *str == '\'')
-			&& (*str != quote_type) && !quote_type)	
+			&& (*str != quote_type) && !quote_type)
 			quote_type = *str;
 		else if (*str == quote_type)
 			quote_type = 0;
-			str++;
+		str++;
 	}
 	str = head;
 	return (quote_type);
